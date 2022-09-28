@@ -1,0 +1,17 @@
+{
+    "extends": "@tsconfig/node16-strictest-esm/tsconfig.json",
+    "include": ["types/**.*", "src/**/*"],
+    "compilerOptions": {
+        "module": "es2022",
+        "allowJs": true,
+        "outDir": "dist",
+        "removeComments": true,
+        "sourceMap": true,
+        "jsx": "react-jsx",
+        "jsxImportSource": "preact",
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noImplicitReturns": true,
+        "noImplicitAny": true
+    }
+}
