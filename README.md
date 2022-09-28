@@ -22,7 +22,7 @@ To remedy these and numerous other shortcomings, I intended to rewrite Trio by c
 
     1. The generation of static HTML will use three asset types - _Pages_, _Includes_ and _Templates_. A Page can be injected into a Template but it can also stand on its own and Includes can be injected into both Pages and Templates. Each of these assets will support front-matter.
 
-    2. The generation and injection of dynamic content has not yet been implemented. I am leaning towards using a _JSX_ solution but I am also considering making JSX an option with the default using a fourt asset type. Would love to hear your opinions on this.
+    2. The generation and injection of dynamic content has not yet been implemented. I am leaning towards using a _JSX_ solution but I am also considering making JSX an option with the default using a fourth asset type. Would love to hear your opinions on this.
 
 ## Current Status
 
@@ -34,7 +34,8 @@ Yada is still in its infancy but is making steady progress. I constantly have to
 
 ## ToDos
 
-- Data driven JSX-based dynamic markup generation.
+- Documentation.
+- Data driven dynamic markup generation.
 - Collection generation.
 
 ## Longer Term Goals
