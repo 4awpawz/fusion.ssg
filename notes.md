@@ -14,7 +14,7 @@ Implement basic page composition using pages, templates and includes using front
 - [x] Implement file name interpolation
 
 ## Project Name
-To be determined, but definitely not 'fractured'
+Yada for now.
 
 ## File Name Interpolation
 

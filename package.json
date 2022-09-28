@@ -1,10 +1,10 @@
 {
-  "name": "fractured",
+  "name": "yada",
   "type": "module",
   "version": "1.0.0",
   "description": "",
   "bin": {
-    "fractured": "./dist/index.js"
+    "yada": "./dist/index.js"
   },
   "main": "index.js",
   "scripts": {
