@@ -1,3 +1,7 @@
+/**
+ * _emptyDir - async/await wrapper for emptyDir.
+ */
+
 import fs from "fs-extra";
 
 export const _emptyDir = async function(path: string): Promise<void> {

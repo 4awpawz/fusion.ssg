@@ -1,3 +1,7 @@
+/**
+ * _fileExists - Wrapper for fileExists.
+ */
+
 import fs from "fs-extra";
 
 export const _fileExists = function(path: string): boolean | void {

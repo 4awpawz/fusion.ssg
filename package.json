@@ -10,7 +10,8 @@
   "scripts": {
     "test": "jest --watch-all --coverage",
     "build": "tsc --build --watch",
-    "start": "tsc --build && node dist/index.js"
+    "buildall": "tsc --build --force",
+    "start": "tsc --build --force && node dist/index.js"
   },
   "keywords": [],
   "author": "jeffreyschwartz",

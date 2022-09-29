@@ -10,7 +10,7 @@ interface Asset {
     fileName: string,
     fileType: string,
     content: string,
-    htmlDocumentName?: fileName | undefined,
+    htmlDocumentName?: string | undefined,
     associatedTemplate?: string | undefined,
     fm: GrayMatterFile
 }

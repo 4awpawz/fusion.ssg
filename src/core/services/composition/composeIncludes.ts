@@ -1,7 +1,13 @@
+/**
+ * composeIncludes - Compose with include assets.
+ */
+
+import { join, parse } from "path";
 import { markerFindAndReplaceContent } from "../../lib/marker/markerFindAndReplaceContent.js";
+import { _find } from "../../lib/functional.js";
 
 const getListOfIncludesFromAsset = function(asset: Asset): IncludeMatchesResults {
-    const regexIncludeFileName = /\{include:([a-zA-Z0-9_]+)}/g;
+    const regexIncludeFileName = /\{include:([/a-zA-Z0-9]+)}/g;
     const matches = [...asset.content.matchAll(regexIncludeFileName)];
     if (typeof matches === "undefined") return [];
     return matches.map(match => ({ matched: match[0] as string, fileName: match[1] as string })) as IncludeMatchesResults;
@@ -9,17 +15,14 @@ const getListOfIncludesFromAsset = function(asset: Asset): IncludeMatchesResults
 
 export const composeIncludes = function(asset: Asset, assets: Assets): Asset {
     const matcherResults = getListOfIncludesFromAsset(asset);
-    if (matcherResults.length > 0) {
-        for (const matchResult of matcherResults) {
-            const foundInclude = assets.find(_asset =>
-                _asset.assetType === "include" && (_asset.fileName === `src/include.${matchResult.fileName}.html` ||
-                    _asset.fileName === `src/include.${matchResult.fileName}.md`));
-            if (typeof foundInclude !== "undefined") {
-                // Strip off the opening and closing curly braces from matchResult.matched and find the marker and replace it with the include content.
-                // const matched  = matchResult.matched.substring(1, matchResult.matched.length - 1);
-                asset.content = markerFindAndReplaceContent(asset.content, matchResult.matched, foundInclude.content);
-            }
-        }
+    if (matcherResults.length === 0) return asset;
+    for (const matchResult of matcherResults) {
+        const pathToInclude = join("src", "includes", `${parse(matchResult.fileName).dir}/include.${parse(matchResult.fileName).name}`);
+        const foundInclude = _find(assets, _asset =>
+            _asset.assetType === "include" && (_asset.fileName === `${pathToInclude}.html` || _asset.fileName === `${pathToInclude}.md`));
+        if (typeof foundInclude === "undefined")
+            throw Error(`there was an error: unable to find include file ${pathToInclude} declared in ${asset.fileName}`);
+        asset.content = markerFindAndReplaceContent(asset.content, matchResult.matched, foundInclude.content);
     }
     return asset;
 };

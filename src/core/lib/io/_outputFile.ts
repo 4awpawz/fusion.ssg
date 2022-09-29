@@ -1,3 +1,7 @@
+/**
+ * _outputFile - async/await wrapper for outputFile.
+ */
+
 import fs from "fs-extra";
 
 export const _outputFile = async function(path: string, content: string): Promise<void> {

@@ -1,3 +1,7 @@
+/**
+ * _remove - wrapper for rmSync.
+ */
+
 import fs from "fs-extra";
 
 export const _remove = function(path: string): void {

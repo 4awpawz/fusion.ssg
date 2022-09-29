@@ -4,6 +4,6 @@
 
 import { marked } from "marked";
 
-export const markdownToHTML = function(content: string) : string {
+export const markdownToHTML = function(content: string): string {
     return marked.parse(content);
 };

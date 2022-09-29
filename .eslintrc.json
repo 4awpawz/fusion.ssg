@@ -6,7 +6,9 @@
         "es2021": true
     },
     "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
+    "plugins": [
+        "@typescript-eslint"
+    ],
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
@@ -17,10 +19,12 @@
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
-
         }
     },
     "rules": {
-        "semi": [2, "always"]
+        "semi": [
+            2,
+            "always"
+        ]
     }
 }

@@ -1,3 +1,7 @@
+/**
+ * Saves generated content to file.
+ */
+
 import path from "path";
 import { _remove } from "../lib/io/_remove.js";
 import { _outputFile } from "../lib/io/_outputFile.js";

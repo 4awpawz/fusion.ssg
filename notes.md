@@ -12,6 +12,8 @@ Implement basic page composition using pages, templates and includes using front
 - [x] Write content out
 - [] Implement include assets
 - [x] Implement file name interpolation
+- [x] Implement file path interpolatin of associated temlates into page file names
+- [] Implement file path interpolatin include files into include markers
 
 ## Project Name
 Yada for now.
