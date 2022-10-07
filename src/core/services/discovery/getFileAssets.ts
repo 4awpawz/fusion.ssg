@@ -19,7 +19,7 @@ export const getFileAssets = async function(): Promise<Assets> {
             .catch(err => console.error("there was an error:", err)) as string;
         const fileInfo = parse(file);
         const namePartsArray = fileInfo.name.split(".");
-        const fm: matter.GrayMatterFile<string> = matter(fileContent);
+        const fm: matter.GrayMatterFile<string> = Object.freeze(matter(fileContent));
         const asset: Asset = {
             assetType: namePartsArray[0] as AssetType,
             fileName: file,
