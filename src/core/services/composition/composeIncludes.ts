@@ -17,7 +17,7 @@ export const composeIncludes = function(asset: Asset, assets: Assets): Asset {
     const matcherResults = getListOfIncludesFromAsset(asset);
     if (matcherResults.length === 0) return asset;
     for (const matchResult of matcherResults) {
-        const pathToInclude = join("src", "includes", `${parse(matchResult.fileName).dir}/include.${parse(matchResult.fileName).name}`);
+        const pathToInclude = join("src", "includes", matchResult.fileName);
         const foundInclude = _find(assets, _asset =>
             _asset.assetType === "include" && (_asset.fileName === `${pathToInclude}.html` || _asset.fileName === `${pathToInclude}.md`));
         if (typeof foundInclude === "undefined")
