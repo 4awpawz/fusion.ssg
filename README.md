@@ -19,49 +19,59 @@ Trio also provides a build-pipeline which includes everything needed to produce 
 
 I originally intended to remedy these and the numerous other shortcomings in Trio by chipping away at its current codebase and incrementally refactoring it. However, because Trio's codebase has acquired a considerable amount of cruft (yes, that's my fault) and because the changes that I intend to implement would require huge alterations to Trio's core architecture, I decided to forego maintaining Trio and to build a brand new static site generator that addresses all of Trio's shortcomings as well as my new ambitions.
 
-## Project Goals
+## Project Development
 
-The project will employ TypeScript. No excuses. It just works.
+The project will be written using TypeScript. No excuses. It just works beautifully.
 
-The project's scope is limited to producing HTML documents and nothing else. It will not provide a build pipeline nor any other tooling other than what is absolutely necessary for creating HTML documents. I see this as a benefit to Yada's users because they will be able to pick and chose their own tools.
+Yada's project's scope is limited to producing HTML documents and nothing else. It will not provide a build pipeline nor any other tooling other than what is absolutely necessary for creating HTML documents. I see this as a benefit to Yada's users because they will be able to pick and chose their own tools.
 
-It will not require a rigid project structure other than 2 sub folders off of the project's root folder, one to hold three sub folders - pages, templates and includes - and one to receive the output of what is built.
+Yada will not require a rigid project structure other than 2 sub folders off of the project's root folder, one to hold three sub folders - pages, templates and includes - and one to receive the serialized output.
 
-Creating HTML documents will be a two step process:
+Yada's generation of HTML documents consists of two steps.
 
-1\) The generation of static HTML will use three asset types - _Pages_, _Includes_ and _Templates_. A Page can be injected into a Template but it can also stand on its own and Includes can be injected into both Pages and Templates. Page and Include assets will support front matter.
+1\) Static Page Composition:
 
-2\) For the generation and injection of dynamic content I am leaning towards _JSX_ but I am also considering making JSX an option with the default being a fourth asset type that would use YAML and markup and markdown to declaratively create dynamic content. Would love to hear your opinions on this.
+Static page composition uses _Pages_, _Includes_ and _Templates_ to generate an HTML document. These are called _page assets_. Pages can be injected into Templates but they can also stand on their own and Includes can be injected into both Pages and Templates. Pages and Includes support front matter.
+
+2\) Dynamic Page Composition:
+
+Dynamic page composition is optional and can use both the _metadata_ that Yada generates every time it builds a site and user supplied _external data_ such as data from an external file like a .json file for example to add content to a page.
+
+Two implementation options are currently being explored, the first one being Yada's default and which will employ HTM/JSX/TSX and the second one as a user selected option that would employ a fourth asset type along, YAML and markup and markdown to _declaratively_ compose pages using dynamic content. Would love to hear your opinions on this.
+
+A pluggable dynamic composition engine might also be considered for a post release if its benefits falls within the overall goals of the project.
 
 Community involvement will be both encouraged and welcomed!
 
 ## Current Status
 
-Yada is still in its infancy but is making steady progress.
+Yada is still in its pre-release alpha development stage and every alpha release should be considered unstable and transient. While in alpha features and implementations might change dramatically and this should be considered the norm.
 
-[x] - The creation of static HTML documents using Pages, Includes and Templates is implemented. The implementation is purely text based and it is very quick.
+### What Has Already Been Implemented
+
+[x] - Page generation using pages, templates and includes.
 
 [x] - Pages, Includes and Templates employ an interpolated file naming convention that describes each file's role in page composition and greatly reduces the strain of discovering the association between these assets.
 
-[x] - The interpolation of YAML data into HTML documents decorated with markers is also implemented.
+[x] - Document marker implemented from front matter.
 
-[x] - Interpolated file names can now express paths to related assets.
+[x] - Template path interpolation in page asset file names.
 
-## ToDos
+### What Needs To Be Done
+
+[] - Encourage early community involvement.
 
 [] - Data driven dynamic content generation.
 
 [] - Collection generation.
 
-[] - Documentation.
-
 [] - Provide sufficient testing to reduce the likelihood of introducing regressions.
 
-## Longer Term Goals
+[] - Documentation.
+
+### Longer Term Goals
 
 - Seek RFC.
-
-- Encourage community involvement.
 
 - Accept pull requests when the codebase is stable enough to receive them, which will probably coincide with the first major Alpha release.
 
