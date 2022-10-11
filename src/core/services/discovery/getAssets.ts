@@ -1,6 +1,6 @@
 /**
- * getFileAssets - Creates an assets for each file found in user's
- * src folder. An asset is any file that participates in page compostion.
+ * getFileAssets - Creates an assets for each file found in user's config.src
+ * folder. An asset is any file that participates in page compostion.
  * Resolves to an array of assets.
  */
 

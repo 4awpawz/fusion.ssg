@@ -9,8 +9,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watch-all --coverage",
-    "watch": "tsc --build --watch",
-    "build": "tsc --build --force",
+    "build": "tsc --build --force --watch",
     "start": "tsc --build --force && node dist/index.js"
   },
   "keywords": [],

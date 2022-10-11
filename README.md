@@ -57,9 +57,13 @@ Yada is still in its pre-release alpha development stage and every alpha release
 
 [x] - Template path interpolation in page asset file names.
 
+#### [x] = Basic user project configuration implementation.
+
 ### What Needs To Be Done
 
 [] - Encourage early community involvement.
+
+[] - Blog-awareness.
 
 [] - Data driven dynamic content generation.
 
