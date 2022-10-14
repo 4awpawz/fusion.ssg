@@ -7,6 +7,7 @@
 import path from "path";
 import { _readJsonFile } from "../../lib/io/_readJsonFile.js";
 import { _fileExists } from "../../lib/io/_fileExists.js";
+import { deepFreeze } from "../deepFreeze.js";
 
 export const getConfiguration = async function(): Promise<Configuration> {
     const defaultConfig: Configuration = {
@@ -17,7 +18,7 @@ export const getConfiguration = async function(): Promise<Configuration> {
         },
     };
     const configPath = path.join(process.cwd(), "yada.json");
-    if (!_fileExists(configPath)) return Object.freeze(defaultConfig);
+    if (!_fileExists(configPath)) return deepFreeze(defaultConfig);
     const userConfig = await _readJsonFile(configPath);
-    return Object.freeze({ ...defaultConfig, ...userConfig });
+    return deepFreeze({ ...defaultConfig, ...userConfig });
 };
