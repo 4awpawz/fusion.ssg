@@ -47,6 +47,6 @@ interface Configuration {
     projectStructure: {
         srcFolder: string,
         buildFolder: string,
-        articlesFolder: string
+        postsFolder: string
     }
 }
