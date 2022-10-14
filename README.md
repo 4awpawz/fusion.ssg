@@ -63,7 +63,7 @@ Yada is still in its pre-release alpha development stage and every alpha release
 
 [] - Encourage early community involvement.
 
-[] - Blog-awareness.
+[] - Support for content posting (i.e. blogging).
 
 [] - Data driven dynamic content generation.
 
