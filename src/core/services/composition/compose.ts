@@ -2,14 +2,13 @@
  * Compose - Compose pages using CategorizedPages.
  */
 
-// import path from "path";
 import { composeWithoutTemplate } from "./composeWithoutTemplate.js";
 import { composeWithTemplate } from "./composeWithTemplate.js";
 
-export const compose = function(assets: Assets): Assets {
+export const compose = async function(assets: Assets): Promise<Assets> {
     for (const _asset of assets) {
         if (_asset.assetType !== "page") continue;
-        _asset.associatedTemplate === "" ? composeWithoutTemplate(_asset, assets) : composeWithTemplate(_asset, assets);
+        _asset.associatedTemplate === "" ? await composeWithoutTemplate(_asset, assets) : await composeWithTemplate(_asset, assets);
     }
     return assets;
 };

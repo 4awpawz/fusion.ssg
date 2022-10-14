@@ -42,3 +42,11 @@ type MarkerContent = string
 type MarkerRightDelimeter = "}"
 
 type Marker = `${MarkerLeftDelimeter}${MarkerContent}${MarkerRightDelimeter}`
+
+interface Configuration {
+    projectStructure: {
+        srcFolder: string,
+        buildFolder: string,
+        articlesFolder: string
+    }
+}

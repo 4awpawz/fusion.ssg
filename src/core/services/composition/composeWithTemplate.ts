@@ -7,7 +7,7 @@ import { markerFindAndReplaceContent } from "../../lib/marker/markerFindAndRepla
 import { composeIncludes } from "./composeIncludes.js";
 import { composeTokens } from "./composeTokens.js";
 
-export const composeWithTemplate = function(asset: Asset, assets: Asset[]): Asset {
+export const composeWithTemplate = async function(asset: Asset, assets: Asset[]): Promise<Asset> {
     const associatedTemplate =
         _find(assets, _asset => _asset.assetType === "template" && _asset.fileName === asset.associatedTemplate) as Asset;
     if (typeof associatedTemplate === "undefined")
@@ -16,7 +16,7 @@ export const composeWithTemplate = function(asset: Asset, assets: Asset[]): Asse
     // Inject the page's content into the Template's "{page}" marker.
     asset.content = markerFindAndReplaceContent(associatedTemplate.content, "page", asset.content);
     // Resolve includes.
-    asset = composeIncludes(asset, assets);
+    asset = await composeIncludes(asset, assets);
     // Resolve front matter tokens.
     const fmData = { ...associatedTemplate.fm.data, ...asset.fm.data };
     asset.content = composeTokens(asset.content, fmData);

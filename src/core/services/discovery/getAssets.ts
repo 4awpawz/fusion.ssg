@@ -28,7 +28,7 @@ export const getAssets = async function(): Promise<Assets> {
             fm,
         };
         if (asset.assetType !== "page") return asset;
-        asset.associatedTemplate = getTemplatePathFromFileName(assetPath);
+        asset.associatedTemplate = await getTemplatePathFromFileName(assetPath);
         const oPath = fileInfo.dir.split("/").slice(2).join("/"); // removes 'src/' and the parent folder containing pages.
         const oName = namePartsArray[namePartsArray.length - 1] === "index" ? "index.html" :
             namePartsArray[namePartsArray.length - 1] + "/" + "index.html";

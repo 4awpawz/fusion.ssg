@@ -5,7 +5,7 @@
 import { join } from "path";
 import { markerFindAndReplaceContent } from "../../lib/marker/markerFindAndReplaceContent.js";
 import { _find } from "../../lib/functional.js";
-import { config } from "../configuration/config.js";
+import { getConfiguration } from "../configuration/getConfiguration.js";
 
 const getListOfIncludesFromAsset = function(asset: Asset): IncludeMatchesResults {
     const regexIncludeFileName = /\{include:([/a-zA-Z0-9]+)}/g;
@@ -14,8 +14,8 @@ const getListOfIncludesFromAsset = function(asset: Asset): IncludeMatchesResults
     return matches.map(match => ({ matched: match[0] as string, fileName: match[1] as string })) as IncludeMatchesResults;
 };
 
-export const composeIncludes = function(asset: Asset, assets: Assets): Asset {
-    const srcFolder = config.projectStructure.srcFolder;
+export const composeIncludes = async function(asset: Asset, assets: Assets): Promise<Asset> {
+    const srcFolder = (await getConfiguration()).projectStructure.srcFolder;
     const matcherResults = getListOfIncludesFromAsset(asset);
     if (matcherResults.length === 0) return asset;
     for (const matchResult of matcherResults) {

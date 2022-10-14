@@ -3,12 +3,11 @@
  */
 
 import { parse } from "path";
-import { config } from "../configuration/config.js";
+import { getConfiguration } from "../configuration/getConfiguration.js";
 
-const srcFolder = config.projectStructure.srcFolder;
-
-export const getTemplatePathFromFileName = function(path: string): string {
+export const getTemplatePathFromFileName = async function(path: string): Promise<string> {
     const parseReslt = parse(path);
+    const srcFolder = (await getConfiguration()).projectStructure.srcFolder;
     if (!parseReslt.name.includes(".")) return "";
     return `${srcFolder}/templates/${parseReslt.name.split(".")[0]?.split("-").join("/") as string}.html`;
 };
