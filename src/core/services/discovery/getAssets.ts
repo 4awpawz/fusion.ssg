@@ -11,7 +11,6 @@ import { _readFile } from "../../lib/io/_readFile.js";
 import { getFiles } from "./getFiles.js";
 import { getAssetType } from "./getAssetType.js";
 import { getTemplatePathFromFileName } from "./getTemplatePathFromFileName.js";
-import { deepFreeze } from "../deepFreeze.js";
 
 export const getAssets = async function(): Promise<Assets> {
     const pathsToAssets = await getFiles();
@@ -20,7 +19,7 @@ export const getAssets = async function(): Promise<Assets> {
             .catch(err => console.error("there was an error:", err)) as string;
         const fileInfo = parse(assetPath);
         const namePartsArray = fileInfo.name.split(".");
-        const fm: matter.GrayMatterFile<string> = deepFreeze(matter(fileContent));
+        const fm = matter(fileContent);
         const asset: Asset = {
             assetType: getAssetType(assetPath),
             fileName: assetPath,
