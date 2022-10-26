@@ -7,6 +7,7 @@
 import path from "path";
 import { _readJsonFile } from "../../lib/io/_readJsonFile.js";
 import { _fileExists } from "../../lib/io/_fileExists.js";
+import { configFileName } from "./configFileName.js";
 
 export const getConfiguration = async function(): Promise<Configuration> {
     const defaultConfig: Configuration = {
@@ -16,7 +17,7 @@ export const getConfiguration = async function(): Promise<Configuration> {
             postsFolder: "posts", // Name of src folder  that contains posts.
         },
     };
-    const configPath = path.join(process.cwd(), "yada.json");
+    const configPath = path.join(process.cwd(), configFileName);
     if (!_fileExists(configPath)) return defaultConfig;
     const userConfig = await _readJsonFile(configPath);
     return { ...defaultConfig, ...userConfig };

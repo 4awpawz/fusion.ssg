@@ -10,7 +10,7 @@ import { markdownToHTML } from "../../lib/markdownToHTML.js";
 import { _readFile } from "../../lib/io/_readFile.js";
 import { getFiles } from "./getFiles.js";
 import { getAssetType } from "./getAssetType.js";
-import { getTemplatePathFromFileName } from "./getTemplatePathFromFileName.js";
+import { getPagePathFromFileName } from "./getPagePathFromFileName.js";
 
 export const getAssets = async function(): Promise<Assets> {
     const pathsToAssets = await getFiles();
@@ -27,12 +27,13 @@ export const getAssets = async function(): Promise<Assets> {
             content: fileInfo.ext === ".md" ? markdownToHTML(fm.content) : fm.content,
             fm,
         };
-        if (asset.assetType !== "page") return asset;
-        asset.associatedTemplate = await getTemplatePathFromFileName(assetPath);
-        const oPath = fileInfo.dir.split("/").slice(2).join("/"); // removes 'src/' and the parent folder containing pages.
+        if (asset.assetType !== "template") return asset;
+        asset.associatedPage = await getPagePathFromFileName(assetPath);
+        const oPath = fileInfo.dir.split("/").slice(2).join("/"); // removes 'src/' and the parent folder containing templates.
         const oName = namePartsArray[namePartsArray.length - 1] === "index" ? "index.html" :
             namePartsArray[namePartsArray.length - 1] + "/" + "index.html";
         asset.htmlDocumentName = join(oPath, oName);
+        console.log("asset.htmlDocumentName", asset.htmlDocumentName);
         return asset;
     }));
     return fileAssets;

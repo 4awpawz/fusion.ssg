@@ -12,9 +12,9 @@ export const serialize = async function(assets: Assets): Promise<Assets> {
     const buildFolder = (await getConfiguration()).projectStructure.buildFolder;
     const buildPath = path.join(process.cwd(), buildFolder);
     _remove(buildFolder);
-    const pageAssets: Assets = _filter(assets, asset => asset.assetType === "page");
-    for (let i = 0; i < pageAssets.length; i++) {
-        const asset = pageAssets[i] as Asset;
+    const templateAssets: Assets = _filter(assets, asset => asset.assetType === "template");
+    for (let i = 0; i < templateAssets.length; i++) {
+        const asset = templateAssets[i] as Asset;
         const outputPath = path.join(buildPath, asset.htmlDocumentName as string);
         try {
             await _outputFile(outputPath, asset.content);
