@@ -7,6 +7,7 @@ import { _remove } from "../lib/io/_remove.js";
 import { _outputFile } from "../lib/io/_outputFile.js";
 import { _filter } from "../lib/functional.js";
 import { getConfiguration } from "./configuration/getConfiguration.js";
+import type { Asset, Assets } from "../../types/types";
 
 export const serialize = async function(assets: Assets): Promise<Assets> {
     const buildFolder = (await getConfiguration()).projectStructure.buildFolder;

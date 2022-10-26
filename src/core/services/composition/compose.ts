@@ -4,6 +4,7 @@
 
 import { composeWithoutTemplate } from "./composeWithoutTemplate.js";
 import { composeWithTemplate as composeWithTemplate } from "./composeWithTemplate.js";
+import type { Assets } from "../../../types/types";
 
 export const compose = async function(assets: Assets): Promise<Assets> {
     for (const _asset of assets) {

@@ -6,6 +6,7 @@ import { _find } from "../../lib/functional.js";
 import { markerFindAndReplaceContent } from "../../lib/marker/markerFindAndReplaceContent.js";
 import { composeIncludes } from "./composeIncludes.js";
 import { composeTokens } from "./composeTokens.js";
+import type { Asset } from "../../../types/types";
 
 export const composeWithTemplate = async function(asset: Asset, assets: Asset[]): Promise<Asset> {
     const associatedPage =

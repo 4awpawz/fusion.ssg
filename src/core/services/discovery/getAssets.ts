@@ -11,6 +11,7 @@ import { _readFile } from "../../lib/io/_readFile.js";
 import { getFiles } from "./getFiles.js";
 import { getAssetType } from "./getAssetType.js";
 import { getPagePathFromFileName } from "./getPagePathFromFileName.js";
+import type { Asset, Assets } from "../../../types/types";
 
 export const getAssets = async function(): Promise<Assets> {
     const pathsToAssets = await getFiles();
@@ -33,7 +34,6 @@ export const getAssets = async function(): Promise<Assets> {
         const oName = namePartsArray[namePartsArray.length - 1] === "index" ? "index.html" :
             namePartsArray[namePartsArray.length - 1] + "/" + "index.html";
         asset.htmlDocumentName = join(oPath, oName);
-        console.log("asset.htmlDocumentName", asset.htmlDocumentName);
         return asset;
     }));
     return fileAssets;

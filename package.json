@@ -1,42 +1,42 @@
 {
-  "name": "yada",
-  "type": "module",
-  "version": "0.0.0-alpha.1",
-  "description": "",
-  "bin": {
-    "yada": "./dist/index.js"
-  },
-  "main": "index.js",
-  "scripts": {
-    "test": "jest --watch-all --coverage",
-    "build": "tsc --build --force --watch",
-    "start": "tsc --build --force && node dist/index.js"
-  },
-  "keywords": [],
-  "author": "jeffreyschwartz",
-  "license": "ISC",
-  "devDependencies": {
-    "@tsconfig/node16-strictest-esm": "^1.0.3",
-    "@types/fs-extra": "^9.0.13",
-    "@types/glob": "^8.0.0",
-    "@types/jest": "^29.0.0",
-    "@types/marked": "^4.0.7",
-    "@types/node": "^18.7.13",
-    "@typescript-eslint/eslint-plugin": "^5.36.2",
-    "@typescript-eslint/parser": "^5.36.2",
-    "eslint": "^8.23.0",
-    "eslint-plugin-import": "^2.26.0",
-    "jest": "^28.0.0",
-    "ts-jest": "^28.0.8"
-  },
-  "dependencies": {
-    "fs-extra": "^10.1.0",
-    "glob": "^8.0.3",
-    "gray-matter": "^4.0.3",
-    "marked": "^4.1.0",
-    "preact": "^10.11.1",
-    "preact-render-to-string": "^5.2.5",
-    "prettier": "^2.7.1",
-    "ts-node": "^10.9.1"
-  }
+    "name": "yada",
+    "type": "module",
+    "version": "0.0.0-alpha.1",
+    "description": "",
+    "bin": {
+        "yada": "dist/index.js"
+    },
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "jest --watch-all --coverage",
+        "build": "tsc --build --force --watch",
+        "start": "tsc --build --force && node dist/index.js"
+    },
+    "keywords": [],
+    "author": "jeffreyschwartz",
+    "license": "ISC",
+    "devDependencies": {
+        "@tsconfig/node16-strictest-esm": "^1.0.3",
+        "@types/fs-extra": "^9.0.13",
+        "@types/glob": "^8.0.0",
+        "@types/jest": "^29.0.0",
+        "@types/marked": "^4.0.7",
+        "@types/node": "^18.7.13",
+        "@typescript-eslint/eslint-plugin": "^5.36.2",
+        "@typescript-eslint/parser": "^5.36.2",
+        "eslint": "^8.23.0",
+        "eslint-plugin-import": "^2.26.0",
+        "gray-matter": "^4.0.3",
+        "jest": "^28.0.0",
+        "ts-jest": "^28.0.8"
+    },
+    "dependencies": {
+        "fs-extra": "^10.1.0",
+        "glob": "^8.0.3",
+        "marked": "^4.1.0",
+        "preact": "^10.11.1",
+        "preact-render-to-string": "^5.2.5",
+        "prettier": "^2.7.1",
+        "ts-node": "^10.9.1"
+    }
 }
