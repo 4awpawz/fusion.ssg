@@ -53,7 +53,7 @@ Yada is still in its pre-release alpha development stage and every alpha release
 
 [x] - Pages, Includes and Templates employ an interpolated file naming convention that describes each file's role in page composition and greatly reduces the strain of discovering the association between these assets.
 
-[x] - Document marker implemented from front matter.
+[x] - Document token implemented from front matter.
 
 [x] - Template path interpolation in page asset file names.
 

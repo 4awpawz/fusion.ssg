@@ -19,14 +19,14 @@ export interface Asset {
 
 export type Assets = Asset[]
 
-export type IncludeMarker = string
+export type IncludeToken = string
 
 export type IncludeFileName = string
 
 export type IncludeContent = string
 
 export interface Include {
-    includeMakrer: IncludeMarker,
+    includeMakrer: IncludeToken,
     includeFileName: IncludeFileName,
     includeContent: IncludeContent,
 }
@@ -37,13 +37,13 @@ export type IncludeMatchResult = { matched: string, fileName: string }
 
 export type IncludeMatchesResults = [IncludeMatchResult] | []
 
-export type MarkerLeftDelimeter = "{"
+export type TokenLeftDelimeter = "{"
 
-export type MarkerContent = string
+export type TokenContent = string
 
-export type MarkerRightDelimeter = "}"
+export type TokenRightDelimeter = "}"
 
-export type Marker = `${MarkerLeftDelimeter}${MarkerContent}${MarkerRightDelimeter}`
+export type Token = `${TokenLeftDelimeter}${TokenContent}${TokenRightDelimeter}`
 
 export interface Configuration {
     projectStructure: {

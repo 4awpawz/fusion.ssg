@@ -3,7 +3,7 @@
  */
 
 import { join } from "path";
-import { markerFindAndReplaceContent } from "../../lib/marker/markerFindAndReplaceContent.js";
+import { findAndReplaceTokenContent } from "../../lib/token/findAndReplaceTokenContent.js";
 import { _find } from "../../lib/functional.js";
 import { getConfiguration } from "../configuration/getConfiguration.js";
 import type { Asset, Assets, IncludeMatchesResults } from "../../../types/types";
@@ -25,7 +25,7 @@ export const composeIncludes = async function(asset: Asset, assets: Assets): Pro
             _asset.assetType === "include" && (_asset.fileName === `${pathToInclude}.html` || _asset.fileName === `${pathToInclude}.md`));
         if (typeof foundInclude === "undefined")
             throw Error(`there was an error: unable to find include file ${pathToInclude} declared in ${asset.fileName}`);
-        asset.content = markerFindAndReplaceContent(asset.content, matchResult.matched, foundInclude.content);
+        asset.content = findAndReplaceTokenContent(asset.content, matchResult.matched, foundInclude.content);
     }
     return asset;
 };
