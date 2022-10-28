@@ -9,7 +9,11 @@ import { _filter } from "../lib/functional.js";
 import { getConfiguration } from "./configuration/getConfiguration.js";
 import type { Asset, Assets } from "../../types/types";
 
-export const serialize = async function(assets: Assets): Promise<Assets> {
+/**
+ * Serialize pages.
+ */
+
+const serializePages = async function(assets: Assets) {
     const buildFolder = (await getConfiguration()).projectStructure.buildFolder;
     const buildPath = path.join(process.cwd(), buildFolder);
     _remove(buildFolder);
@@ -20,8 +24,27 @@ export const serialize = async function(assets: Assets): Promise<Assets> {
         try {
             await _outputFile(outputPath, asset.content);
         } catch (error) {
-            console.error(`there was an error: unable to writing asset ${outputPath} to file.`);
+            console.error(`there was an error: unable to write asset ${outputPath} to file.`);
         }
     }
+};
+
+/**
+ * Serialize assets as JSON.
+ */
+
+const serializeAssets = function(assets: Assets) {
+    const assetsAsJSONString = JSON.stringify(assets);
+    const outputPath = path.join(process.cwd(), "assets.json");
+    try {
+        _outputFile(outputPath, assetsAsJSONString);
+    } catch (error) {
+        console.error(`there was an error: unable to write assets ${outputPath} to file.`);
+    }
+};
+
+export const serialize = async function(assets: Assets): Promise<Assets> {
+    await serializePages(assets);
+    serializeAssets(assets);
     return assets;
 };

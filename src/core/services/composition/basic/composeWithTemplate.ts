@@ -2,11 +2,11 @@
  * composeWithTemplate - Compose with a template asset.
  */
 
-import { _find } from "../../lib/functional.js";
-import { findAndReplaceTokenContent } from "../../lib/token/findAndReplaceTokenContent.js";
+import { _find } from "../../../lib/functional.js";
+import { findAndReplaceTokenContent } from "../../../lib/token/findAndReplaceTokenContent.js";
 import { composeIncludes } from "./composeIncludes.js";
 import { composeTokens } from "./composeTokens.js";
-import type { Asset } from "../../../types/types";
+import type { Asset } from "../../../../types/types";
 
 export const composeWithTemplate = async function(asset: Asset, assets: Asset[]): Promise<Asset> {
     const associatedPage =

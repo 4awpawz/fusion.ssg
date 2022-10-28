@@ -1,5 +1,5 @@
 /**
- * findAndReplaceTokenContent - find a tiken and  replace its content.
+ * findAndReplaceTokenContent - find a token and  replace its content.
  */
 
 import { delimitTokenContent } from "./delimitTokenContent.js";

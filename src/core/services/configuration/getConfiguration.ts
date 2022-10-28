@@ -16,6 +16,8 @@ export const getConfiguration = async function(): Promise<Configuration> {
             srcFolder: "src", // Name of folder that contains the project's source.
             buildFolder: "build", // Name of folder that contains the project's build.
             postsFolder: "posts", // Name of src folder  that contains posts.
+            componentsFolder: "components", // Name of src folder that contains components.
+            libFolder: "lib",
         },
     };
     const configPath = path.join(process.cwd(), configFileName);

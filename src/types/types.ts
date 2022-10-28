@@ -49,6 +49,21 @@ export interface Configuration {
     projectStructure: {
         srcFolder: string,
         buildFolder: string,
-        postsFolder: string
+        postsFolder: string,
+        componentsFolder: string,
+        libFolder: string
     }
 }
+
+export interface ComponentIdentifier {
+    modulePath: string,
+    moduleName: string
+}
+
+export interface ComponentsMap {
+    [key: string]: ComponentIdentifier
+}
+
+export type Component = (() => string) | undefined;
+
+export type Components = Components[];
