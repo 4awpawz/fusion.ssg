@@ -21,8 +21,8 @@ export const hydrateContent = async function(content: string, componentTokensPat
     for (const componentTokenPath of componentTokensPaths) {
         const componentIdentifier: ComponentIdentifier = componentsMap[componentTokenPath] as ComponentIdentifier;
         const component: Component = await getComponent(componentIdentifier.modulePath, componentIdentifier.moduleName);
-        if (typeof component === undefined) return content;
-        const componentContent = component?.();
+        if (typeof component === "undefined") return content;
+        const componentContent = component();
         if (typeof componentContent === "undefined") return content;
         console.log("hydrated content:", componentContent);
         console.log("componentTokenPath", componentTokenPath);
