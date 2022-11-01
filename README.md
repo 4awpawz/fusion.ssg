@@ -49,29 +49,27 @@ Yada is still in its pre-release alpha development stage and every alpha release
 
 ### What Has Already Been Implemented
 
-[x] - Page generation using pages, templates and includes.
+[x] - HTML document generation using Pages, Templates and Includes.
 
-[x] - Pages, Includes and Templates employ an interpolated file naming convention that describes each file's role in page composition and greatly reduces the strain of discovering the association between these assets.
+[x] - Templates employ an interpolated file naming convention that declares the Template that it is associated with.
 
-[x] - Document token implemented from front matter.
+[x] - Document token interpolation implemented using front matter.
 
-[x] - Template path interpolation in page asset file names.
+[x] - HTML document hydration using components (i.e. .js, .jsx, .ts, .tsx) and component tokens.
 
 #### [x] = Basic user project configuration implementation.
 
 ### What Needs To Be Done
 
-[] - Encourage early community involvement.
-
-[] - Support for content posting (i.e. blogging).
-
-[] - Data driven dynamic content generation.
-
-[] - Collection generation.
-
-[] - Provide sufficient testing to reduce the likelihood of introducing regressions.
+[] - Collections.
 
 [] - Documentation.
+
+[] - Encourage early community involvement.
+
+[] - Support for content posting (e.g. blogging).
+
+[] - Provide sufficient testing to reduce the likelihood of introducing regressions.
 
 ### Longer Term Goals
 
