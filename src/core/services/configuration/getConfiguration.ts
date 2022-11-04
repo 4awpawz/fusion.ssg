@@ -8,20 +8,22 @@ import path from "path";
 import { _readJsonFile } from "../../lib/io/_readJsonFile.js";
 import { _fileExists } from "../../lib/io/_fileExists.js";
 import { configFileName } from "./configFileName.js";
-import type { Configuration } from "../../../types/types";
+import type { Configuration, UserConfig } from "../../../types/types";
 
 export const getConfiguration = async function(): Promise<Configuration> {
     const defaultConfig: Configuration = {
-        projectStructure: {
-            srcFolder: "src", // Name of folder that contains the project's source.
-            buildFolder: "build", // Name of folder that contains the project's build.
-            postsFolder: "posts", // Name of src folder  that contains posts.
-            componentsFolder: "components", // Name of src folder that contains components.
-            libFolder: "lib",
+        srcFolder: "src", // Folder that contains the project's source.
+        buildFolder: "build", // Folder that contains the project's build.
+        libFolder: "lib", // Folder that contains transpiled components.
+        componentsFolder: "components", // Folder that contains component definitions.
+        userConfig: {
+            postsFolder: "posts", // Folder that contains postsA. Can be renamed by user.
         },
     };
     const configPath = path.join(process.cwd(), configFileName);
     if (!_fileExists(configPath)) return defaultConfig;
     const userConfig = await _readJsonFile(configPath);
-    return { ...defaultConfig, ...userConfig };
+    if (typeof userConfig === "undefined") return ({ ...defaultConfig });
+    defaultConfig.userConfig = { ...defaultConfig.userConfig, ...userConfig };
+    return { ...defaultConfig };
 };

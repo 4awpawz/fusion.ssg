@@ -3,13 +3,13 @@ import { join } from "path";
 import { getConfiguration } from "../../configuration/getConfiguration.js";
 import { findAndReplaceTokenContent } from "../../../lib/token/findAndReplaceTokenContent.js";
 
-const projectStructure = (await getConfiguration()).projectStructure;
+const config = (await getConfiguration());
 
 const getComponent = async function(modulePath: string, moduleName: string): Promise<Component> {
     // Dynamic import returns promise.
     let component;
     try {
-        const _modulePath = join(process.cwd(), projectStructure.libFolder, modulePath);
+        const _modulePath = join(process.cwd(), config.libFolder, modulePath);
         component = await import(_modulePath).then(module => module[moduleName]);
     } catch (error) {
         return undefined;

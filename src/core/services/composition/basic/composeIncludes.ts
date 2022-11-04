@@ -16,7 +16,7 @@ const getListOfIncludesFromAsset = function(asset: Asset): IncludeMatchesResults
 };
 
 export const composeIncludes = async function(asset: Asset, assets: Assets): Promise<Asset> {
-    const srcFolder = (await getConfiguration()).projectStructure.srcFolder;
+    const srcFolder = (await getConfiguration()).srcFolder;
     const matcherResults = getListOfIncludesFromAsset(asset);
     if (matcherResults.length === 0) return asset;
     for (const matchResult of matcherResults) {

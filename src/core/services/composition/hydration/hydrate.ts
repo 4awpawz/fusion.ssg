@@ -8,10 +8,10 @@ import { hydrateContent } from "./hydrateContent.js";
 import { _glob } from "../../../lib/io/_glob.js";
 import { getConfiguration } from "../../configuration/getConfiguration.js";
 
-const projectStructure = (await getConfiguration()).projectStructure;
+const config = (await getConfiguration());
 
 const getComponentPaths = async function(): Promise<string[] | Error> {
-    const componentsPath = join(projectStructure.srcFolder, projectStructure.componentsFolder, "**/", "{*.js,*.jsx,*.ts,*.tsx}");
+    const componentsPath = join(config.srcFolder, config.componentsFolder, "**/", "{*.js,*.jsx,*.ts,*.tsx}");
     const result = await _glob(componentsPath);
     return result.value;
 };

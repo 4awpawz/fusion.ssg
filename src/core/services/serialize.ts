@@ -14,7 +14,7 @@ import type { Asset, Assets } from "../../types/types";
  */
 
 const serializePages = async function(assets: Assets) {
-    const buildFolder = (await getConfiguration()).projectStructure.buildFolder;
+    const buildFolder = (await getConfiguration()).buildFolder;
     const buildPath = path.join(process.cwd(), buildFolder);
     _remove(buildFolder);
     const templateAssets: Assets = _filter(assets, asset => asset.assetType === "template");

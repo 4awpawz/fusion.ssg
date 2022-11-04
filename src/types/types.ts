@@ -45,14 +45,16 @@ export type TokenRightDelimeter = "}"
 
 export type Token = `${TokenLeftDelimeter}${TokenContent}${TokenRightDelimeter}`
 
+export interface UserConfig {
+    postsFolder?: string,
+}
+
 export interface Configuration {
-    projectStructure: {
-        srcFolder: string,
-        buildFolder: string,
-        postsFolder: string,
-        componentsFolder: string,
-        libFolder: string
-    }
+    srcFolder: string,
+    buildFolder: string,
+    libFolder: string
+    componentsFolder: string,
+    userConfig?: UserConfig
 }
 
 export interface ComponentIdentifier {
