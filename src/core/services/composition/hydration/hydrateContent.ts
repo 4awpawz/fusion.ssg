@@ -24,8 +24,6 @@ export const hydrateContent = async function(content: string, componentTokensPat
         if (typeof component === "undefined") return content;
         const componentContent = component();
         if (typeof componentContent === "undefined") return content;
-        console.log("hydrated content:", componentContent);
-        console.log("componentTokenPath", componentTokenPath);
         content = findAndReplaceTokenContent(content, componentTokenPath, componentContent);
     }
     return content;

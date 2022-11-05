@@ -10,7 +10,6 @@ import { markdownToHTML } from "../../lib/markdownToHTML.js";
 import { _readFile } from "../../lib/io/_readFile.js";
 import { getFiles } from "./getFiles.js";
 import { getAssetType } from "./getAssetType.js";
-import { getPagePathFromFileName } from "./getPagePathFromFileName.js";
 import type { Asset, Assets } from "../../../types/types";
 
 export const getAssets = async function(): Promise<Assets> {
@@ -29,7 +28,8 @@ export const getAssets = async function(): Promise<Assets> {
             fm,
         };
         if (asset.assetType !== "template") return asset;
-        asset.associatedPage = await getPagePathFromFileName(assetPath);
+        const page: string | undefined = fm.data["page"];
+        asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || "";
         const oPath = fileInfo.dir.split("/").slice(2).join("/"); // removes 'src/' and the parent folder containing templates.
         const oName = namePartsArray[namePartsArray.length - 1] === "index" ? "index.html" :
             namePartsArray[namePartsArray.length - 1] + "/" + "index.html";
