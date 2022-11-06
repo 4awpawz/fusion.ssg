@@ -66,6 +66,6 @@ export interface ComponentsMap {
     [key: string]: ComponentIdentifier
 }
 
-export type Component = (() => string) | undefined;
+export type Component = (() => Promise<string>) | undefined;
 
 export type Components = Components[];

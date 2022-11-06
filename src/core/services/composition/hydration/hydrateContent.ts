@@ -18,11 +18,17 @@ const getComponent = async function(modulePath: string, moduleName: string): Pro
 };
 
 export const hydrateContent = async function(content: string, componentTokensPaths: string[], componentsMap: ComponentsMap): Promise<string> {
+    const runtimeCWD = join(process.cwd(), config.libFolder);
+    const cwd = process.cwd();
     for (const componentTokenPath of componentTokensPaths) {
         const componentIdentifier: ComponentIdentifier = componentsMap[componentTokenPath] as ComponentIdentifier;
         const component: Component = await getComponent(componentIdentifier.modulePath, componentIdentifier.moduleName);
+        // Set the cwd to 'cwd/lib' so that component calls to import using relative paths are resolved relative to the lib folder.
         if (typeof component === "undefined") return content;
-        const componentContent = component();
+        process.chdir(runtimeCWD);
+        // Components are always called asynchronously.
+        const componentContent = await component();
+        process.chdir(cwd);
         if (typeof componentContent === "undefined") return content;
         content = findAndReplaceTokenContent(content, componentTokenPath, componentContent);
     }
