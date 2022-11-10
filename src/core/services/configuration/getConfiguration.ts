@@ -16,6 +16,7 @@ export const getConfiguration = async function(): Promise<Configuration> {
         buildFolder: "build", // Folder that contains the project's build.
         libFolder: "lib", // Folder that contains transpiled components.
         componentsFolder: "components", // Folder that contains component definitions.
+        dataFolder: "data", // Folder that contains data referenced by components.
         userConfig: {
             postsFolder: "posts", // Folder that contains postsA. Can be renamed by user.
         },

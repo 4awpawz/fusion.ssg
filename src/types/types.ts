@@ -54,6 +54,7 @@ export interface Configuration {
     buildFolder: string,
     libFolder: string
     componentsFolder: string,
+    dataFolder: string,
     userConfig?: UserConfig
 }
 
