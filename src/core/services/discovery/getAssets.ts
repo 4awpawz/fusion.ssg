@@ -1,5 +1,5 @@
 /**
- * getFileAssets - Creates an assets for each file found in user's config.src
+ * getAssets - Creates an asset for each file found in user's config.src
  * folder. An asset is any file that participates in page compostion.
  * Resolves to an array of assets.
  */
@@ -8,6 +8,7 @@ import { join, parse } from "path";
 import matter from "gray-matter";
 import { markdownToHTML } from "../../lib/markdownToHTML.js";
 import { _readFile } from "../../lib/io/_readFile.js";
+import { fileModifiedTime } from "../../lib/io/fileModifiedTime.js";
 import { getFiles } from "./getFiles.js";
 import { getAssetType } from "./getAssetType.js";
 import type { Asset, Assets } from "../../../types/types";
@@ -21,6 +22,7 @@ export const getAssets = async function(): Promise<Assets> {
         const namePartsArray = fileInfo.name.split(".");
         const fm = matter(fileContent);
         const asset: Asset = {
+            timestamp: await fileModifiedTime(assetPath),
             assetType: getAssetType(assetPath),
             fileName: assetPath,
             fileType: fileInfo.ext,

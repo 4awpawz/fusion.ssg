@@ -8,6 +8,7 @@ export interface PromiseResultGlob {
 export type AssetType = "page" | "template" | "include"
 
 export interface Asset {
+    timestamp: number,
     assetType: AssetType
     fileName: string,
     fileType: string,
