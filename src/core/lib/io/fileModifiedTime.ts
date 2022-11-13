@@ -6,12 +6,11 @@
 import fs from "fs-extra";
 
 export const fileModifiedTime = async function(path: string): Promise<number> {
-    let stats: fs.Stats;
     try {
-        stats = await fs.promises.stat(path);
+        const stats = await fs.promises.stat(path);
+        return stats.mtimeMs;
     } catch (error) {
-        console.error(`there was an error: unable to get stats for file ${path}.`);
+        console.error(`there was an error: unable to get stats for file ${path}`);
         throw error;
     }
-    return stats.mtimeMs;
 };

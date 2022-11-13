@@ -47,7 +47,7 @@ export const hydrate = async function(assets: Assets): Promise<Assets> {
     if (componentPaths instanceof Error) {
         console.error(componentPaths);
         console.error(`there was an error: glob failed when searching for components`);
-        return assets;
+        throw componentPaths;
     }
     if (componentPaths.length === 0) return assets;
     const componentsMap = makeComponentsMap(componentPaths);

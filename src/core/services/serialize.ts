@@ -5,6 +5,7 @@
 import path from "path";
 import { _remove } from "../lib/io/_remove.js";
 import { _outputFile } from "../lib/io/_outputFile.js";
+import { _writeJson } from "../lib/io/_writeJson.js";
 import { _filter } from "../lib/functional.js";
 import { getConfiguration } from "./configuration/getConfiguration.js";
 import type { Asset, Assets } from "../../types/types";
@@ -21,11 +22,7 @@ const serializePages = async function(assets: Assets) {
     for (let i = 0; i < templateAssets.length; i++) {
         const asset = templateAssets[i] as Asset;
         const outputPath = path.join(buildPath, asset.htmlDocumentName as string);
-        try {
-            await _outputFile(outputPath, asset.content);
-        } catch (error) {
-            console.error(`there was an error: unable to write asset ${outputPath} to file.`);
-        }
+        await _outputFile(outputPath, asset.content);
     }
 };
 
@@ -33,18 +30,13 @@ const serializePages = async function(assets: Assets) {
  * Serialize assets as JSON.
  */
 
-const serializeAssets = function(assets: Assets) {
-    const assetsAsJSONString = JSON.stringify(assets);
+const serializeAssets = async function(assets: Assets) {
     const outputPath = path.join(process.cwd(), "assets.json");
-    try {
-        _outputFile(outputPath, assetsAsJSONString);
-    } catch (error) {
-        console.error(`there was an error: unable to write assets ${outputPath} to file.`);
-    }
+    await _writeJson(outputPath, assets);
 };
 
 export const serialize = async function(assets: Assets): Promise<Assets> {
     await serializePages(assets);
-    serializeAssets(assets);
+    await serializeAssets(assets);
     return assets;
 };

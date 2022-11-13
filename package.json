@@ -4,7 +4,7 @@
     "version": "0.0.0-alpha.1",
     "description": "",
     "bin": {
-        "yada": "dist/index.js"
+        "yada": "dist/bin/yada.js"
     },
     "main": "dist/index.js",
     "scripts": {
@@ -30,6 +30,8 @@
         "ts-jest": "^28.0.8"
     },
     "dependencies": {
+        "chokidar": "^3.5.3",
+        "chokidar-cli": "^3.0.0",
         "fs-extra": "^10.1.0",
         "glob": "^8.0.3",
         "gray-matter": "^4.0.3",

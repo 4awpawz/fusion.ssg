@@ -8,6 +8,7 @@ export const _outputFile = async function(path: string, content: string): Promis
     try {
         await fs.outputFile(path, content);
     } catch (error) {
-        console.error("there was an error:", error);
+        console.error(`there was an error when writing file ${path}`);
+        throw error;
     }
 };

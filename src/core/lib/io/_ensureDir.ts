@@ -9,6 +9,7 @@ export const _ensureDir = async function(dir: string): Promise<void> {
     try {
         ensureDir(dir);
     } catch (error) {
-        console.error("there was an error:", error);
+        console.error(`there was an error when creating directory ${dir}`);
+        throw error;
     }
 };

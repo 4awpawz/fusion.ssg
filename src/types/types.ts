@@ -1,5 +1,4 @@
 import type { GrayMatterFile } from "gray-matter";
-
 export interface PromiseResultGlob {
     success: boolean,
     value: string[] | Error,

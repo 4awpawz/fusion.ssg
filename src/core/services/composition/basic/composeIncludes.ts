@@ -24,7 +24,7 @@ export const composeIncludes = async function(asset: Asset, assets: Assets): Pro
         const foundInclude = _find(assets, _asset =>
             _asset.assetType === "include" && (_asset.fileName === `${pathToInclude}.html` || _asset.fileName === `${pathToInclude}.md`));
         if (typeof foundInclude === "undefined")
-            throw Error(`there was an error: unable to find include file ${pathToInclude} declared in ${asset.fileName}`);
+            throw new Error(`there was an error: unable to find include file ${pathToInclude} declared in ${asset.fileName}`);
         asset.content = findAndReplaceTokenContent(asset.content, matchResult.matched, foundInclude.content);
     }
     return asset;

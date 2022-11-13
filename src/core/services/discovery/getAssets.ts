@@ -15,12 +15,13 @@ import type { Asset, Assets } from "../../../types/types";
 
 export const getAssets = async function(): Promise<Assets> {
     const pathsToAssets = await getFiles();
-    const fileAssets: Assets = await Promise.all(pathsToAssets.map(async (assetPath: string) => {
-        const fileContent = await _readFile(assetPath)
-            .catch(err => console.error("there was an error:", err)) as string;
+    let assets: Assets = [];
+    assets = await Promise.all(pathsToAssets.map(async (assetPath: string) => {
+        const fileContent = await _readFile(assetPath) as string;
+        // .catch(err => console.error("there was an error:", err)) as string;
         const fileInfo = parse(assetPath);
         const namePartsArray = fileInfo.name.split(".");
-        const fm = matter(fileContent);
+        const fm = matter(fileContent, { excerpt: true });
         const asset: Asset = {
             timestamp: await fileModifiedTime(assetPath),
             assetType: getAssetType(assetPath),
@@ -38,5 +39,5 @@ export const getAssets = async function(): Promise<Assets> {
         asset.htmlDocumentName = join(oPath, oName);
         return asset;
     }));
-    return fileAssets;
+    return assets;
 };
