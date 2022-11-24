@@ -22,6 +22,7 @@ const serializePages = async function(assets: Assets) {
     for (let i = 0; i < templateAssets.length; i++) {
         const asset = templateAssets[i] as Asset;
         const outputPath = path.join(buildPath, asset.htmlDocumentName as string);
+        if (typeof asset.content === "undefined") continue;
         await _outputFile(outputPath, asset.content);
     }
 };

@@ -4,17 +4,17 @@ export interface PromiseResultGlob {
     value: string[] | Error,
 }
 
-export type AssetType = "page" | "template" | "include"
+export type AssetType = "page" | "template" | "include" | "component" | "data" | "*"
 
 export interface Asset {
     timestamp: number,
     assetType: AssetType
     fileName: string,
     fileType: string,
-    content: string,
-    htmlDocumentName?: string | undefined,
+    content?: string,
+    fm?: GrayMatterFile<string>
     associatedPage?: string | undefined,
-    fm: GrayMatterFile<string>
+    htmlDocumentName?: string | undefined,
 }
 
 export type Assets = Asset[]

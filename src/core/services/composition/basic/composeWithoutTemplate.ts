@@ -10,6 +10,7 @@ export const composeWithoutTemplate = async function(asset: Asset, assets: Asset
     // Resolve includes.
     asset = await composeIncludes(asset, assets);
     // Resolve front matter tokens.
-    asset.content = composeTokens(asset.content, asset.fm.data);
+    if (typeof asset.fm === "undefined") return asset;
+    asset.content = composeTokens(asset.content as string, asset.fm.data);
     return asset;
 };

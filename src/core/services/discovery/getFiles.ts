@@ -12,5 +12,5 @@ export const getFiles = async function(): Promise<string[]> {
     const srcFolder = (await getConfiguration()).srcFolder;
     const result = await _glob(`${srcFolder}/**/*.*`);
     const paths = result.value as string[];
-    return _filter(paths, path => ["templates", "includes", "pages"].includes(parse(path).dir.split("/")[1] as string));
+    return _filter(paths, path => ["templates", "includes", "pages", "components"].includes(parse(path).dir.split("/")[1] as string));
 };

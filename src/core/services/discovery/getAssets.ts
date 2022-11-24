@@ -15,23 +15,27 @@ import type { Asset, Assets } from "../../../types/types";
 
 export const getAssets = async function(): Promise<Assets> {
     const pathsToAssets = await getFiles();
-    let assets: Assets = [];
-    assets = await Promise.all(pathsToAssets.map(async (assetPath: string) => {
-        const fileContent = await _readFile(assetPath) as string;
-        // .catch(err => console.error("there was an error:", err)) as string;
+    const assets = await Promise.all(pathsToAssets.map(async (assetPath: string) => {
         const fileInfo = parse(assetPath);
+        const fileName = assetPath;
+        const fileType = fileInfo.ext;
+        const timestamp = await fileModifiedTime(assetPath);
+        const assetType = getAssetType(assetPath);
         const namePartsArray = fileInfo.name.split(".");
-        const fm = matter(fileContent, { excerpt: true });
         const asset: Asset = {
-            timestamp: await fileModifiedTime(assetPath),
-            assetType: getAssetType(assetPath),
-            fileName: assetPath,
-            fileType: fileInfo.ext,
-            content: fileInfo.ext === ".md" ? markdownToHTML(fm.content) : fm.content,
-            fm,
+            timestamp,
+            assetType,
+            fileName,
+            fileType,
         };
+        // Assets that represent data files do not include their content.
+        if (["data", "component"].includes(assetType)) return asset;
+        const buffer = await _readFile(assetPath);
+        if (typeof buffer === "undefined") return asset;
+        asset.fm = matter(buffer, { excerpt: true });
+        asset.content = fileType === ".md" ? markdownToHTML(asset.fm.content) : asset.fm.content;
         if (asset.assetType !== "template") return asset;
-        const page: string | undefined = fm.data["page"];
+        const page: string | undefined = asset.fm.data["page"];
         asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || "";
         const oPath = fileInfo.dir.split("/").slice(2).join("/"); // removes 'src/' and the parent folder containing templates.
         const oName = namePartsArray[namePartsArray.length - 1] === "index" ? "index.html" :
