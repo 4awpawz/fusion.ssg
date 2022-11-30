@@ -65,17 +65,5 @@ export const compile = async function(fileNames: readonly string[] | undefined, 
     });
 
     const exitCode = emitResult.emitSkipped ? 1 : 0;
-    console.log(`Process exiting with code '${exitCode}'.`);
-    // TODO: 22/11/24 16:04:47 - jeffreyschwartz : Not sure I need the following as I don't want to terminate the process at this point.
-    // process.exit(exitCode);
+    console.log(`Typescript Process exiting with code '${exitCode}'.`);
 };
-
-// // TODO: 22/11/24 11:42:24 - jeffreyschwartz : I need to call the above function using the values similar to below.
-// export const compile = function(fileNames: string[]) {
-//     _compile(process.argv.slice(2), {
-//         noEmitOnError: true,
-//         noImplicitAny: true,
-//         target: ts.ScriptTarget.ES5,
-//         module: ts.ModuleKind.CommonJS
-//     });
-// };

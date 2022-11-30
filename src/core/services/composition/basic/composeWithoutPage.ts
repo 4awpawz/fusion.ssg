@@ -6,7 +6,7 @@ import { composeIncludes } from "./composeIncludes.js";
 import { composeTokens } from "./composeTokens.js";
 import type { Asset, Assets } from "../../../../types/types";
 
-export const composeWithoutTemplate = async function(asset: Asset, assets: Assets): Promise<Asset> {
+export const composeWithoutPage = async function(asset: Asset, assets: Assets): Promise<Asset> {
     // Resolve includes.
     asset = await composeIncludes(asset, assets);
     // Resolve front matter tokens.
