@@ -7,6 +7,7 @@ import type { Assets, ComponentIdentifier, ComponentsMap, Component } from "../.
 import { hydrateContent } from "./hydrateContent.js";
 import { _glob } from "../../../lib/io/_glob.js";
 import { getConfiguration } from "../../configuration/getConfiguration.js";
+import { compile } from "../../ts/compile.js";
 
 const config = (await getConfiguration());
 
@@ -50,6 +51,7 @@ export const hydrate = async function(assets: Assets): Promise<Assets> {
         throw componentPaths;
     }
     if (componentPaths.length === 0) return assets;
+    await compile();
     const componentsMap = makeComponentsMap(componentPaths);
     for (const _asset of assets) {
         if (_asset.assetType !== "template") continue;
