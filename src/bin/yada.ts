@@ -11,7 +11,6 @@ import { _readFile } from "../core/lib/io/_readFile.js";
 import { log } from "../core/lib/io/log.js";
 import { run } from "../index.js";
 import { __dirname } from "../core/lib/__dirname.js";
-import { watcher } from "../core/services/watcher.js";
 
 const buffer = await _readFile(path.join(__dirname, "../../package.json"));
 const pkgJson = JSON.parse(buffer as string);
@@ -84,24 +83,6 @@ const commandSpecificHelp = (command: string) => {
         log("");
         return;
     }
-    if (command === "w" || command === "watch") {
-        log("NAME");
-        log("       yada-watch - Builds your site and watches for changes.");
-        log("");
-        log("SYNOPSIS");
-        log("       yada watch");
-        log("");
-        log("       alias: yada w");
-        log("");
-        log("DESCRIPTION");
-        log("       This command builds your site targeting the build folder and watches for changes.");
-        log("");
-        log("           yada watch");
-        log("");
-        log("       In the first form, it builds your entire site.");
-        log("");
-        return;
-    }
     generalHelp();
 };
 
@@ -132,23 +113,9 @@ const buildCommand = {
     invalid: () => generalHelp(),
 };
 
-const watchCommand = {
-    validate: function() {
-        return true;
-    },
-    valid: async () => {
-        log("watching");
-        await run();
-        watcher();
-    },
-    invalid: () => generalHelp(),
-};
-
 const commandHandlers = new Map();
 commandHandlers.set("build", buildCommand);
 commandHandlers.set("b", buildCommand);
-commandHandlers.set("watch", watchCommand);
-commandHandlers.set("w", watchCommand);
 
 /**
  * Command runner.

@@ -9,8 +9,7 @@
     "main": "dist/index.js",
     "scripts": {
         "test": "jest --watch-all --coverage",
-        "build": "tsc --build --force --watch",
-        "start": "tsc --build --force && node dist/index.js"
+        "build": "tsc --build --force --watch"
     },
     "keywords": [],
     "author": "jeffreyschwartz",
@@ -30,8 +29,6 @@
         "ts-jest": "^28.0.8"
     },
     "dependencies": {
-        "chokidar": "^3.5.3",
-        "chokidar-cli": "^3.0.0",
         "fs-extra": "^10.1.0",
         "glob": "^8.0.3",
         "gray-matter": "^4.0.3",
