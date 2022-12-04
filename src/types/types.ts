@@ -11,6 +11,7 @@ export interface Asset {
     assetType: AssetType
     fileName: string,
     fileType: string,
+    isCollection?: boolean,
     content?: string,
     fm?: GrayMatterFile<string>
     associatedPage?: string | undefined,

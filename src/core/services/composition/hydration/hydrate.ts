@@ -3,11 +3,12 @@
  */
 
 import { join, parse } from "path";
-import type { Assets, ComponentIdentifier, ComponentsMap, Component } from "../../../../types/types";
+import type { Assets, ComponentIdentifier, ComponentsMap } from "../../../../types/types";
 import { hydrateContent } from "./hydrateContent.js";
 import { _glob } from "../../../lib/io/_glob.js";
 import { getConfiguration } from "../../configuration/getConfiguration.js";
 import { compile } from "../../ts/compile.js";
+import * as metrics from "../../../lib/metrics.js";
 
 const config = (await getConfiguration());
 
@@ -44,6 +45,7 @@ const getPathsFromComponentTokens = function(assetContent: string): string[] {
 };
 
 export const hydrate = async function(assets: Assets): Promise<Assets> {
+    metrics.startTimer("hydration");
     const componentPaths = await getComponentPaths();
     if (componentPaths instanceof Error) {
         console.error(componentPaths);
@@ -62,5 +64,6 @@ export const hydrate = async function(assets: Assets): Promise<Assets> {
         const hydratedContent = await hydrateContent(_asset.content, componentTokensPaths, componentsMap);
         _asset.content = hydratedContent;
     }
+    metrics.stopTimer("hydration");
     return assets;
 };

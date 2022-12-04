@@ -11,9 +11,9 @@ import * as metrics from "./core/lib/metrics.js";
 
 export const run = async function() {
     metrics.clearTimers();
-    metrics.startTimer("process");
+    metrics.startTimer("total elapsed time");
     await copyDataFilesToLib();
-    const assets = (await serialize(await hydrate(await compose(await getAssets()))));
-    console.log("assets", assets);
-    console.log(metrics.stopTimer("process"));
+    (await serialize(await hydrate(await compose(await getAssets()))));
+    metrics.stopTimer("total elapsed time");
+    metrics.forEachTimer(timer => console.log(timer.elapsed));
 };

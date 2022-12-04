@@ -8,7 +8,7 @@ import path from "path";
 import { _readJsonFile } from "../../lib/io/_readJsonFile.js";
 import { _fileExists } from "../../lib/io/_fileExists.js";
 import { configFileName } from "./configFileName.js";
-import type { Configuration, UserConfig } from "../../../types/types";
+import type { Configuration } from "../../../types/types";
 
 export const getConfiguration = async function(): Promise<Configuration> {
     const defaultConfig: Configuration = {

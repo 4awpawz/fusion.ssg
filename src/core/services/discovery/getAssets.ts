@@ -12,8 +12,10 @@ import { fileModifiedTime } from "../../lib/io/fileModifiedTime.js";
 import { getFiles } from "./getFiles.js";
 import { getAssetType } from "./getAssetType.js";
 import type { Asset, Assets } from "../../../types/types";
+import * as metrics from "../../lib/metrics.js";
 
 export const getAssets = async function(): Promise<Assets> {
+    metrics.startTimer("discovery");
     const pathsToAssets = await getFiles();
     const assets = await Promise.all(pathsToAssets.map(async (assetPath: string) => {
         const fileInfo = parse(assetPath);
@@ -35,6 +37,7 @@ export const getAssets = async function(): Promise<Assets> {
         asset.fm = matter(buffer, { excerpt: true });
         asset.content = fileType === ".md" ? markdownToHTML(asset.fm.content) : asset.fm.content;
         if (asset.assetType !== "template") return asset;
+        asset.isCollection = Object.prototype.hasOwnProperty.call(asset.fm.data, "collection");
         const page: string | undefined = asset.fm.data["page"];
         asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || "";
         const oPath = fileInfo.dir.split("/").slice(2).join("/"); // removes 'src/' and the parent folder containing templates.
@@ -43,5 +46,6 @@ export const getAssets = async function(): Promise<Assets> {
         asset.htmlDocumentName = join(oPath, oName);
         return asset;
     }));
+    metrics.stopTimer("discovery");
     return assets;
 };
