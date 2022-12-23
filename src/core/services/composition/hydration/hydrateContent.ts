@@ -1,7 +1,7 @@
 import type { ComponentIdentifier, ComponentsMap, Component } from "../../../../types/types";
 import { join } from "path";
 import { getConfiguration } from "../../configuration/getConfiguration.js";
-import { findAndReplaceTokenContent } from "../../../lib/token/findAndReplaceTokenContent.js";
+import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenContent.js";
 
 const config = (await getConfiguration());
 
@@ -31,7 +31,7 @@ export const hydrateContent = async function(content: string, componentTokensPat
         const componentContent = await component();
         process.chdir(cwd);
         if (typeof componentContent === "undefined") return content;
-        content = findAndReplaceTokenContent(content, componentTokenPath, componentContent);
+        content = findAndReplaceTokenContent(content, `{component:${componentTokenPath}}`, componentContent);
     }
     return content;
 };

@@ -32,7 +32,7 @@ const makeComponentsMap = function(result: string[]): ComponentsMap {
 };
 
 const getPathsFromComponentTokens = function(assetContent: string): string[] {
-    const regex = /\{(.*?)\}/g;
+    const regex = /\{component:(.*?)\}/g;
     const matches = assetContent.matchAll(regex);
     if (typeof matches === "undefined") return [];
     const _matches = [...matches];

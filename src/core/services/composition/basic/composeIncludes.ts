@@ -3,7 +3,7 @@
  */
 
 import { join } from "path";
-import { findAndReplaceTokenContent } from "../../../lib/token/findAndReplaceTokenContent.js";
+import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenContent.js";
 import { _find } from "../../../lib/functional.js";
 import { getConfiguration } from "../../configuration/getConfiguration.js";
 import type { Asset, Assets, IncludeMatchesResults } from "../../../../types/types";
