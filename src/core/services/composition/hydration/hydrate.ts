@@ -53,7 +53,11 @@ export const hydrate = async function(assets: Assets): Promise<Assets> {
         throw componentPaths;
     }
     if (componentPaths.length === 0) return assets;
-    await compile();
+    const exitCode = await compile();
+    if (exitCode === 1) {
+        console.error(`there was an error: TypeScript found errors in one or more components that need to be addressed.`);
+        return assets;
+    }
     const componentsMap = makeComponentsMap(componentPaths);
     for (const _asset of assets) {
         if (_asset.assetType !== "template") continue;

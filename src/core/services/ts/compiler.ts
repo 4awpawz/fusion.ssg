@@ -5,7 +5,7 @@
 
 import ts from "typescript";
 
-export const compiler = function(pathsToComponents: readonly string[], options: ts.CompilerOptions): void {
+export const compiler = function(pathsToComponents: readonly string[], options: ts.CompilerOptions): number {
     const program = ts.createProgram(pathsToComponents, options);
     const emitResult = program.emit();
 
@@ -25,4 +25,5 @@ export const compiler = function(pathsToComponents: readonly string[], options: 
 
     const exitCode = emitResult.emitSkipped ? 1 : 0;
     console.log(`Typescript Compilation Process exited with code '${exitCode}'.`);
+    return exitCode;
 };

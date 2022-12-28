@@ -14,7 +14,7 @@ import { compiler } from "./compiler.js";
 
 const extensions = [".js", ".jsx", ".tsx"];
 
-const getPathsToComponents = async function(): Promise<readonly string[]> {
+const getComponentPaths = async function(): Promise<readonly string[]> {
     const configuration = await getConfiguration();
     const paths = (await _glob(path.join(configuration.srcFolder, configuration.componentsFolder, "**/*"))).value as readonly string[];
     const pathsToComponents = paths.filter(_path => extensions.includes(path.parse(_path).ext));
@@ -37,6 +37,6 @@ const options: ts.CompilerOptions = {
     noImplicitAny: true,
 };
 
-export const compile = async function(): Promise<void> {
-    compiler(await getPathsToComponents(), options);
+export const compile = async function(): Promise<number> {
+    return compiler(await getComponentPaths(), options);
 };
