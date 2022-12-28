@@ -23,6 +23,10 @@ export const hydrateContent = async function(content: string, componentTokensPat
     const cwd = process.cwd();
     for (const componentTokenPath of componentTokensPaths) {
         const componentIdentifier: ComponentIdentifier = componentsMap[componentTokenPath] as ComponentIdentifier;
+        if (typeof componentIdentifier === "undefined") {
+            console.error(`there was an error: Component '${componentTokenPath}' does not exist.`);
+            continue;
+        }
         const component: Component = await getComponentModule(componentIdentifier.modulePath, componentIdentifier.moduleName);
         // *Important: Set the cwd to 'cwd/lib' so that component calls to import using relative paths are resolved relative to the lib folder.
         if (typeof component === "undefined") return content;
