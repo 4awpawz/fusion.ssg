@@ -28,6 +28,10 @@ export const hydrateContent = async function(content: string, componentTokensPat
             continue;
         }
         const component: Component = await getComponentModule(componentIdentifier.modulePath, componentIdentifier.moduleName);
+        if (typeof component === "undefined") {
+            console.log(`there was an error: Unable to import '${componentIdentifier.moduleName}' from '${componentIdentifier.modulePath}'.`);
+            continue;
+        }
         // *Important: Set the cwd to 'cwd/lib' so that component calls to import using relative paths are resolved relative to the lib folder.
         if (typeof component === "undefined") return content;
         process.chdir(runtimeCWD);
