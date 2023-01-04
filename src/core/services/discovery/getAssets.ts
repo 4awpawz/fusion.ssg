@@ -37,7 +37,7 @@ export const getAssets = async function(): Promise<Assets> {
         asset.fm = matter(buffer, { excerpt: true });
         asset.content = fileType === ".md" ? markdownToHTML(asset.fm.content) : asset.fm.content;
         if (asset.assetType !== "template") return asset;
-        asset.isCollection = Object.prototype.hasOwnProperty.call(asset.fm.data, "collection");
+        asset.isCollection = Object.hasOwn(asset.fm.data, "collection");
         const page: string | undefined = asset.fm.data["page"];
         asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || "";
         const oPath = fileInfo.dir.split("/").slice(2).join("/"); // removes 'src/' and the parent folder containing templates.

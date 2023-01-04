@@ -9,7 +9,7 @@ import { getConfiguration } from "../../configuration/getConfiguration.js";
 import type { Asset, Assets, IncludeMatchesResults } from "../../../../types/types";
 
 const getListOfIncludesFromAsset = function(assetContent: string): IncludeMatchesResults {
-    const regexIncludeFileName = /\{include:([/a-zA-Z0-9]+)}/g;
+    const regexIncludeFileName = /\{\{([/a-zA-Z0-9]+)}}/g;
     const matches = [...assetContent.matchAll(regexIncludeFileName)];
     return matches.map(match => ({ matched: match[0] as string, fileName: match[1] as string })) as IncludeMatchesResults;
 };

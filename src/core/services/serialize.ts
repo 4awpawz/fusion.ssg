@@ -5,21 +5,21 @@
 import path from "path";
 import { _remove } from "../lib/io/_remove.js";
 import { _outputFile } from "../lib/io/_outputFile.js";
-import { _writeJson } from "../lib/io/_writeJson.js";
+import { _writeJSONFile } from "../lib/io/_writeJSONFile.js";
 import { _filter } from "../lib/functional.js";
 import { getConfiguration } from "./configuration/getConfiguration.js";
 import type { Asset, Assets } from "../../types/types";
 import * as metrics from "../lib/metrics.js";
 
 /**
- * Serialize pages.
+ * Serialize every template's content except those that are used to generate a collection.
  */
 
 const serializePages = async function(assets: Assets) {
     const buildFolder = (await getConfiguration()).buildFolder;
     const buildPath = path.join(process.cwd(), buildFolder);
     _remove(buildFolder);
-    const templateAssets: Assets = _filter(assets, asset => asset.assetType === "template");
+    const templateAssets: Assets = _filter(assets, asset => asset.assetType === "template" && !asset.isCollection);
     for (let i = 0; i < templateAssets.length; i++) {
         const asset = templateAssets[i] as Asset;
         const outputPath = path.join(buildPath, asset.htmlDocumentName as string);
@@ -35,14 +35,14 @@ const serializePages = async function(assets: Assets) {
 
 const serializeAssets = async function(assets: Assets) {
     const outputPath = path.join(process.cwd(), "assets.json");
-    await _writeJson(outputPath, assets);
+    await _writeJSONFile(outputPath, assets);
     return;
 };
 
 export const serialize = async function(assets: Assets): Promise<Assets> {
-    metrics.startTimer("serialize");
+    metrics.startTimer("serialization");
     await serializePages(assets);
     await serializeAssets(assets);
-    metrics.stopTimer("serialize");
+    metrics.stopTimer("serialization");
     return assets;
 };

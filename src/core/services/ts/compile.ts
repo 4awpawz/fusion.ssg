@@ -2,24 +2,14 @@
  * compile - Calls the Typescropt compiler api passig it a list of user components and compiler options.
  */
 
-import path from "path";
 import ts from "typescript";
-import { _glob } from "../../lib/io/_glob.js";
-import { getConfiguration } from "../configuration/getConfiguration.js";
 import { compiler } from "./compiler.js";
+import * as metrics from "../../lib/metrics.js";
+import { getComponentPaths } from "../../lib/getComponentPaths.js";
 
 /**
  *  Get a list of all the component files from src/components.
  */
-
-const extensions = [".js", ".jsx", ".tsx"];
-
-const getComponentPaths = async function(): Promise<readonly string[]> {
-    const configuration = await getConfiguration();
-    const paths = (await _glob(path.join(configuration.srcFolder, configuration.componentsFolder, "**/*"))).value as readonly string[];
-    const pathsToComponents = paths.filter(_path => extensions.includes(path.parse(_path).ext));
-    return pathsToComponents;
-};
 
 const options: ts.CompilerOptions = {
     module: ts.ModuleKind.NodeNext,
@@ -37,6 +27,20 @@ const options: ts.CompilerOptions = {
     noImplicitAny: true,
 };
 
-export const compile = async function(): Promise<number> {
-    return compiler(await getComponentPaths(), options);
+export const compile = async function(): Promise<void> {
+    metrics.startTimer("compilation");
+    const componentPaths = await getComponentPaths();
+    if (componentPaths.length === 0) {
+        console.log("no components found");
+        process.env["OK_TO_CALL_COMPONENTS"] = "0";
+        return;
+    }
+    const exitCode = compiler(componentPaths, options);
+    if (exitCode === 1) {
+        console.error(`there was an error: TypeScript found errors in one or more components that need to be addressed.`);
+        process.env["OK_TO_CALL_COMPONENTS"] = "0";
+        return;
+    }
+    process.env["OK_TO_CALL_COMPONENTS"] = "1";
+    metrics.stopTimer("compilation");
 };

@@ -1,10 +1,10 @@
 /**
- * _readJsonFile - async/await wrapper for readJSONFile.
+ * _readJSONfile - async/await wrapper for readJSONFile.
  */
 
 import fs from "fs-extra";
 
-export const _readJsonFile = async function(path: string, options = "utf8"): Promise<JSON | void> {
+export const _readJSONFile = async function(path: string, options = "utf8"): Promise<unknown | void> {
     try {
         return await fs.readJson(path, options);
     } catch (error) {

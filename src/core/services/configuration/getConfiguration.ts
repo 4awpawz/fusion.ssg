@@ -5,10 +5,10 @@
  */
 
 import path from "path";
-import { _readJsonFile } from "../../lib/io/_readJsonFile.js";
+import { _readJSONFile } from "../../lib/io/_readJsonFile.js";
 import { _fileExists } from "../../lib/io/_fileExists.js";
 import { configFileName } from "./configFileName.js";
-import type { Configuration } from "../../../types/types";
+import type { Configuration, UserConfig } from "../../../types/types";
 
 export const getConfiguration = async function(): Promise<Configuration> {
     const defaultConfig: Configuration = {
@@ -23,7 +23,7 @@ export const getConfiguration = async function(): Promise<Configuration> {
     };
     const configPath = path.join(process.cwd(), configFileName);
     if (!_fileExists(configPath)) return defaultConfig;
-    const userConfig = await _readJsonFile(configPath);
+    const userConfig = await _readJSONFile(configPath) as UserConfig;
     if (typeof userConfig === "undefined") return ({ ...defaultConfig });
     defaultConfig.userConfig = { ...defaultConfig.userConfig, ...userConfig };
     return { ...defaultConfig };

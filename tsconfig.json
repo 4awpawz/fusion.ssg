@@ -2,6 +2,7 @@
     "extends": "@tsconfig/node16-strictest-esm/tsconfig.json",
     "include": ["src/**/*"],
     "compilerOptions": {
+        "lib": [ "es2022" ],
         "module": "es2022",
         "allowJs": true,
         "outDir": "dist",

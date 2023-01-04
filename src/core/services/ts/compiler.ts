@@ -15,7 +15,8 @@ export const compiler = function(pathsToComponents: readonly string[], options: 
 
     allDiagnostics.forEach(diagnostic => {
         if (diagnostic.file) {
-            const { line, character } = ts.getLineAndCharacterOfPosition(diagnostic.file, diagnostic.start!);
+            // const { line, character } = ts.getLineAndCharacterOfPosition(diagnostic.file, diagnostic.start!);
+            const { line, character } = ts.getLineAndCharacterOfPosition(diagnostic.file, diagnostic.start as number);
             const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n");
             console.log(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
         } else {

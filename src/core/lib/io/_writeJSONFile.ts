@@ -1,10 +1,10 @@
 /**
- * _wrtieJson - async/await wrapper for _wrtieJson.
+ * _wrtieJSONFile - async/await wrapper for _wrtieJson.
  */
 
 import fs from "fs-extra";
 
-export const _writeJson = async function(path: string, object: any): Promise<void> {
+export const _writeJSONFile = async function(path: string, object: any): Promise<void> {
     try {
         await fs.writeJson(path, object);
     } catch (error) {

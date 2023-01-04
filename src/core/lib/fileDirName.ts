@@ -3,8 +3,13 @@
  * implements and exports them so that they can be used as if they were native Node implementations.
  */
 
-import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-export const __filename = fileURLToPath(import.meta.url);
-export const __dirname = dirname(__filename);
+export default function fileDirName(meta: any) {
+    const __filename = fileURLToPath(meta.url);
+
+    const __dirname = dirname(__filename);
+
+    return { __dirname, __filename };
+}

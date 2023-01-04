@@ -3,25 +3,15 @@
  */
 
 import { join, parse } from "path";
-import type { Assets, ComponentIdentifier, ComponentsMap } from "../../../../types/types";
+import type { Assets, ComponentIdentifier, ComponentProfile, ComponentsMap } from "../../../../types/types";
 import { hydrateContent } from "./hydrateContent.js";
-import { _glob } from "../../../lib/io/_glob.js";
-import { getConfiguration } from "../../configuration/getConfiguration.js";
-import { compile } from "../../ts/compile.js";
 import * as metrics from "../../../lib/metrics.js";
+import { getComponentPaths } from "../../../lib/getComponentPaths.js";
 
-const config = (await getConfiguration());
-
-const getComponentPaths = async function(): Promise<string[] | Error> {
-    const componentsPath = join(config.srcFolder, config.componentsFolder, "**/", "{*.js,*.jsx,*.ts,*.tsx}");
-    const result = await _glob(componentsPath);
-    return result.value;
-};
-
-const makeComponentsMap = function(result: string[]): ComponentsMap {
+const makeComponentsMap = function(componentPaths: readonly string[]): ComponentsMap {
     const componentsMap: ComponentsMap = {};
-    for (const itemPath of result) {
-        // Remove 'src/' from the path.
+    for (const itemPath of componentPaths) {
+        // Remove 'src/components/' from the path.
         const componentPath = join(parse(itemPath).dir.split("/").slice(2).join("/"), parse(itemPath).base);
         const componentName = parse(itemPath).name;
         const componentExt = ".js";
@@ -31,42 +21,36 @@ const makeComponentsMap = function(result: string[]): ComponentsMap {
     return componentsMap;
 };
 
-const getPathsFromComponentTokens = function(assetContent: string): string[] {
-    const regex = /\{component:(.*?)\}/g;
+const getComponentProfilesFromTokens = function(assetContent: string): ComponentProfile[] {
+    const regex = /\{\{\{(.*?)}}}/g;
     const matches = assetContent.matchAll(regex);
     if (typeof matches === "undefined") return [];
     const _matches = [...matches];
-    const paths: string[] = [];
+    if (_matches.length === 0) return [];
+    const componentProfiles: ComponentProfile[] = [];
     for (const match of _matches) {
         if (typeof match[1] === "undefined") continue;
-        paths.push(match[1]);
+        // Get the component path and its data sources declared in the token.
+        const tokenParts = match[1].split(",");
+        const tokenPath = tokenParts[0]; // string - component p
+        const tokenDataSources = tokenParts.slice(1).map(item => item.trim()); // string[] - data source(s)
+        componentProfiles.push({ token: match[1], path: tokenPath as string, dataSources: tokenDataSources });
     }
-    return paths;
+    return componentProfiles;
 };
 
 export const hydrate = async function(assets: Assets): Promise<Assets> {
     metrics.startTimer("hydration");
+    if (process.env["OK_TO_CALL_COMPONENTS"] === "0") return assets;
     const componentPaths = await getComponentPaths();
-    if (componentPaths instanceof Error) {
-        console.error(componentPaths);
-        console.error(`there was an error: glob failed when searching for components`);
-        throw componentPaths;
-    }
-    if (componentPaths.length === 0) return assets;
-    const exitCode = await compile();
-    if (exitCode === 1) {
-        console.error(`there was an error: TypeScript found errors in one or more components that need to be addressed.`);
-        return assets;
-    }
     const componentsMap = makeComponentsMap(componentPaths);
-    for (const _asset of assets) {
-        if (_asset.assetType !== "template") continue;
-        if (typeof _asset.content === "undefined") continue;
-        const componentTokensPaths = getPathsFromComponentTokens(_asset.content);
-        if (componentTokensPaths.length === 0) continue;
+    for (const asset of assets) {
+        if (asset.assetType !== "template" || typeof asset.content === "undefined") continue;
+        const componentProfiles = getComponentProfilesFromTokens(asset.content);
+        if (componentProfiles.length === 0) continue;
         // Document contains compnents, needs hydration.
-        const hydratedContent = await hydrateContent(_asset.content, componentTokensPaths, componentsMap);
-        _asset.content = hydratedContent;
+        const hydratedContent = await hydrateContent(asset.content, componentProfiles, componentsMap);
+        asset.content = hydratedContent as string;
     }
     metrics.stopTimer("hydration");
     return assets;

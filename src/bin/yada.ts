@@ -10,9 +10,11 @@ import path from "path";
 import { _readFile } from "../core/lib/io/_readFile.js";
 import { log } from "../core/lib/io/log.js";
 import { run } from "../index.js";
-import { __dirname } from "../core/lib/__dirname.js";
+import fileDirName from "../core/lib/fileDirName.js";
 
-const buffer = await _readFile(path.join(__dirname, "../../package.json"));
+const { __dirname } = fileDirName(import.meta);
+
+const buffer = await _readFile(path.join(__dirname, "..", "..", "package.json"));
 const pkgJson = JSON.parse(buffer as string);
 
 /**

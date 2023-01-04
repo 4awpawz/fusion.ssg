@@ -12,6 +12,7 @@ export interface Asset {
     fileName: string,
     fileType: string,
     isCollection?: boolean,
+    collection?: Asset[],
     content?: string,
     fm?: GrayMatterFile<string>
     associatedPage?: string | undefined,
@@ -19,6 +20,22 @@ export interface Asset {
 }
 
 export type Assets = Asset[]
+
+export interface Tokens {
+    tokens: object
+}
+
+export type DataSource = string
+
+export interface ComponentProfile {
+    token: string,
+    path: string,
+    dataSources: DataSource[]
+}
+
+export interface BuffersMap {
+    [key: string]: any
+}
 
 export type IncludeToken = string
 
@@ -68,6 +85,6 @@ export interface ComponentsMap {
     [key: string]: ComponentIdentifier
 }
 
-export type Component = (() => Promise<string>) | undefined;
+export type Component = ((buffersMap: BuffersMap | void) => Promise<string>) | undefined;
 
 export type Components = Components[];
