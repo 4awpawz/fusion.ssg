@@ -4,7 +4,7 @@
 
 import fs from "fs-extra";
 
-export const _readJSONFile = async function(path: string, options = "utf8"): Promise<unknown | void> {
+export const _readJSONFile = async function(path: string, options = "utf8"): Promise<any | void> {
     try {
         return await fs.readJson(path, options);
     } catch (error) {

@@ -7,6 +7,7 @@ import type { Assets, ComponentIdentifier, ComponentProfile, ComponentsMap } fro
 import { hydrateContent } from "./hydrateContent.js";
 import * as metrics from "../../../lib/metrics.js";
 import { getComponentPaths } from "../../../lib/getComponentPaths.js";
+import { clearCache } from "../../../lib/cache.js";
 
 const makeComponentsMap = function(componentPaths: readonly string[]): ComponentsMap {
     const componentsMap: ComponentsMap = {};
@@ -44,6 +45,7 @@ export const hydrate = async function(assets: Assets): Promise<Assets> {
     if (process.env["OK_TO_CALL_COMPONENTS"] === "0") return assets;
     const componentPaths = await getComponentPaths();
     const componentsMap = makeComponentsMap(componentPaths);
+    clearCache();
     for (const asset of assets) {
         if (asset.assetType !== "template" || typeof asset.content === "undefined") continue;
         const componentProfiles = getComponentProfilesFromTokens(asset.content);
