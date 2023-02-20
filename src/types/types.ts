@@ -9,14 +9,19 @@ export type AssetType = "page" | "template" | "include" | "component" | "data" |
 export interface Asset {
     timestamp: number,
     assetType: AssetType
-    fileName: string,
+    filePath: string,
     fileType: string,
-    isCollection?: boolean,
     collection?: Asset[],
     content?: string,
     fm?: GrayMatterFile<string>
     associatedPage?: string | undefined,
     htmlDocumentName?: string | undefined,
+}
+
+export interface CollectionPageProfile {
+    content: string,
+    title: string,
+    htmlDocumentName: string
 }
 
 export type Assets = Asset[]
@@ -28,7 +33,7 @@ export interface Tokens {
 export type DataSource = string
 
 export interface ComponentProfile {
-    token: string,
+    token: Token,
     path: string,
     dataSources: DataSource[]
 }
@@ -87,4 +92,12 @@ export interface ComponentsMap {
 
 export type Component = ((buffersMap: BuffersMap | void) => Promise<string>) | undefined;
 
+export type CollectionComponent = ((index: number, buffersMap: BuffersMap | void) => Promise<CollectionPageProfile>) | undefined;
+
 export type Components = Components[];
+
+export type TokenValidator = (matches: RegExpMatchArray) => boolean;
+
+export interface TokenValidators {
+    [key: string]: TokenValidator
+}

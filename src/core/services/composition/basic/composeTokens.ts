@@ -3,7 +3,7 @@
 * in front matter to like-named tokens found in an asset's content.
  */
 
-import type { Tokens } from "../../../../types/types.js";
+import type { Tokens } from "../../../../types/types";
 import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenContent.js";
 
 export const composeTokens = function(assetContent: string, fmData: object): string {

@@ -7,11 +7,12 @@ import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenCont
 import { _find } from "../../../lib/functional.js";
 import { getConfiguration } from "../../configuration/getConfiguration.js";
 import type { Asset, Assets, IncludeMatchesResults } from "../../../../types/types";
+import chalk from "chalk";
+import { getMatchingTokens } from "../../../lib/getMatchingTokens.js";
 
 const getListOfIncludesFromAsset = function(assetContent: string): IncludeMatchesResults {
-    const regexIncludeFileName = /\{\{([/a-zA-Z0-9]+)}}/g;
-    const matches = [...assetContent.matchAll(regexIncludeFileName)];
-    return matches.map(match => ({ matched: match[0] as string, fileName: match[1] as string })) as IncludeMatchesResults;
+    const matches = getMatchingTokens(assetContent, "twoBraces");
+    return matches.map(match => ({ matched: match[0] as string, fileName: match[2] as string })) as IncludeMatchesResults;
 };
 
 export const composeIncludes = async function(asset: Asset, assets: Assets): Promise<Asset> {
@@ -22,9 +23,11 @@ export const composeIncludes = async function(asset: Asset, assets: Assets): Pro
     for (const matchResult of matcherResults) {
         const pathToInclude = join(`${srcFolder}`, "includes", matchResult.fileName);
         const foundInclude: Asset | undefined = _find(assets, _asset =>
-            _asset.assetType === "include" && (_asset.fileName === `${pathToInclude}.html` || _asset.fileName === `${pathToInclude}.md`));
-        if (typeof foundInclude === "undefined")
-            throw new Error(`there was an error: unable to find include file ${pathToInclude} declared in ${asset.fileName}`);
+            _asset.assetType === "include" && (_asset.filePath === `${pathToInclude}.html` || _asset.filePath === `${pathToInclude}.md`));
+        if (typeof foundInclude === "undefined") {
+            console.log(chalk.red(`there was an error: unable to find include file ${pathToInclude} declared in ${asset.filePath}`));
+            continue;
+        }
         const token = matchResult.matched;
         asset.content = findAndReplaceTokenContent(asset.content, token, foundInclude.content as string);
     }

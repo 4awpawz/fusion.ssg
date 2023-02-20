@@ -5,11 +5,8 @@
 import ts from "typescript";
 import { compiler } from "./compiler.js";
 import * as metrics from "../../lib/metrics.js";
-import { getComponentPaths } from "../../lib/getComponentPaths.js";
-
-/**
- *  Get a list of all the component files from src/components.
- */
+import { componentPaths } from "../../lib/getComponentPaths.js";
+import chalk from "chalk";
 
 const options: ts.CompilerOptions = {
     module: ts.ModuleKind.NodeNext,
@@ -27,20 +24,23 @@ const options: ts.CompilerOptions = {
     noImplicitAny: true,
 };
 
-export const compile = async function(): Promise<void> {
+export const compile = async function(): Promise<boolean> {
     metrics.startTimer("compilation");
-    const componentPaths = await getComponentPaths();
+    // const componentPaths = await getComponentPaths();
     if (componentPaths.length === 0) {
-        console.log("no components found");
+        console.log(chalk.blue("no components found"));
         process.env["OK_TO_CALL_COMPONENTS"] = "0";
-        return;
+        metrics.stopTimer("compilation");
+        return true;
     }
     const exitCode = compiler(componentPaths, options);
     if (exitCode === 1) {
-        console.error(`there was an error: TypeScript found errors in one or more components that need to be addressed.`);
+        console.error(chalk.red("there was an error: TypeScript found errors in one or more components that need to be addressed."));
         process.env["OK_TO_CALL_COMPONENTS"] = "0";
-        return;
+        metrics.stopTimer("compilation");
+        return false;
     }
     process.env["OK_TO_CALL_COMPONENTS"] = "1";
     metrics.stopTimer("compilation");
+    return true;
 };

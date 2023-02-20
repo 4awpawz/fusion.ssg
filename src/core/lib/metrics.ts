@@ -4,6 +4,8 @@
  * api: startTimer, stopTimer, getTimer, printLog, deleteTimer, clearTimers
  */
 
+import chalk from "chalk";
+
 
 interface Timer {
     name: string,
@@ -24,7 +26,7 @@ const startTimer = (name: string, precision = 3) => {
 };
 
 const noSuchTimer = (name: string) => {
-    console.log(`no such timer named '${name}'`);
+    console.log(chalk.red(`no such timer named '${name}'`));
 };
 
 const stopTimer = (name: string): string | void => {

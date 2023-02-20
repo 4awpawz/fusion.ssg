@@ -1,15 +1,13 @@
 /**
- * getDataSources - Returns the data associated with one or
+ * getDataSources - returns the data associated with one or
  * moredatdata sources that is declared in a component token.
  */
 
 import path from "path";
-import type { BuffersMap, DataSource } from "../../../../types/types";
-import { getConfiguration } from "../../../services/configuration/getConfiguration.js";
-import { readCache } from "../../../lib/cache.js";
+import type { BuffersMap, Configuration, DataSource } from "../../types/types";
+import { readCache } from "./cache.js";
 
-export const getDataSources = async function(dataSources: DataSource[]): Promise<BuffersMap> {
-    const config = await getConfiguration();
+export const getDataSources = async function(dataSources: DataSource[], config: Configuration): Promise<BuffersMap> {
     const buffersMap: BuffersMap = Object.create(null);
     for (const dataSource of dataSources) {
         const _path = path.join(config.srcFolder, config.dataFolder, dataSource);

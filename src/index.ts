@@ -3,17 +3,17 @@
  */
 
 import { compile } from "./core/services/ts/compile.js";
-import { getAssets } from "./core/services/discovery/getAssets.js";
 import { compose } from "./core/services/composition/basic/compose.js";
 import { hydrate } from "./core/services/composition/hydration/hydrate.js";
 import { serialize } from "./core/services/serialize.js";
 import * as metrics from "./core/lib/metrics.js";
+import { discover } from "./core/services/discovery/discover.js";
+import { collectionGerator } from "./core/services/composition/collections/collectionGenerator.js";
 
 export const run = async function() {
-    metrics.clearTimers();
     metrics.startTimer("total elapsed time");
-    await compile();
-    (await serialize(await hydrate(await compose(await getAssets()))));
+    const isOKToContine = await compile();
+    isOKToContine && (await serialize(await hydrate(await collectionGerator(await compose(await discover())))));
     metrics.stopTimer("total elapsed time");
     metrics.forEachTimer(timer => console.log(timer.elapsed));
 };

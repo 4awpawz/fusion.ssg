@@ -17,12 +17,11 @@ import * as metrics from "../lib/metrics.js";
 
 const serializePages = async function(assets: Assets) {
     const buildFolder = (await getConfiguration()).buildFolder;
-    const buildPath = path.join(process.cwd(), buildFolder);
+    const buildFolderPath = path.join(process.cwd(), buildFolder);
     _remove(buildFolder);
-    const templateAssets: Assets = _filter(assets, asset => asset.assetType === "template" && !asset.isCollection);
-    for (let i = 0; i < templateAssets.length; i++) {
-        const asset = templateAssets[i] as Asset;
-        const outputPath = path.join(buildPath, asset.htmlDocumentName as string);
+    const templateAssets: Assets = _filter(assets, asset => asset.assetType === "template" && !asset.fm?.data["isCollection"]);
+    for (const asset of templateAssets) {
+        const outputPath = path.join(buildFolderPath, asset.htmlDocumentName as string);
         if (typeof asset.content === "undefined") continue;
         await _outputFile(outputPath, asset.content);
     }

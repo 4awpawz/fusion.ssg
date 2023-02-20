@@ -29,6 +29,7 @@
         "ts-jest": "^28.0.8"
     },
     "dependencies": {
+        "chalk": "^5.2.0",
         "fs-extra": "^10.1.0",
         "glob": "^8.0.3",
         "gray-matter": "^4.0.3",
