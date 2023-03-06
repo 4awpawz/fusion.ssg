@@ -21,7 +21,7 @@ export const hydrate = async function(assets: Assets): Promise<Assets> {
         const componentProfiles = getComponentProfilesFromTokens(asset.content, "threeBraces");
         if (componentProfiles.length === 0) continue;
         // Document contains compnents, needs hydration.
-        const hydratedContent = await hydrateContent(asset.content, componentProfiles, componentsMap);
+        const hydratedContent = await hydrateContent(asset.content, componentProfiles, componentsMap, assets);
         asset.content = hydratedContent as string;
     }
     metrics.stopTimer("hydration");
