@@ -1,4 +1,5 @@
 import type { GrayMatterFile } from "gray-matter";
+
 export interface PromiseResultGlob {
     success: boolean,
     value: string[] | Error,
@@ -78,6 +79,10 @@ export interface Configuration {
     libFolder: string
     componentsFolder: string,
     dataFolder: string,
+    cssFolder: string,
+    scriptsFolder: string,
+    mediaFolder: string,
+    etcFolder: string,
     userConfig?: UserConfig
 }
 

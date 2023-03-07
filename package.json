@@ -31,9 +31,10 @@
     "dependencies": {
         "chalk": "^5.2.0",
         "fs-extra": "^10.1.0",
-        "glob": "^8.0.3",
+        "glob": "^9.2.1",
         "gray-matter": "^4.0.3",
         "marked": "^4.1.0",
+        "nstall": "^0.2.0",
         "preact": "^10.11.1",
         "preact-render-to-string": "^5.2.5",
         "prettier": "^2.7.1",

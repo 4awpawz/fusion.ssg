@@ -5,7 +5,7 @@
 import { compile } from "./core/services/ts/compile.js";
 import { compose } from "./core/services/composition/basic/compose.js";
 import { hydrate } from "./core/services/composition/hydration/hydrate.js";
-import { serialize } from "./core/services/serialize.js";
+import { serialize } from "./core/services/serialization/serialize.js";
 import * as metrics from "./core/lib/metrics.js";
 import { discover } from "./core/services/discovery/discover.js";
 import { collectionGerator } from "./core/services/composition/collections/collectionGenerator.js";

@@ -2,14 +2,17 @@
  * _glob - async/await wrapper for glob.
  */
 
+import chalk from "chalk";
 import glob from "glob";
-import type { PromiseResultGlob } from "../../../types/types";
 
-export const _glob = async function(path: string, options = {}): Promise<PromiseResultGlob> {
-    return new Promise(resolve => {
-        const _options = { ...options, ...{ ignore: ['node_moduless**/*'] } };
-        glob(path, _options, (err, files) => {
-            err ? resolve({ success: false, value: err }) : resolve({ success: true, value: files });
-        });
-    });
+export const _glob = async function(pattern: string, options = {}): Promise<string[]> {
+    const _options = { ...options, ...{ ignore: "node_moduless**/*" } };
+    let paths = [] as string[];
+    try {
+        paths = await glob(pattern, _options);
+    } catch (error) {
+        console.error(chalk.red(`there was an error when calling glob with pattern ${pattern}`));
+        throw error;
+    }
+    return paths;
 };
