@@ -12,7 +12,7 @@ export const makeComponentsMap = function(componentPaths: readonly string[]): Co
         const componentPath = join(parse(itemPath).dir.split("/").slice(2).join("/"), parse(itemPath).base);
         const componentName = parse(itemPath).name;
         const componentExt = ".js";
-        const componentIdentifier: ComponentIdentifier = { modulePath: join(parse(componentPath).dir, componentName + componentExt), moduleName: componentName };
+        const componentIdentifier: ComponentIdentifier = { moduleName: componentName + componentExt };
         componentsMap[componentPath] = componentIdentifier;
     }
     return componentsMap;

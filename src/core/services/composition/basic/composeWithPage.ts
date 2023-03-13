@@ -22,7 +22,7 @@ export const composeWithPage = async function(asset: Asset, assets: Asset[]): Pr
     asset = await composeIncludes(asset, assets);
     if (typeof associatedPage.fm === "undefined" || typeof asset.fm === "undefined") return asset;
     // Resolve front matter tokens.
-    // TODO: 23/02/20 09:43:46 - jeffreyschwartz : If pages do not support front matter then this is not necessary.
+    // TODO: 23/02/20 09:43:46 - jeffreyschwartz : If pages will not support front matter then this is not necessary.
     const frontmatterData = { ...associatedPage.fm.data, ...asset.fm.data };
     asset.content = composeTokens(asset.content as string, frontmatterData);
     return asset;

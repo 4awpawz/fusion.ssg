@@ -15,17 +15,20 @@ export const makeCollection = async function(assets: Assets, asset: Asset, compo
     const config = await getConfiguration();
     const runtimeCWD = join(process.cwd(), config.libFolder);
     const cwd = process.cwd();
-    const componentIdentifier: ComponentIdentifier = componentsMap[componentProfile.path] as ComponentIdentifier;
+    const componentIdentifier: ComponentIdentifier = componentsMap[componentProfile.componentName] as ComponentIdentifier;
     if (typeof componentIdentifier === "undefined") {
-        console.error(chalk.red(`there was an error: Collection Component '${componentProfile.path}' does not exist.`));
+        console.error(chalk.red(`there was an error: Collection Component '${componentProfile.componentName}' does not exist.`));
         return;
     }
-    const collectionComponent = await importModule(componentIdentifier.modulePath, componentIdentifier.moduleName, config) as CollectionComponent;
+    const collectionComponent = await importModule((componentIdentifier.moduleName), config) as CollectionComponent;
     if (typeof collectionComponent === "undefined") {
-        console.error(chalk.red(`there was an error: Unable to import '${componentIdentifier.moduleName}' from '${componentIdentifier.modulePath}'.`));
+        console.error(chalk.red(`there was an error: Unable to import '${componentIdentifier.moduleName}' from '${componentIdentifier.moduleName}'.`));
         return;
     }
-    const buffersMap = { ...componentProfile.dataSources.length > 0 ? await getDataSources(componentProfile.dataSources, config) : undefined, assets };
+    const buffersMap = {
+        ...componentProfile.componentDataSources.length > 0 ?
+            await getDataSources(componentProfile.componentDataSources, config) : undefined, assets
+    };
     // *Important: Set the cwd to 'cwd/lib' so that component calls to import using relative paths are resolved relative to the lib folder.
     process.chdir(runtimeCWD);
     // The component may possible need an index for each call.
@@ -36,7 +39,7 @@ export const makeCollection = async function(assets: Assets, asset: Asset, compo
         const collectionPageProfile = (typeof buffersMap !== "undefined" ? await collectionComponent(index, buffersMap) : await collectionComponent(index)) as CollectionPageProfile;
         // Collection components return undefined when there's nothing more to process.
         if (typeof collectionPageProfile === "undefined") break;
-        const generatedAsset = makeNewAsset(asset, collectionPageProfile, componentProfile.token);
+        const generatedAsset = makeNewAsset(asset, collectionPageProfile, componentProfile.componentTag);
         assets.push(generatedAsset);
         index += 1;
     }

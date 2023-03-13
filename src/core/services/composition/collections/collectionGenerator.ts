@@ -10,7 +10,7 @@ import { makeCollection } from "./makeCollection.js";
 import { componentPaths } from "../../../lib/getComponentPaths.js";
 import { makeComponentsMap } from "../../../lib/makeComponentsMap.js";
 import { clearCache } from "../../../lib/cache.js";
-import { getComponentProfilesFromTokens } from "../../../lib/getComponentProfilesFromTokens.js";
+import { getComponentProfiles } from "../../../lib/getComponentProfiles.js";
 
 export const collectionGerator = async function(assets: Assets): Promise<Assets> {
     metrics.startTimer("collections");
@@ -20,7 +20,7 @@ export const collectionGerator = async function(assets: Assets): Promise<Assets>
     for (const asset of assets) {
         if (asset.assetType !== "template" || typeof asset?.fm?.data["isCollection"] === "undefined"
             || !asset?.fm?.data["isCollection"] || typeof asset.fm?.content === "undefined") continue;
-        const componentProfiles = getComponentProfilesFromTokens(asset.fm?.content as string, "fourBraces");
+        const componentProfiles = getComponentProfiles(asset.fm?.content as string).filter(componentProfile => componentProfile.componentIsCollection);
         if (componentProfiles.length !== 1) {
             console.error(chalk.red(`there was an error: collection processing for template ${asset.filePath} bypassed, a template that declares itself a collection must declare one collection component`));
             continue;

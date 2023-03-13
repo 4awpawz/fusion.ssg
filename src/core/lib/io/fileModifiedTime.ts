@@ -1,4 +1,3 @@
-
 /**
  * fileModifiedTime - returns the time in ms when file (path) was last modified.
  */

@@ -8,5 +8,5 @@ import { _glob } from "./io/_glob.js";
 
 const extensions = [".tsx"];
 const config = await getConfiguration();
-const paths = await _glob(path.join(config.srcFolder, config.componentsFolder, "**/*"));
+const paths = await _glob(path.join(config.srcFolder, config.componentsFolder, "*.tsx"));
 export const componentPaths = paths.filter(_path => extensions.includes(path.parse(_path).ext));

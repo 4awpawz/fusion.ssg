@@ -34,9 +34,11 @@ export interface Tokens {
 export type DataSource = string
 
 export interface ComponentProfile {
-    token: Token,
-    path: string,
-    dataSources: DataSource[]
+    componentTag: string,
+    componentName: string,
+    componentDataSources: DataSource[],
+    componentProperties: string[],
+    componentIsCollection: boolean
 }
 
 export interface BuffersMap {
@@ -87,7 +89,6 @@ export interface Configuration {
 }
 
 export interface ComponentIdentifier {
-    modulePath: string,
     moduleName: string
 }
 

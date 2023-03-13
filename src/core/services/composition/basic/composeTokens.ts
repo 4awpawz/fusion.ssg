@@ -1,6 +1,6 @@
 /**
- * composeTokens - Applies named values found in a datat source and
-* in front matter to like-named tokens found in an asset's content.
+ * composeTokens - Applies named values found in front
+ * matter to like-named tokens found in an asset's content.
  */
 
 import type { Tokens } from "../../../../types/types";

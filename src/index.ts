@@ -1,5 +1,5 @@
 /**
- * index - Builds user's site.
+ * index - Main entry point to building user site.
  */
 
 import { compile } from "./core/services/ts/compile.js";
