@@ -2,7 +2,6 @@
  * getAssetType - Returns the type of the asset.
  */
 
-import { parse } from "path";
 import type { AssetType } from "../../../types/types";
 
 export const getAssetType = function(pathToAsset: string): AssetType {
