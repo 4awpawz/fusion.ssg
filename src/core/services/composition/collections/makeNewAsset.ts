@@ -2,7 +2,7 @@
  * makeNewAsset - Makes a copy of the collection template for use in a collection.
  */
 
-import type { Asset, CollectionPageProfile, Token } from "../../../../types/types";
+import type { Asset, CollectionPageProfile } from "../../../../types/types";
 import { join, parse } from "path";
 
 export const makeNewAsset = function(asset: Asset, collectionPageProfile: CollectionPageProfile, componentTag: string): Asset {
