@@ -10,8 +10,8 @@
         "sourceMap": true,
         "jsx": "react-jsx",
         "jsxImportSource": "preact",
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
         "noImplicitReturns": true,
         "noImplicitAny": true,
         "declaration": true
