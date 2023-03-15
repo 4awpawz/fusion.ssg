@@ -11,6 +11,6 @@ export const composeWithoutPage = async function(asset: Asset, assets: Assets): 
     asset = await composeIncludes(asset, assets);
     // Resolve front matter tokens.
     if (typeof asset.fm === "undefined") return asset;
-    asset.content = composeTokens(asset.content as string, asset.fm.data);
+    asset.content = await composeTokens(asset.content as string, asset.fm.data["tokens"]);
     return asset;
 };

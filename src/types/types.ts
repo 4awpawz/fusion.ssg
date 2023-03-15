@@ -73,6 +73,7 @@ export type Token = `${TokenLeftDelimeter}${TokenContent}${TokenRightDelimeter}`
 
 export interface UserConfig {
     postsFolder?: string,
+    baseURL?: string
 }
 
 export interface Configuration {

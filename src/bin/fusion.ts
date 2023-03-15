@@ -50,7 +50,7 @@ const commands = process.argv
  */
 const generalHelp = () => {
     log("");
-    log("Usage: yada [option] | yada [command] [args]");
+    log("Usage: fusion [option] | fusion [command] [args]");
     log("");
     log("where [option] is one of:");
     log("    -v | --version (version)");
@@ -59,7 +59,7 @@ const generalHelp = () => {
     log("where [command] is one of:");
     log("    n, new, b, build, r, release, c, cachebust, s, serve, j, json");
     log("");
-    log("For command specific help, enter yada -h | --help [command]");
+    log("For command specific help, enter fusion -h | --help [command]");
     log("");
 };
 
@@ -69,17 +69,17 @@ const generalHelp = () => {
 const commandSpecificHelp = (command: string) => {
     if (command === "b" || command === "build") {
         log("NAME");
-        log("       yada-build - Builds your site.");
+        log("       fusion-build - Builds your site.");
         log("");
         log("SYNOPSIS");
-        log("       yada build");
+        log("       fusion build");
         log("");
-        log("       alias: yada b");
+        log("       alias: fusion b");
         log("");
         log("DESCRIPTION");
         log("       This command builds your site targeting the build folder.");
         log("");
-        log("           yada build");
+        log("           fusion build");
         log("");
         log("       In the first form, it builds your entire site.");
         log("");
@@ -92,9 +92,9 @@ const commandSpecificHelp = (command: string) => {
  * "Guard against commands that act on a project but which are issued in a folder that doesn't contain one.
  */
 const guard = function() {
-    const isAProject = fs.existsSync(path.join(process.cwd(), "yada.json"));
+    const isAProject = fs.existsSync(path.join(process.cwd(), "fusion.json"));
     if (!isAProject) {
-        log(`This command requires the current working directory to be a Yada project. See 'yada -h ${commands[0]}' for more information.`);
+        log(`This command requires the current working directory to be a fusion project. See 'fusion -h ${commands[0]}' for more information.`);
         log("");
         process.exit();
     }

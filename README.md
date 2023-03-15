@@ -40,6 +40,8 @@ The project is still in its prerelease stage. One or more _Beta releases_ will f
 
 [x] - Support for generating _collections of pages_ using Typescript components and JSON data sources.
 
+[x] - Support for base URLs.
+
 ### What Needs To Be Done
 
 
@@ -51,7 +53,7 @@ The project is still in its prerelease stage. One or more _Beta releases_ will f
 
 [] - Provide sufficient testing to reduce the likelihood of introducing regressions.
 
-[] = User project generation with preconfigured for TypeScript and Preact's render-to-string.
+[] = User project generation preconfigured for TypeScript and Preact's render-to-string.
 
 ### Longer Term Goals
 

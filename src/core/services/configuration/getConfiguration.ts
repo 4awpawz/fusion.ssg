@@ -2,6 +2,7 @@
  * config - Returns immutable Configuration object.
  * Note: The choice was made not to export a static config object as it would require
  * the user to restart node whenever they make a change to their config file.
+ * Note: A static config object is not exported becau the user can make changes to theirs.
  */
 
 import path from "path";
@@ -22,7 +23,8 @@ export const getConfiguration = async function(): Promise<Configuration> {
         mediaFolder: "media", // Folder that contains media files.
         etcFolder: "etc", // Folder that contains etc type files.
         userConfig: {
-            postsFolder: "posts", // Folder that contains postsA. Can be renamed by user.
+            postsFolder: "posts", // Folder that contains postsA.
+            baseURL: "" // Base URL that can be applied as a token via {baseURL}.
         },
     };
     const configPath = path.join(process.cwd(), configFileName);

@@ -16,14 +16,12 @@ export const composeWithPage = async function(asset: Asset, assets: Asset[]): Pr
         console.log(chalk.red(`there was an error: unable to find associated page for ${asset.filePath}`));
         return asset;
     }
-    // Inject the page's content into the Template's "page" token.
+    // Replace the template's content with the composed page's content.
     asset.content = findAndReplaceTokenContent(associatedPage.content as string, `{{template}}`, asset.content as string);
-    // Resolve includes.
+    // Resolve all includes.
     asset = await composeIncludes(asset, assets);
     if (typeof associatedPage.fm === "undefined" || typeof asset.fm === "undefined") return asset;
     // Resolve front matter tokens.
-    // TODO: 23/02/20 09:43:46 - jeffreyschwartz : If pages will not support front matter then this is not necessary.
-    const frontmatterData = { ...associatedPage.fm.data, ...asset.fm.data };
-    asset.content = composeTokens(asset.content as string, frontmatterData);
+    asset.content = await composeTokens(asset.content as string, asset.fm.data["tokens"]);
     return asset;
 };

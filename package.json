@@ -4,7 +4,7 @@
     "version": "0.0.0-alpha.1",
     "description": "A framework whose goal is to greatly simplify the creation of robust and resilient static web sites.",
     "bin": {
-        "yada": "dist/bin/yada.js"
+        "fusion": "dist/bin/fusion.js"
     },
     "main": "dist/index.js",
     "scripts": {

@@ -1,15 +1,22 @@
 /**
- * composeTokens - Applies named values found in front
- * matter to like-named tokens found in an asset's content.
+ * composeTokens - Applies template front matter tokens and user config's base URL to content.
  */
 
 import type { Tokens } from "../../../../types/types";
 import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenContent.js";
+import { getConfiguration } from "../../configuration/getConfiguration.js";
 
-export const composeTokens = function(assetContent: string, fmData: object): string {
-    const tokens = (fmData as Tokens)["tokens"];
+const getUerConfigBaseURL = async function(): Promise<string | undefined> {
+    return (await getConfiguration()).userConfig?.baseURL;
+};
+
+export const composeTokens = async function(assetContent: string, tokens: Tokens): Promise<string> {
     if (typeof tokens === "undefined") return assetContent;
-    for (const [key, value] of Object.entries(tokens)) {
+    const baseURL = await getUerConfigBaseURL();
+    // If it exists, apply the user's baseURL.
+    const _tokens = typeof baseURL !== "undefined" ? { ...tokens, baseURL } : tokens;
+    console.log("_tokens", _tokens);
+    for (const [key, value] of Object.entries(_tokens)) {
         assetContent = findAndReplaceTokenContent(assetContent, `{${key}}`, value as string);
     }
     return assetContent;
