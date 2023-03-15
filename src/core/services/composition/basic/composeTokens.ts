@@ -15,7 +15,6 @@ export const composeTokens = async function(assetContent: string, tokens: Tokens
     const baseURL = await getUerConfigBaseURL();
     // If it exists, apply the user's baseURL.
     const _tokens = typeof baseURL !== "undefined" ? { ...tokens, baseURL } : tokens;
-    console.log("_tokens", _tokens);
     for (const [key, value] of Object.entries(_tokens)) {
         assetContent = findAndReplaceTokenContent(assetContent, `{${key}}`, value as string);
     }
