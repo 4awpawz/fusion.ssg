@@ -1,8 +1,8 @@
 {
-    "name": "yada",
+    "name": "fusion",
     "type": "module",
     "version": "0.0.0-alpha.1",
-    "description": "",
+    "description": "A framework whose goal is to greatly simplify the creation of robust and resilient static web sites.",
     "bin": {
         "yada": "dist/bin/yada.js"
     },
