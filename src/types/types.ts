@@ -17,6 +17,12 @@ export interface Asset {
     fm?: GrayMatterFile<string>
     associatedPage?: string | undefined,
     htmlDocumentName?: string | undefined,
+    isPost?: boolean
+}
+
+export interface PostProfile {
+    categories: string,
+    tags: string
 }
 
 export interface CollectionPageProfile {
@@ -72,8 +78,8 @@ export type TokenRightDelimeter = "}"
 export type Token = `${TokenLeftDelimeter}${TokenContent}${TokenRightDelimeter}`
 
 export interface UserConfig {
-    postsFolder?: string,
-    baseURL?: string
+    postsFolder: string,
+    baseURL: string
 }
 
 export interface Configuration {
@@ -86,7 +92,7 @@ export interface Configuration {
     scriptsFolder: string,
     mediaFolder: string,
     etcFolder: string,
-    userConfig?: UserConfig
+    userConfig: UserConfig
 }
 
 export interface ComponentIdentifier {
@@ -97,9 +103,9 @@ export interface ComponentsMap {
     [key: string]: ComponentIdentifier
 }
 
-export type Component = ((buffersMap: BuffersMap | void) => Promise<string>) | undefined;
+export type Component = ((buffersMap: BuffersMap) => Promise<string>) | undefined;
 
-export type CollectionComponent = ((index: number, buffersMap: BuffersMap | void) => Promise<CollectionPageProfile>) | undefined;
+export type CollectionComponent = ((index: number, buffersMap: BuffersMap) => Promise<CollectionPageProfile>) | undefined;
 
 export type Components = Components[];
 

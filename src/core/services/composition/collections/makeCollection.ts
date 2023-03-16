@@ -1,9 +1,9 @@
 /**
  * makeCollection - Makes a copy of the original collection template, calls the collection component
-* for each copy to contribute content to the page and stores the copied asset to assets.
+ * for each copy to contribute content to the page and stores the copied asset to assets.
  */
 
-import type { Asset, Assets, CollectionComponent, CollectionPageProfile, ComponentIdentifier, ComponentProfile, ComponentsMap } from "../../../../types/types";
+import type { Asset, Assets, CollectionComponent, ComponentIdentifier, ComponentProfile, ComponentsMap } from "../../../../types/types";
 import { join } from "path";
 import chalk from "chalk";
 import { makeNewAsset } from "./makeNewAsset.js";
@@ -25,10 +25,10 @@ export const makeCollection = async function(assets: Assets, asset: Asset, compo
         console.error(chalk.red(`there was an error: Unable to import '${componentIdentifier.moduleName}' from '${componentIdentifier.moduleName}'.`));
         return;
     }
-    const buffersMap = {
-        ...componentProfile.componentDataSources.length > 0 ?
-            await getDataSources(componentProfile.componentDataSources, config) : undefined, assets
-    };
+    let buffersMap = componentProfile.componentDataSources.length > 0 &&
+        await getDataSources(componentProfile.componentDataSources, config);
+    buffersMap = { ...buffersMap, asset, assets };
+
     // *Important: Set the cwd to 'cwd/lib' so that component calls to import using relative paths are resolved relative to the lib folder.
     process.chdir(runtimeCWD);
     // The component may possible need an index for each call.
@@ -36,7 +36,7 @@ export const makeCollection = async function(assets: Assets, asset: Asset, compo
     const condition = true;
     while (condition) {
         // Components are always called asynchronously.
-        const collectionPageProfile = (typeof buffersMap !== "undefined" ? await collectionComponent(index, buffersMap) : await collectionComponent(index)) as CollectionPageProfile;
+        const collectionPageProfile = await collectionComponent(index, buffersMap);
         // Collection components return undefined when there's nothing more to process.
         if (typeof collectionPageProfile === "undefined") break;
         const generatedAsset = makeNewAsset(asset, collectionPageProfile, componentProfile.componentTag);

@@ -11,7 +11,7 @@ import chalk from "chalk";
 export const serialize = async function(assets: Assets): Promise<Assets> {
     metrics.startTimer("serialization");
     const count = await serializePages(assets);
-    console.log("total pages generated: ", chalk.green(count));
+    console.log("total documents generated: ", chalk.green(count));
     await serializeOtherAssets(assets);
     metrics.stopTimer("serialization");
     return assets;

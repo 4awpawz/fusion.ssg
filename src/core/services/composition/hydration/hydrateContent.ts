@@ -2,7 +2,7 @@
  * hydrateContent - Calls custom components and replaces their tags with the content they return.
  */
 
-import type { ComponentIdentifier, ComponentsMap, Component, ComponentProfile, Assets } from "../../../../types/types";
+import type { ComponentIdentifier, ComponentsMap, Component, ComponentProfile, Assets, Asset } from "../../../../types/types";
 import { join } from "path";
 import { getConfiguration } from "../../configuration/getConfiguration.js";
 import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenContent.js";
@@ -10,7 +10,7 @@ import { getDataSources } from "../../../lib/getDataSources.js";
 import { importModule } from "../../../lib/importModule.js";
 import chalk from "chalk";
 
-export const hydrateContent = async function(content: string, componentProfiles: ComponentProfile[], componentsMap: ComponentsMap, assets: Assets): Promise<string | void> {
+export const hydrateContent = async function(content: string, componentProfiles: ComponentProfile[], componentsMap: ComponentsMap, asset: Asset, assets: Assets): Promise<string | void> {
     const config = await getConfiguration();
     const runtimeCWD = join(process.cwd(), config.libFolder);
     const cwd = process.cwd(); // Is restored below.
@@ -26,14 +26,14 @@ export const hydrateContent = async function(content: string, componentProfiles:
             console.error(chalk.red(`there was an error: hydration processing for template '${componentIdentifier.moduleName}' bypassed, unable to import component '${componentIdentifier.moduleName}'`));
             continue;
         }
-        const buffersMap = {
-            ...componentProfile.componentDataSources.length > 0 ?
-                await getDataSources(componentProfile.componentDataSources, config) : undefined, assets
-        };
+        let buffersMap = componentProfile.componentDataSources.length > 0 &&
+            await getDataSources(componentProfile.componentDataSources, config);
+        buffersMap = { ...buffersMap, asset, assets };
+
         // *Important: Set the cwd to 'cwd/lib' so that component calls to import using relative paths are resolved relative to the lib folder.
         process.chdir(runtimeCWD);
         // Components are always called asynchronously.
-        const componentContent = typeof buffersMap !== "undefined" ? await component(buffersMap) : await component();
+        const componentContent = await component(buffersMap);
         process.chdir(cwd);
         if (typeof componentContent === "undefined") continue;
         content = findAndReplaceTokenContent(content, componentProfile.componentTag, componentContent);

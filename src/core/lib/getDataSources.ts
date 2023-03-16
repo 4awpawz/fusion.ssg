@@ -1,6 +1,6 @@
 /**
- * getDataSources - returns the data associated with one or
- * moredatdata sources that is declared in a component token.
+ * getDataSources - Returns the data associated with
+ * one or more data sources declared in a component token.
  */
 
 import path from "path";

@@ -11,8 +11,12 @@ import { _readFile } from "../../lib/io/_readFile.js";
 import { fileModifiedTime } from "../../lib/io/fileModifiedTime.js";
 import { getFiles } from "./getFiles.js";
 import { getAssetType } from "./getAssetType.js";
-import type { Asset, Assets } from "../../../types/types";
+import type { Asset, Assets, PostProfile } from "../../../types/types";
 import * as metrics from "../../lib/metrics.js";
+import { normalizeOutPath } from "./normalizeOutPath.js";
+import { getPostOutPath } from "./getPostOutPath.js";
+import { getCategoriesPath } from "./getCategoriesPath.js";
+import { isPost } from "./isPost.js";
 
 export const discover = async function(): Promise<Assets> {
     metrics.startTimer("discovery");
@@ -30,7 +34,8 @@ export const discover = async function(): Promise<Assets> {
             filePath,
             fileType,
         };
-        // Assets that represent data files do not include their content.
+        // Assets that represent data and components files do not include their content.
+        asset.isPost = false;
         if (["data", "component"].includes(assetType)) return asset;
         const buffer = await _readFile(assetPath);
         if (typeof buffer === "undefined") return asset;
@@ -39,9 +44,15 @@ export const discover = async function(): Promise<Assets> {
         if (asset.assetType !== "template") return asset;
         const page: string | undefined = asset.fm.data["page"];
         asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || "";
-        const oPath = fileInfo.dir.split("/").slice(2).join("/"); // removes 'src/' and the parent folder containing templates.
-        const oName = fileName.endsWith("index") ? "index.html" : fileName + "/index.html";
-        asset.htmlDocumentName = join(oPath, oName);
+        asset.isPost = await isPost(assetPath);
+        const postProfile = asset.isPost ? asset.fm.data["post"] as PostProfile : undefined;
+        const postCategoriesPath = asset.isPost && typeof postProfile !== "undefined" ? getCategoriesPath(postProfile.categories) : undefined;
+        const oPath = asset.isPost && fileInfo.name !== "index" ?
+            await getPostOutPath(asset.filePath, postCategoriesPath) : normalizeOutPath(fileInfo.dir);
+        if (typeof oPath === "undefined") return asset;
+        const postNamePath = asset.isPost ? join(oPath, parse(filePath.split("-").pop() as string).name, "index.html") : "";
+        const oName = asset.isPost && postNamePath || fileName.endsWith("index") ? "index.html" : fileName + "/index.html";
+        asset.htmlDocumentName = asset.isPost ? postNamePath : join(oPath, oName);
         return asset;
     }));
     metrics.stopTimer("discovery");

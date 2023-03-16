@@ -28,32 +28,37 @@ The project's scope is limited to generating robust and resilient HTML documents
 
 The project is still in its prerelease stage. One or more _Beta releases_ will follow and should be considered _unstable_ and _transient_. While in Beta, features and implementations might change dramatically and this should be considered the norm.
 
-### What Has Already Been Implemented
+### What Has Been Implemented
 
-[x] - Support for _simple HTML document creation_ using _Pages, Templates and Includes_.
+- [x] Support for _simple HTML document creation_ using _Pages, Templates and Includes_.
 
-[x] - Support for _simple token replacement_ involving _front matter property values_ and _matching property names_ in HTML.
+- [x] Support for _simple token replacement_ involving _front matter property values_ and _matching property names_ in HTML.
 
-[x] - Support for Typescript _`.tsx` components_, _compilation_ and _sand-boxed execution_.
+- [x] Support for Typescript _`.tsx` components_, _compilation_ and _sand-boxed execution_.
 
-[x] - Support for _document hydration_ using Typescript components and JSON data sources.
+- [x]  Support for _document hydration_ using Typescript components and JSON data sources.
 
-[x] - Support for generating _collections of pages_ using Typescript components and JSON data sources.
+- [x] Support for generating _collections of pages_ using Typescript components and JSON data sources.
 
-[x] - Support for base URLs.
+- [x] Support for base URLs.
 
-### What Needs To Be Done
+- [x]  Support for content posting (e.g. Blogging)
 
+  - [x] Support for tags.
 
-[] - Support for content posting (e.g. Blogging).
+  - [x] Support for categories.
 
-[] - Project website and documentation.
+### What Remains To Be Done
 
-[] - Encourage early community involvement.
+- Work in progress pages.
 
-[] - Provide sufficient testing to reduce the likelihood of introducing regressions.
+- Project website and documentation.
 
-[] = User project generation preconfigured for TypeScript and Preact's render-to-string.
+- Encourage early community involvement.
+
+- Provide sufficient testing to reduce the likelihood of introducing regressions.
+
+- User project generation preconfigured for TypeScript and Preact's render-to-string.
 
 ### Longer Term Goals
 

@@ -109,7 +109,6 @@ const buildCommand = {
         return true;
     },
     valid: async () => {
-        log("building");
         await run();
     },
     invalid: () => generalHelp(),

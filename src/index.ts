@@ -1,5 +1,5 @@
 /**
- * index - Main entry point to building user site.
+ * site landing page.
  */
 
 import { compile } from "./core/services/ts/compile.js";
@@ -12,6 +12,7 @@ import { collectionGerator } from "./core/services/composition/collections/colle
 
 export const run = async function() {
     metrics.startTimer("total elapsed time");
+    console.log("building...");
     const isOKToContine = await compile();
     isOKToContine && (await serialize(await hydrate(await collectionGerator(await compose(await discover())))));
     metrics.stopTimer("total elapsed time");

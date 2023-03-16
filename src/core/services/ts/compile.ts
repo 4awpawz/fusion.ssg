@@ -25,7 +25,7 @@ const options: ts.CompilerOptions = {
 };
 
 export const compile = async function(): Promise<boolean> {
-    metrics.startTimer("compilation");
+    metrics.startTimer("component compilation");
     // const componentPaths = await getComponentPaths();
     if (componentPaths.length === 0) {
         console.log(chalk.blue("no components found"));
@@ -41,6 +41,6 @@ export const compile = async function(): Promise<boolean> {
         return false;
     }
     process.env["OK_TO_CALL_COMPONENTS"] = "1";
-    metrics.stopTimer("compilation");
+    metrics.stopTimer("component compilation");
     return true;
 };
