@@ -1,4 +1,5 @@
 import type { GrayMatterFile } from "gray-matter";
+import type { VNode } from "preact";
 
 export interface PromiseResultGlob {
     success: boolean,
@@ -26,7 +27,7 @@ export interface PostProfile {
 }
 
 export interface CollectionPageProfile {
-    content: string,
+    content: VNode,
     title: string,
     htmlDocumentName: string
 }
@@ -103,7 +104,7 @@ export interface ComponentsMap {
     [key: string]: ComponentIdentifier
 }
 
-export type Component = ((buffersMap: BuffersMap) => Promise<string>) | undefined;
+export type Component = ((buffersMap: BuffersMap) => Promise<VNode>) | undefined;
 
 export type CollectionComponent = ((index: number, buffersMap: BuffersMap) => Promise<CollectionPageProfile>) | undefined;
 

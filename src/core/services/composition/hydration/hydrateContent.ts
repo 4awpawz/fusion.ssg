@@ -9,6 +9,7 @@ import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenCont
 import { getDataSources } from "../../../lib/getDataSources.js";
 import { importModule } from "../../../lib/importModule.js";
 import chalk from "chalk";
+import { renderToString } from "preact-render-to-string";
 
 export const hydrateContent = async function(content: string, componentProfiles: ComponentProfile[], componentsMap: ComponentsMap, asset: Asset, assets: Assets): Promise<string | void> {
     const config = await getConfiguration();
@@ -36,7 +37,8 @@ export const hydrateContent = async function(content: string, componentProfiles:
         const componentContent = await component(buffersMap);
         process.chdir(cwd);
         if (typeof componentContent === "undefined") continue;
-        content = findAndReplaceTokenContent(content, componentProfile.componentTag, componentContent);
+        const html = renderToString(componentContent);
+        content = findAndReplaceTokenContent(content, componentProfile.componentTag, html);
     }
     return content;
 };
