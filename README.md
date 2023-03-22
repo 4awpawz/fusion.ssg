@@ -11,11 +11,11 @@
 
 ## Purpose
 
-_fusion.ssg_ is a framework whose goal is to greatly simplify the creation of robust and resilient static web sites.
+A tool that greatly simplifies the process of creating static websites.
 
 ## The Name
 
-The name _fusion_ plays on the idea of __fusing__ together various elements (HTML, Markdown, TypseScript components, JSON data, YAML front matter, etc.) to generate a static website.
+_fusion_ plays on the idea of the __fusing__ together of various elements (HTML, Markdown, TypseScript components, JSON data, YAML front matter, etc.).
 
 ## Project Development
 
@@ -51,6 +51,8 @@ The project is still in its prerelease stage. One or more _Beta releases_ will f
 ### What Remains To Be Done
 
 - Work in progress pages.
+
+- End-User project generation.
 
 - Project website and documentation.
 
