@@ -60,8 +60,6 @@ The project is still in its prerelease stage. One or more _Beta releases_ will f
 
 - Provide sufficient testing to reduce the likelihood of introducing regressions.
 
-- User project generation preconfigured for TypeScript and Preact's render-to-string.
-
 ### Longer Term Goals
 
 - Seek RFC.
