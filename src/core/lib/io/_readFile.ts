@@ -9,7 +9,7 @@ export const _readFile = async function(path: string, options = "utf8"): Promise
     try {
         return await fs.readFile(path, options);
     } catch (error) {
-        console.error(chalk.red(`there was an error when reading file ${path}`));
+        console.error(chalk.red(`there was an error: When reading file ${path}`));
         throw error;
     }
 };

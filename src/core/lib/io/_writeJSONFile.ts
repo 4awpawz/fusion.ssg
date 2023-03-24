@@ -9,7 +9,7 @@ export const _writeJSONFile = async function(path: string, object: unknown): Pro
     try {
         await fs.writeJson(path, object);
     } catch (error) {
-        console.error(chalk.red(`there was an error writing JSON file ${path}.`));
+        console.error(chalk.red(`there was an error: When writing JSON file ${path}.`));
         throw error;
     }
 };

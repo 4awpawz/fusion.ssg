@@ -13,7 +13,7 @@ export const composeWithPage = async function(asset: Asset, assets: Asset[]): Pr
     const associatedPage =
         _find(assets, _asset => _asset.assetType === "page" && _asset.filePath === asset.associatedPage) as Asset;
     if (typeof associatedPage === "undefined") {
-        console.log(chalk.red(`there was an error: unable to find associated page for ${asset.filePath}`));
+        console.log(chalk.red(`there was an error: Unable to find associated page for ${asset.filePath}`));
         return asset;
     }
     // Replace the template's content with the composed page's content.

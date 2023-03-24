@@ -5,6 +5,7 @@
 
 import chalk from "chalk";
 import ts from "typescript";
+import { _forEach } from "../../lib/functional.js";
 
 export const compiler = function(pathsToComponents: readonly string[], options: ts.CompilerOptions): number {
     const program = ts.createProgram(pathsToComponents, options);
@@ -14,7 +15,7 @@ export const compiler = function(pathsToComponents: readonly string[], options: 
         .getPreEmitDiagnostics(program)
         .concat(emitResult.diagnostics);
 
-    allDiagnostics.forEach(diagnostic => {
+    _forEach(allDiagnostics, diagnostic => {
         if (diagnostic.file) {
             const { line, character } = ts.getLineAndCharacterOfPosition(diagnostic.file, diagnostic.start as number);
             const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n");

@@ -11,6 +11,7 @@ import { componentPaths } from "../../../lib/getComponentPaths.js";
 import { makeComponentsMap } from "../../../lib/makeComponentsMap.js";
 import { clearCache } from "../../../lib/cache.js";
 import { getComponentProfiles } from "../../../lib/getComponentProfiles.js";
+import { _filter } from "../../../lib/functional.js";
 
 export const collectionGerator = async function(assets: Assets): Promise<Assets> {
     metrics.startTimer("collections");
@@ -20,9 +21,9 @@ export const collectionGerator = async function(assets: Assets): Promise<Assets>
     for (const asset of assets) {
         if (asset.assetType !== "template" || typeof asset?.fm?.data["isCollection"] === "undefined"
             || !asset?.fm?.data["isCollection"] || typeof asset.fm?.content === "undefined") continue;
-        const componentProfiles = getComponentProfiles(asset.fm?.content as string).filter(componentProfile => componentProfile.componentIsCollection);
+        const componentProfiles = _filter(getComponentProfiles(asset.fm?.content as string), item => item.componentIsCollection);
         if (componentProfiles.length !== 1) {
-            console.error(chalk.red(`there was an error: collection processing for template ${asset.filePath} bypassed, a template that declares itself a collection must declare one collection component`));
+            console.error(chalk.red(`there was an error: Collection processing for template ${asset.filePath} bypassed, a template that declares itself a collection must declare one collection component`));
             continue;
         }
         // Document contains compnents, needs collections.

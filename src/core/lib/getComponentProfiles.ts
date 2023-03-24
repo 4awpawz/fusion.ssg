@@ -3,9 +3,10 @@
  */
 
 import type { ComponentProfile, DataSource } from "../../types/types";
+import { _filter } from "./functional.js";
 
 const getDataSourcesFromTagProperties = function(properties: string[]): DataSource[] {
-    const componentDataSourcesProperty = properties.filter(property => property.startsWith("dataSources"))[0] as string; // dataSources="dataSource,..."
+    const componentDataSourcesProperty = _filter(properties, property => property.startsWith("dataSources"))[0] as string; // dataSources="dataSource,..."
     if (typeof componentDataSourcesProperty === "undefined") return [];
     let dataSources = componentDataSourcesProperty.split("=").slice(1);
     dataSources = dataSources.map(dataSource => dataSource.replaceAll("'", "").replaceAll("\"", ""));
@@ -13,7 +14,7 @@ const getDataSourcesFromTagProperties = function(properties: string[]): DataSour
 };
 
 const getOtherPropertiesFromTagProperties = function(properties: string[]) {
-    return properties.filter(propertiy => !propertiy.startsWith("dataSources"));
+    return _filter(properties, propertiy => !propertiy.startsWith("dataSources"));
 };
 
 export const getComponentProfiles = function(assetContent: string): ComponentProfile[] {
@@ -25,7 +26,7 @@ export const getComponentProfiles = function(assetContent: string): ComponentPro
         const tagParts = match[0].split(" ");
         let tagProperties = tagParts.slice(1);
         const isCollectionComponent = tagProperties.includes("isCollection");
-        tagProperties = isCollectionComponent && tagProperties.filter(tagProperty => tagProperty !== "isCollection") || tagProperties;
+        tagProperties = isCollectionComponent && _filter(tagProperties, tagProperty => tagProperty !== "isCollection") || tagProperties;
         const componentDataSources = getDataSourcesFromTagProperties(tagProperties);
         const componentProperties = getOtherPropertiesFromTagProperties(tagProperties);
         const componentProfile = {

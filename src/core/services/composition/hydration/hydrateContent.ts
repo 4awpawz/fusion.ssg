@@ -24,7 +24,7 @@ export const hydrateContent = async function(content: string, componentProfiles:
         }
         const component = await importModule(componentIdentifier.moduleName, config) as Component;
         if (typeof component === "undefined") {
-            console.error(chalk.red(`there was an error: hydration processing for template '${componentIdentifier.moduleName}' bypassed, unable to import component '${componentIdentifier.moduleName}'`));
+            console.error(chalk.red(`there was an error: Hydration processing for template '${componentIdentifier.moduleName}' bypassed, unable to import component '${componentIdentifier.moduleName}'`));
             continue;
         }
         let buffersMap = componentProfile.componentDataSources.length > 0 &&

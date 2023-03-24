@@ -10,7 +10,7 @@ export const fileModifiedTime = async function(path: string): Promise<number> {
         const stats = await fs.promises.stat(path);
         return stats.mtimeMs;
     } catch (error) {
-        console.error(chalk.red(`there was an error: unable to get stats for file ${path}`));
+        console.error(chalk.red(`there was an error: When getting stats for file ${path}`));
         throw error;
     }
 };

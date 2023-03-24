@@ -9,7 +9,7 @@ export const _fileExists = function(path: string): boolean {
     try {
         return fs.existsSync(path);
     } catch (error) {
-        console.error(chalk.red(`there was an error when checking if file ${path} exists`));
+        console.error(chalk.red(`there was an error: When checking if file ${path} exists`));
         throw error;
     }
 };

@@ -11,6 +11,7 @@ import { _readFile } from "../core/lib/io/_readFile.js";
 import { log } from "../core/lib/io/log.js";
 import { run } from "../index.js";
 import fileDirName from "../core/lib/fileDirName.js";
+import { _forEach, _filter, _reduce } from "../core/lib/functional.js";
 
 const { __dirname } = fileDirName(import.meta);
 
@@ -20,30 +21,26 @@ const pkgJson = JSON.parse(buffer as string);
 /**
  * Get all of the options and normalize combined options, such as from ["-wi]" to ["-w", "-i"].
  */
-const options: string[] = [];
-process.argv.slice(2)
-    .filter(arg => arg[0] === "-")
-    .reduce((accum, value) => {
-        if (value.startsWith("--")) {
-            accum.push(value);
-            return accum;
-        } else {
-            [...value].forEach(item => {
-                if (item !== "-") {
-                    accum.push(`-${item}`);
-                }
-            });
-            return accum;
-        }
-    }, options);
+const optionsFilterFn = (arg: string) => arg[0] === "-";
+const optionsReduceFn = ((previousValue: string[], value: string): string[] => {
+    if (value.startsWith("--")) {
+        previousValue.push(value);
+        return previousValue;
+    } else {
+        _forEach([...value], item => {
+            if (item !== "-") {
+                previousValue.push(`-${item}`);
+            }
+        });
+        return previousValue;
+    }
+});
+const options = _reduce(_filter(process.argv.slice(2), optionsFilterFn), optionsReduceFn, [] as string[]);
 
 /**
  * Get all of the commands and arguments.
  */
-const commands = process.argv
-    .slice(2)
-    // Eliminate all options, both - and --.
-    .filter(arg => arg[0] !== "-");
+const commands = _filter(process.argv.slice(2), arg => arg[0] !== "-");
 
 /**
  * Prints generalized help to stdout.

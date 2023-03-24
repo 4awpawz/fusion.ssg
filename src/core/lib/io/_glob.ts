@@ -11,7 +11,7 @@ export const _glob = async function(pattern: string, options = {}): Promise<stri
     try {
         paths = await glob(pattern, _options);
     } catch (error) {
-        console.error(chalk.red(`there was an error when calling glob with pattern ${pattern}`));
+        console.error(chalk.red(`there was an error: When calling glob with pattern ${pattern}`));
         throw error;
     }
     return paths;

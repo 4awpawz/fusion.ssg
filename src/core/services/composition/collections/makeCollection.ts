@@ -17,7 +17,7 @@ export const makeCollection = async function(assets: Assets, asset: Asset, compo
     const cwd = process.cwd();
     const componentIdentifier: ComponentIdentifier = componentsMap[componentProfile.componentName] as ComponentIdentifier;
     if (typeof componentIdentifier === "undefined") {
-        console.error(chalk.red(`there was an error: Collection Component '${componentProfile.componentName}' does not exist.`));
+        console.error(chalk.red(`there was an error: Collection component '${componentProfile.componentName}' does not exist.`));
         return;
     }
     const collectionComponent = await importModule((componentIdentifier.moduleName), config) as CollectionComponent;

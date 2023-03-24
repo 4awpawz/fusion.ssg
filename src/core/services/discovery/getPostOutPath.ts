@@ -8,7 +8,7 @@ import { getConfiguration } from "../configuration/getConfiguration.js";
 import { isPostDateValid } from "./isPostDateValid.js";
 
 const outErrorMessage = function(path: string): void {
-    console.log(chalk.red(`there was an error: file name for post ${path} must be of the form: "yyyy-mm-dd-filename.[html|md]"`));
+    console.log(chalk.red(`there was an error: File name for post ${path} must be of the form: "yyyy-mm-dd-filename.[html|md]"`));
     console.log(chalk.red(`and "yyyy-mm-dd" must resolve to a valid date`));
 };
 

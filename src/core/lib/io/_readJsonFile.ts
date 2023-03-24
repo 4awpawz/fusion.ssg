@@ -9,7 +9,7 @@ export const _readJSONFile = async function(path: string, options = "utf8"): Pro
     try {
         return await fs.readJson(path, options);
     } catch (error) {
-        console.error(chalk.red(`there was an error when reading JSON file ${path}`));
+        console.error(chalk.red(`there was an error: When reading JSON file ${path}`));
         throw error;
     }
 };

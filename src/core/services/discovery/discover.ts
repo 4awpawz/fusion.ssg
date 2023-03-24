@@ -17,6 +17,7 @@ import { normalizeOutPath } from "./normalizeOutPath.js";
 import { getPostOutPath } from "./getPostOutPath.js";
 import { getCategoriesPath } from "./getCategoriesPath.js";
 import { isPost } from "./isPost.js";
+import chalk from "chalk";
 
 export const discover = async function(): Promise<Assets> {
     metrics.startTimer("discovery");
@@ -39,7 +40,12 @@ export const discover = async function(): Promise<Assets> {
         if (["data", "component"].includes(assetType)) return asset;
         const buffer = await _readFile(assetPath);
         if (typeof buffer === "undefined") return asset;
-        asset.fm = matter(buffer, { excerpt: true });
+        try {
+            asset.fm = matter(buffer, { excerpt: true });
+        } catch (error) {
+            console.log(chalk.red(`there was an error: Can't compile front matter in ${asset.filePath}.`));
+            throw error;
+        }
         asset.content = fileType === ".md" ? markdownToHTML(asset.fm.content) : asset.fm.content;
         if (asset.assetType !== "template") return asset;
         const page: string | undefined = asset.fm.data["page"];

@@ -9,7 +9,7 @@ export const _copyFolder = async function(sourceFolder: string, destinationFolde
     try {
         await fs.copy(sourceFolder, destinationFolder, options);
     } catch (error) {
-        console.error(chalk.red(`there was an error when copying folder ${sourceFolder} to ${destinationFolder}`));
+        console.error(chalk.red(`there was an error: When copying folder ${sourceFolder} to ${destinationFolder}`));
         throw error;
     }
 };

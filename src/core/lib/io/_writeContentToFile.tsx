@@ -9,7 +9,7 @@ export const _writeContentToFile = async function(path: string, content: string)
     try {
         await fs.outputFile(path, content);
     } catch (error) {
-        console.error(chalk.red(`there was an error when writing file ${path}`));
+        console.error(chalk.red(`there was an error: Unable to write to file ${path}`));
         throw error;
     }
 };

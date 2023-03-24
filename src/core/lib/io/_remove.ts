@@ -9,7 +9,7 @@ export const _remove = function(path: string): void {
     try {
         fs.rmSync(path, { recursive: true, force: true });
     } catch (error) {
-        console.error(chalk.red(`there was an error when deleting folder ${path}`));
+        console.error(chalk.red(`there was an error: When deleting folder ${path}`));
         throw error;
     }
 };

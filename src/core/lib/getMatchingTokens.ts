@@ -3,6 +3,7 @@
  */
 
 import type { TokenValidator, TokenValidators } from "../../types/types";
+import { _filter } from "./functional.js";
 
 export const tokenValidators: TokenValidators = {
     oneBrace: (match: RegExpMatchArray): boolean => match[1] === "{" && match[3] === "}",
@@ -14,6 +15,6 @@ export const tokenValidators: TokenValidators = {
 export const getMatchingTokens = function(assetContent: string, tokenValidatorFnId: string): RegExpMatchArray[] {
     const regex = /(\{{1,})(.*?)(\}{1,})/g;
     const matches = assetContent.matchAll(regex);
-    const _matches = [...matches].filter(tokenValidators[tokenValidatorFnId] as TokenValidator);
+    const _matches = _filter([...matches], tokenValidators[tokenValidatorFnId] as TokenValidator);
     return _matches;
 };

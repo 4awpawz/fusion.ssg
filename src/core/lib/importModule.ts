@@ -13,7 +13,7 @@ export const importModule = async function(moduleName: string, config: Configura
         const _modulePath = join(process.cwd(), config.libFolder, moduleName);
         component = await import(_modulePath).then(module => module[parse(moduleName).name]);
     } catch (error) {
-        console.error(chalk.red(`there was an error when dynamically IMPORTing component module ${moduleName}`));
+        console.error(chalk.red(`there was an error: Unable to dynamically import component module ${moduleName}`));
         throw error;
     }
     return component;

@@ -16,3 +16,9 @@ export function _forEach<T>(array: T[], cb: (item: T, index: number, array: T[])
 export function _find<T>(array: T[], cb: (item: T, index: number, array: T[]) => boolean): T | undefined {
     return array.find(cb);
 }
+
+// _reduce(T[], ()TT, any)
+export function _reduce<T, TT>(array: T[], cb: (previousValue: any, value: T, currentIndex?: number, array?: T[]) => TT,
+    initialValue?: any) {
+    return array.reduce(cb, initialValue) as TT;
+}
