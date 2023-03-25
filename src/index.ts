@@ -13,7 +13,6 @@ import { collectionGerator } from "./core/services/composition/collections/colle
 export const run = async function() {
     metrics.startTimer("total elapsed time");
     console.log("building...");
-    // TODO: 23/03/24 17:52:20 - jeffreyschwartz : delete the build folder at the start of every cycle.
     const isOKToContine = await compile();
     isOKToContine && (await serialize(await hydrate(await collectionGerator(await compose(await discover())))));
     metrics.stopTimer("total elapsed time");
