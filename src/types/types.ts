@@ -13,6 +13,7 @@ export interface Asset {
     assetType: AssetType
     filePath: string,
     fileType: string,
+    isWip?: boolean,
     collection?: Asset[],
     content?: string,
     fm?: GrayMatterFile<string>
@@ -80,7 +81,8 @@ export type Token = `${TokenLeftDelimeter}${TokenContent}${TokenRightDelimeter}`
 
 export interface UserConfig {
     postsFolder: string,
-    baseURL: string
+    baseURL: string,
+    wips: string[]
 }
 
 export interface Configuration {

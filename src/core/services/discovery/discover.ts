@@ -1,7 +1,6 @@
 /**
- * getAssets - Creates an asset for each file found in user's config.src
- * folder. An asset is any file that participates in page compostion.
- * Resolves to an array of assets.
+ * getAssets - Creates assets for files found in user's src
+ * that participates in page compostion. Resolves to an array of assets.
  */
 
 import { join, parse } from "path";
@@ -18,9 +17,15 @@ import { getPostOutPath } from "./getPostOutPath.js";
 import { getCategoriesPath } from "./getCategoriesPath.js";
 import { isPost } from "./isPost.js";
 import chalk from "chalk";
+import { getConfiguration } from "../configuration/getConfiguration.js";
+
+const templateIsWIP = function(wips: string[], templatePath: string) {
+    return wips.includes(templatePath);
+};
 
 export const discover = async function(): Promise<Assets> {
     metrics.startTimer("discovery");
+    const config = await getConfiguration();
     const pathsToAssets = await getFiles();
     const assets = await Promise.all(pathsToAssets.map(async (assetPath: string) => {
         const fileInfo = parse(assetPath);
@@ -48,6 +53,11 @@ export const discover = async function(): Promise<Assets> {
         }
         asset.content = fileType === ".md" ? markdownToHTML(asset.fm.content) : asset.fm.content;
         if (asset.assetType !== "template") return asset;
+
+        // -- At this point asset is a template! --
+
+        const wips = config.userConfig.wips;
+        asset.isWip = templateIsWIP(wips, asset.filePath);
         const page: string | undefined = asset.fm.data["page"];
         asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || "";
         asset.isPost = await isPost(assetPath);

@@ -24,13 +24,14 @@ export const getConfiguration = async function(): Promise<Configuration> {
         etcFolder: "etc", // Folder that contains etc type files.
         userConfig: {
             postsFolder: "posts", // Folder that contains postsA.
-            baseURL: "" // Base URL that can be applied as a token via {baseURL}.
+            baseURL: "", // Base URL that can be applied as a token via {baseURL}.
+            wips: []
         },
     };
     const configPath = path.join(process.cwd(), configFileName);
-    if (!_fileExists(configPath)) return defaultConfig;
+    if (!_fileExists(configPath)) return { ...defaultConfig };
     const userConfig = await _readJSONFile(configPath) as UserConfig;
-    if (typeof userConfig === "undefined") return ({ ...defaultConfig });
+    if (typeof userConfig === "undefined") return { ...defaultConfig };
     defaultConfig.userConfig = { ...defaultConfig.userConfig, ...userConfig };
     return { ...defaultConfig };
 };

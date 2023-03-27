@@ -10,8 +10,10 @@ import chalk from "chalk";
 
 export const serialize = async function(assets: Assets): Promise<Assets> {
     metrics.startTimer("serialization");
-    const count = await serializePages(assets);
-    console.log("total documents generated: ", chalk.green(count));
+    const result = await serializePages(assets);
+    "RELEASE" === process.env["BUILD_STRATEGY"] &&
+        console.log("total WIP documents bypassed: ", chalk.green(result.wips));
+    console.log("total documents generated: ", chalk.green(result.count));
     await serializeOtherAssets(assets);
     metrics.stopTimer("serialization");
     return assets;

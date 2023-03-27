@@ -13,7 +13,7 @@ import type { BuildCategroy } from "./types/types.js";
 
 export const run = async function(buildStrategy: BuildCategroy) {
     metrics.startTimer("total elapsed time");
-    process.env["BUILDSTRATEGY"] = buildStrategy;
+    process.env["BUILD_STRATEGY"] = buildStrategy;
     console.log(`building ${buildStrategy.toLowerCase()}...`);
     const isOKToContine = await compile();
     isOKToContine && (await serialize(await hydrate(await collectionGerator(await compose(await discover())))));
