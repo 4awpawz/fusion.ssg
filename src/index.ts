@@ -9,10 +9,12 @@ import { serialize } from "./core/services/serialization/serialize.js";
 import * as metrics from "./core/lib/metrics.js";
 import { discover } from "./core/services/discovery/discover.js";
 import { collectionGerator } from "./core/services/composition/collections/collectionGenerator.js";
+import type { BuildCategroy } from "./types/types.js";
 
-export const run = async function() {
+export const run = async function(buildStrategy: BuildCategroy) {
     metrics.startTimer("total elapsed time");
-    console.log("building...");
+    process.env["BUILDSTRATEGY"] = buildStrategy;
+    console.log(`building ${buildStrategy.toLowerCase()}...`);
     const isOKToContine = await compile();
     isOKToContine && (await serialize(await hydrate(await collectionGerator(await compose(await discover())))));
     metrics.stopTimer("total elapsed time");

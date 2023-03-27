@@ -43,8 +43,9 @@ const options = _reduce(_filter(process.argv.slice(2), optionsFilterFn), options
 const commands = _filter(process.argv.slice(2), arg => arg[0] !== "-");
 
 /**
- * Prints generalized help to stdout.
+ * Print generalized help to stdout.
  */
+
 const generalHelp = () => {
     log("");
     log("Usage: fusion [option] | fusion [command] [args]");
@@ -61,28 +62,58 @@ const generalHelp = () => {
 };
 
 /**
- * Prints command specific help to stdout.
+ * Print command specific help to stdout.
  */
+
+const buildHelp = function() {
+    log("NAME");
+    log("       fusion-build - Builds your site for development.");
+    log("");
+    log("SYNOPSIS");
+    log("       fusion build");
+    log("");
+    log("       alias: fusion b");
+    log("");
+    log("DESCRIPTION");
+    log("       This command builds your site for development targeting the build folder.");
+    log("");
+    log("           fusion build");
+    log("");
+    log("       In the first form, it builds your entire site.");
+    log("");
+};
+
+const releaseHelp = function() {
+    log("NAME");
+    log("       fusion-release - Builds your site for release.");
+    log("");
+    log("SYNOPSIS");
+    log("       fusion release");
+    log("");
+    log("       alias: fusion r");
+    log("");
+    log("DESCRIPTION");
+    log("       This command builds your site for release targeting the release folder.");
+    log("");
+    log("           fusion release");
+    log("");
+    log("       In the first form, it builds your entire site.");
+    log("");
+};
+
 const commandSpecificHelp = (command: string) => {
-    if (command === "b" || command === "build") {
-        log("NAME");
-        log("       fusion-build - Builds your site.");
-        log("");
-        log("SYNOPSIS");
-        log("       fusion build");
-        log("");
-        log("       alias: fusion b");
-        log("");
-        log("DESCRIPTION");
-        log("       This command builds your site targeting the build folder.");
-        log("");
-        log("           fusion build");
-        log("");
-        log("       In the first form, it builds your entire site.");
-        log("");
-        return;
+    switch (command) {
+        case "b":
+        case "build":
+            buildHelp();
+            break;
+        case "r":
+        case "release":
+            releaseHelp();
+            break;
+        default:
+            generalHelp();
     }
-    generalHelp();
 };
 
 /**
@@ -101,12 +132,24 @@ const guard = function() {
  * Command validation and execution.
  */
 
+// Build for development.
 const buildCommand = {
     validate: function() {
         return true;
     },
     valid: async () => {
-        await run();
+        await run("DEVELOPMENT");
+    },
+    invalid: () => generalHelp(),
+};
+
+// Build for release.
+const releaseCommand = {
+    validate: function() {
+        return true;
+    },
+    valid: async () => {
+        await run("RELEASE");
     },
     invalid: () => generalHelp(),
 };
@@ -114,6 +157,8 @@ const buildCommand = {
 const commandHandlers = new Map();
 commandHandlers.set("build", buildCommand);
 commandHandlers.set("b", buildCommand);
+commandHandlers.set("release", releaseCommand);
+commandHandlers.set("r", releaseCommand);
 
 /**
  * Command runner.

@@ -115,3 +115,5 @@ export type TokenValidator = (matches: RegExpMatchArray) => boolean;
 export interface TokenValidators {
     [key: string]: TokenValidator
 }
+
+export type BuildCategroy = "DEVELOPMENT" | "RELEASE"
