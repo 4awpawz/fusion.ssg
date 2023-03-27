@@ -30,27 +30,27 @@ The project is still in its prerelease stage. One or more _Beta releases_ will f
 
 ### What Has Been Implemented
 
-- [x] Support for _simple HTML document creation_ using _Pages, Templates and Includes_.
+- [X] Support for _simple HTML document creation_ using _Pages, Templates and Includes_.
 
-- [x] Support for _simple token replacement_ involving _front matter property values_ and _matching property names_ in HTML.
+- [X] Support for _simple token replacement_ involving _front matter property values_ and _matching property names_ in HTML.
 
-- [x] Support for Typescript _`.tsx` components_, _compilation_ and _sand-boxed execution_.
+- [X] Support for Typescript _`.tsx` components_, _compilation_ and _sand-boxed execution_.
 
-- [x]  Support for _document hydration_ using Typescript components and JSON data sources.
+- [X]  Support for _document hydration_ using Typescript components and JSON data sources.
 
-- [x] Support for generating _collections of pages_ using Typescript components and JSON data sources.
+- [X] Support for generating _collections of pages_ using Typescript components and JSON data sources.
 
-- [x] Support for base URLs.
+- [X] Support for base URLs.
 
-- [x]  Support for content posting (e.g. Blogging)
+- [X]  Support for content posting (e.g. Blogging)
 
-  - [x] Support for tags.
+  - [X] Support for tags.
 
-  - [x] Support for categories.
+  - [X] Support for categories.
+
+- [X] Work in progress templates.
 
 ### What Remains To Be Done
-
-- Work in progress pages.
 
 - End-User project generation.
 
