@@ -10,13 +10,14 @@ import * as metrics from "./core/lib/metrics.js";
 import { discover } from "./core/services/discovery/discover.js";
 import { collectionGerator } from "./core/services/composition/collections/collectionGenerator.js";
 import type { BuildCategroy } from "./types/types.js";
+import { tokenize } from "./core/services/tokenization/tokenize.js";
 
 export const run = async function(buildStrategy: BuildCategroy) {
     metrics.startTimer("total elapsed time");
     process.env["BUILD_STRATEGY"] = buildStrategy;
     console.log(`building ${buildStrategy.toLowerCase()}...`);
     const isOKToContine = await compile();
-    isOKToContine && (await serialize(await hydrate(await collectionGerator(await compose(await discover())))));
+    isOKToContine && (await serialize(await tokenize(await hydrate(await collectionGerator(await compose(await discover()))))));
     metrics.stopTimer("total elapsed time");
     metrics.forEachTimer(timer => console.log(timer.elapsed));
 };

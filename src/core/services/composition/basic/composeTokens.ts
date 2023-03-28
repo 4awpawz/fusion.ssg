@@ -11,7 +11,7 @@ const getUerConfigBaseURL = async function(): Promise<string | undefined> {
 };
 
 export const composeTokens = async function(assetContent: string, tokens: Tokens): Promise<string> {
-    if (typeof tokens === "undefined") return assetContent;
+    // if (typeof tokens === "undefined") return assetContent;
     const baseURL = await getUerConfigBaseURL();
     // If it exists, apply the user's baseURL.
     const _tokens = typeof baseURL !== "undefined" ? { ...tokens, baseURL } : tokens;
