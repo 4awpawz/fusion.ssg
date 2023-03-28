@@ -42,6 +42,8 @@ The project is still in its prerelease stage. One or more _Beta releases_ will f
 
 - [X] Support for base URLs.
 
+- [X] Support development and release builds.
+
 - [X]  Support for content posting (e.g. Blogging)
 
   - [X] Support for tags.
