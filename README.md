@@ -7,28 +7,40 @@
 <!-- <hr color="grey"> -->
 <!-- <br> -->
 
-# _fusion.ssg_
+# Minimal SSG Framework For Building Static Websites
 
-## Purpose
-
-A tool that greatly simplifies the process of creating static websites.
+HTML, Markdown, Front Matter + Custom `.tsx` Components.
 
 ## The Name
 
-_fusion_ plays on the idea of the __fusing__ together of various elements (HTML, Markdown, TypseScript components, JSON data, YAML front matter, etc.).
+_fusion_ plays on the idea of **_fusing_** together various elements (HTML, Markdown, TypseScript components, JSON data, YAML front matter, etc.).
+
+## Features
+
+- Simple HTML document creation using Pages, Templates and Includes.
+- Simple token replacement involving front matter property values and matching property names in HTML.
+- TSX custom component compilation and sand-boxed execution.
+- Document hydration using Typescript components and JSON data sources.
+- Pages collections using Typescript components and JSON data sources.
+- Base URLs.
+- Development and release builds.
+- Content posting (e.g. Blogging).
+  - Tags.
+  - Categories.
+- Works in progress.
 
 ## Project Development
 
-The project is written in ` TypeScript`. No excuses, _it just works beautifully_.
+The project is written in ` TypeScript` (no excuses, _it just works beautifully_) and runs on `Node`.
 
 ## Project Scope
-The project's scope is limited to generating robust and resilient HTML documents and nothing else. It will not provide any other tooling other than what is absolutely necessary to accomplish that. This keeps the scope of the project focused, preventing feature creep, and benefits users who will be able to pick and chose their own tools.
+The project's scope is limited to generating robust and resilient HTML documents and nothing else. It will not provide any other tooling other than what is absolutely necessary to accomplish that. Importantly, fusion.ssg requires no knowledge of front-end frameworks like React. This keeps the scope of the project focused, preventing feature creep, and benefits users who will be able to pick and chose their own tools.
 
 ## Current Status
 
-The project is still in its prerelease stage. One or more _Beta releases_ will follow and should be considered _unstable_ and _transient_. While in Beta, features and implementations might change dramatically and this should be considered the norm.
+The project is still in its alpha/prerelease stage. One or more _Beta releases_ will follow and should be considered _unstable_ and _transient_. While in Beta, features and implementations might change dramatically and this should be considered the norm.
 
-### What Has Been Implemented
+### What Has Already Been Implemented
 
 - [X] Support for _simple HTML document creation_ using _Pages, Templates and Includes_.
 
@@ -52,13 +64,13 @@ The project is still in its prerelease stage. One or more _Beta releases_ will f
 
 - [X] Work in progress templates.
 
-### What Remains To Be Done
+### What Still Remains To Be Done
 
-- End-User project generation.
+- End-User project generation - _currently under development_.
 
-- Project website and documentation.
+- Project documentation website - _currently under development_.
 
-- Encourage early community involvement.
+- Encourage early community involvement and adoption.
 
 - Provide sufficient testing to reduce the likelihood of introducing regressions.
 
