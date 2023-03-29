@@ -14,5 +14,6 @@ export const makeNewAsset = function(asset: Asset, collectionPageProfile: Collec
     newAsset.content = newAsset.content?.replace(componentTag, html);
     const htmlDocumentPath = parse(asset.filePath).dir.split("/").slice(2).join("/");
     newAsset.htmlDocumentName = join(htmlDocumentPath, collectionPageProfile.htmlDocumentName, "index.html");
+    newAsset.url = parse(newAsset.htmlDocumentName).dir + "/";
     return newAsset;
 };

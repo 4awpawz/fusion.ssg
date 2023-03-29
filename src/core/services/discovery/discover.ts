@@ -69,6 +69,7 @@ export const discover = async function(): Promise<Assets> {
         const postNamePath = asset.isPost ? join(oPath, parse(filePath.split("-").pop() as string).name, "index.html") : "";
         const oName = asset.isPost && postNamePath || fileName.endsWith("index") ? "index.html" : fileName + "/index.html";
         asset.htmlDocumentName = asset.isPost ? postNamePath : join(oPath, oName);
+        asset.url = parse(asset.htmlDocumentName).dir + "/";
         return asset;
     }));
     metrics.stopTimer("discovery");

@@ -17,8 +17,9 @@ export interface Asset {
     collection?: Asset[],
     content?: string,
     fm?: GrayMatterFile<string>
-    associatedPage?: string | undefined,
-    htmlDocumentName?: string | undefined,
+    associatedPage?: string,
+    htmlDocumentName?: string,
+    url?: string,
     isPost?: boolean
 }
 
