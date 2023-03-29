@@ -21,7 +21,7 @@ _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Mark
 - Simple token replacement involving front matter property values and matching property names in HTML.
 - TSX custom component compilation and sand-boxed execution.
 - Document hydration using Typescript components and JSON data sources.
-- Pages collections using Typescript components and JSON data sources.
+- Page collections using Typescript components and JSON data sources.
 - Base URLs.
 - Development and release builds.
 - Content posting (e.g. Blogging).

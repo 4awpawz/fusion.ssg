@@ -2,9 +2,9 @@
  * composeTokens - Applies template front matter tokens and user config's base URL to content.
  */
 
-import type { Tokens } from "../../../../types/types";
-import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenContent.js";
-import { getConfiguration } from "../../configuration/getConfiguration.js";
+import type { Tokens } from "../../../types/types";
+import { findAndReplaceTokenContent } from "../../lib/findAndReplaceTokenContent.js";
+import { getConfiguration } from "../configuration/getConfiguration.js";
 
 const getUerConfigBaseURL = async function(): Promise<string | undefined> {
     return (await getConfiguration()).userConfig.baseURL;

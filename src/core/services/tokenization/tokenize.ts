@@ -3,7 +3,7 @@
  */
 
 import type { Assets } from "../../../types/types";
-import { composeTokens } from "../composition/basic/composeTokens.js";
+import { composeTokens } from "./composeTokens.js";
 
 export const tokenize = async function(assets: Assets): Promise<Assets> {
     for (const asset of assets) {
