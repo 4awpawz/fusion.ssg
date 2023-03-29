@@ -7,14 +7,26 @@ import * as metrics from "../../lib/metrics.js";
 import { serializePages } from "./serializePages.js";
 import { serializeOtherAssets } from "./serializeOtherAssets.js";
 import chalk from "chalk";
+import { getConfiguration } from "../configuration/getConfiguration.js";
+import { join } from "path";
+import { _remove } from "../../lib/io/_remove.js";
+
+const getBuildFolderPath = async function(): Promise<string> {
+    const baseURL = (await getConfiguration()).userConfig.baseURL;
+    let buildFolderPath = join(process.cwd(), (await getConfiguration()).buildFolder);
+    buildFolderPath = process.env["BUILD_STRATEGY"] === "RELEASE" ? join(buildFolderPath, baseURL) : buildFolderPath;
+    return buildFolderPath;
+};
 
 export const serialize = async function(assets: Assets): Promise<Assets> {
     metrics.startTimer("serialization");
-    const result = await serializePages(assets);
+    await _remove((await getConfiguration()).buildFolder);
+    const buildFolderPath = await getBuildFolderPath();
+    const result = await serializePages(assets, buildFolderPath);
     "RELEASE" === process.env["BUILD_STRATEGY"] &&
         console.log("total WIP documents bypassed: ", chalk.green(result.wips));
     console.log("total documents generated: ", chalk.green(result.count));
-    await serializeOtherAssets(assets);
+    await serializeOtherAssets(assets, buildFolderPath);
     metrics.stopTimer("serialization");
     return assets;
 };

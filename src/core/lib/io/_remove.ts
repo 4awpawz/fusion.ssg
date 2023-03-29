@@ -5,9 +5,9 @@
 import chalk from "chalk";
 import fs from "fs-extra";
 
-export const _remove = function(path: string): void {
+export const _remove = async function(path: string): Promise<void> {
     try {
-        fs.rmSync(path, { recursive: true, force: true });
+        await fs.rm(path, { recursive: true, force: true });
     } catch (error) {
         console.error(chalk.red(`there was an error: When deleting folder ${path}`));
         throw error;
