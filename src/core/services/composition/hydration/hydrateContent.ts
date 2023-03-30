@@ -6,7 +6,7 @@ import type { ComponentIdentifier, ComponentsMap, Component, ComponentProfile, A
 import { join } from "path";
 import { getConfiguration } from "../../configuration/getConfiguration.js";
 import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenContent.js";
-import { getDataSources } from "../../../lib/getDataSources.js";
+import { getDataSources } from "../getDataSources.js";
 import { importModule } from "../../../lib/importModule.js";
 import chalk from "chalk";
 import { renderToString } from "preact-render-to-string";

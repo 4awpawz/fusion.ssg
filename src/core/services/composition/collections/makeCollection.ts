@@ -9,7 +9,7 @@ import chalk from "chalk";
 import { makeNewAsset } from "./makeNewAsset.js";
 import { getConfiguration } from "../../configuration/getConfiguration.js";
 import { importModule } from "../../../lib/importModule.js";
-import { getDataSources } from "../../../lib/getDataSources.js";
+import { getDataSources } from "../getDataSources.js";
 
 export const makeCollection = async function(assets: Assets, asset: Asset, componentProfile: ComponentProfile, componentsMap: ComponentsMap): Promise<void> {
     const config = await getConfiguration();

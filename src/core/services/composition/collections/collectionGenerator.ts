@@ -10,7 +10,7 @@ import { makeCollection } from "./makeCollection.js";
 import { componentPaths } from "../../../lib/getComponentPaths.js";
 import { makeComponentsMap } from "../../../lib/makeComponentsMap.js";
 import { clearCache } from "../../../lib/cache.js";
-import { getComponentProfiles } from "../../../lib/getComponentProfiles.js";
+import { getComponentProfiles } from "../getComponentProfiles.js";
 import { _filter } from "../../../lib/functional.js";
 
 export const collectionGerator = async function(assets: Assets): Promise<Assets> {

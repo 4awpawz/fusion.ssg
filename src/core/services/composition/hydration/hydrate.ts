@@ -7,7 +7,7 @@ import { hydrateContent } from "./hydrateContent.js";
 import * as metrics from "../../../lib/metrics.js";
 import { componentPaths } from "../../../lib/getComponentPaths.js";
 import { clearCache } from "../../../lib/cache.js";
-import { getComponentProfiles } from "../../../lib/getComponentProfiles.js";
+import { getComponentProfiles } from "../getComponentProfiles.js";
 import { makeComponentsMap } from "../../../lib/makeComponentsMap.js";
 
 export const hydrate = async function(assets: Assets): Promise<Assets> {
