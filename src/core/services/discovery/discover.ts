@@ -18,10 +18,7 @@ import { getCategoriesPath } from "./getCategoriesPath.js";
 import { isPost } from "./isPost.js";
 import chalk from "chalk";
 import { getConfiguration } from "../configuration/getConfiguration.js";
-
-const templateIsWIP = function(wips: string[], templatePath: string) {
-    return wips.includes(templatePath);
-};
+import { templateIsWIP } from "./templateIsWIP.js";
 
 export const discover = async function(): Promise<Assets> {
     metrics.startTimer("discovery");

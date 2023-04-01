@@ -33,5 +33,8 @@ export const getConfiguration = async function(): Promise<Configuration> {
     const userConfig = await _readJSONFile(configPath) as UserConfig;
     if (typeof userConfig === "undefined") return { ...defaultConfig };
     defaultConfig.userConfig = { ...defaultConfig.userConfig, ...userConfig };
+    // Note: Sorting wips will allow those that are ignored
+    // (they start with an '!') to be evaluated first.
+    defaultConfig.userConfig.wips.sort();
     return { ...defaultConfig };
 };
