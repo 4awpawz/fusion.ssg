@@ -28,6 +28,9 @@ _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Mark
   - Tags.
   - Categories.
 - Works in progress.
+  - Individual files.
+  - Folders.
+  - Ignored.
 
 ## Project Development
 
