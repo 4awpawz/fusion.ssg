@@ -56,7 +56,7 @@ export const discover = async function(): Promise<Assets> {
         const wips = config.userConfig.wips;
         asset.isWip = templateIsWIP(wips, asset.filePath);
         const page: string | undefined = asset.fm.data["page"];
-        asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || "";
+        asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || `src/pages/default.html`;
         asset.isPost = await isPost(assetPath);
         const postProfile = asset.isPost ? asset.fm.data["post"] as PostProfile : undefined;
         const postCategoriesPath = asset.isPost && typeof postProfile !== "undefined" ? getCategoriesPath(postProfile.categories) : undefined;
