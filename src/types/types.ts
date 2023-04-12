@@ -24,8 +24,8 @@ export interface Asset {
 }
 
 export interface PostProfile {
-    categories: string,
-    tags: string
+    categories?: string,
+    tags?: string
 }
 
 export interface CollectionPageProfile {
@@ -88,6 +88,7 @@ export interface UserConfig {
 
 export interface Configuration {
     srcFolder: string,
+    postsFolder: string,
     buildFolder: string,
     libFolder: string
     componentsFolder: string,

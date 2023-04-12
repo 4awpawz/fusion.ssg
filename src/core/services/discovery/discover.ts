@@ -14,7 +14,7 @@ import type { Asset, Assets, PostProfile } from "../../../types/types";
 import * as metrics from "../../lib/metrics.js";
 import { normalizeOutPath } from "./normalizeOutPath.js";
 import { getPostOutPath } from "./getPostOutPath.js";
-import { getCategoriesPath } from "./getCategoriesPath.js";
+import { getCategoryPath } from "./getCategoryPath.js";
 import { isPost } from "./isPost.js";
 import chalk from "chalk";
 import { getConfiguration } from "../configuration/getConfiguration.js";
@@ -58,10 +58,12 @@ export const discover = async function(): Promise<Assets> {
         const page: string | undefined = asset.fm.data["page"];
         asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || `src/pages/default.html`;
         asset.isPost = await isPost(assetPath);
-        const postProfile = asset.isPost ? asset.fm.data["post"] as PostProfile : undefined;
-        const postCategoriesPath = asset.isPost && typeof postProfile !== "undefined" ? getCategoriesPath(postProfile.categories) : undefined;
+        // TODO: 23/04/12 11:27:09 - jeffreyschwartz : if index is a post and user's config postsFolder === "" then issue error because you can't have 2 index files in the build folder's root!
+        const postProfile: PostProfile = asset.isPost && asset.fm.data["post"];
+        const postCategoryPath = asset.isPost && fileInfo.name !== "index" && typeof postProfile !== "undefined"
+            && typeof postProfile.categories !== "undefined" ? getCategoryPath(postProfile.categories) : undefined;
         const oPath = asset.isPost && fileInfo.name !== "index" ?
-            await getPostOutPath(asset.filePath, postCategoriesPath) : normalizeOutPath(fileInfo.dir);
+            await getPostOutPath(asset.filePath, postCategoryPath) : normalizeOutPath(fileInfo.dir);
         if (typeof oPath === "undefined") return asset;
         const postNamePath = asset.isPost ? join(oPath, parse(filePath.split("-").pop() as string).name, "index.html") : "";
         const oName = asset.isPost && postNamePath || fileName.endsWith("index") ? "index.html" : fileName + "/index.html";

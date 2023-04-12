@@ -10,6 +10,6 @@ export const isPost = async function(assetPath: string): Promise<boolean> {
     // Posts will never be named 'index'.
     if (assetPathParts.name === "index") return false;
     const config = await getConfiguration();
-    const postFolderPath = config.userConfig.postsFolder;
+    const postFolderPath = config.postsFolder;
     return parse(assetPath).dir.includes(postFolderPath);
 };
