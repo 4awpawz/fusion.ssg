@@ -20,7 +20,8 @@ export interface Asset {
     associatedPage?: string,
     htmlDocumentName?: string,
     url?: string,
-    isPost?: boolean
+    isPost?: boolean,
+    postTimeStamp?: number
 }
 
 export interface PostProfile {

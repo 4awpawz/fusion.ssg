@@ -19,6 +19,7 @@ import { isPost } from "./isPost.js";
 import chalk from "chalk";
 import { getConfiguration } from "../configuration/getConfiguration.js";
 import { templateIsWIP } from "./templateIsWIP.js";
+import { getPostTimeStampFromPostPath } from "./getPostTimeStampFromPostPath.js";
 
 export const discover = async function(): Promise<Assets> {
     metrics.startTimer("discovery");
@@ -58,7 +59,7 @@ export const discover = async function(): Promise<Assets> {
         const page: string | undefined = asset.fm.data["page"];
         asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || `src/pages/default.html`;
         asset.isPost = await isPost(assetPath);
-        // TODO: 23/04/12 11:27:09 - jeffreyschwartz : if index is a post and user's config postsFolder === "" then issue error because you can't have 2 index files in the build folder's root!
+        if (asset.isPost) asset.postTimeStamp = getPostTimeStampFromPostPath(asset.filePath);
         const postProfile: PostProfile = asset.isPost && asset.fm.data["post"];
         const postCategoryPath = asset.isPost && fileInfo.name !== "index" && typeof postProfile !== "undefined"
             && typeof postProfile.categories !== "undefined" ? getCategoryPath(postProfile.categories) : undefined;
