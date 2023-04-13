@@ -17,13 +17,12 @@ import { getPostOutPath } from "./getPostOutPath.js";
 import { getCategoryPath } from "./getCategoryPath.js";
 import { isPost } from "./isPost.js";
 import chalk from "chalk";
-import { getConfiguration } from "../configuration/getConfiguration.js";
+import { config } from "../configuration/configuration.js";
 import { templateIsWIP } from "./templateIsWIP.js";
 import { getPostTimeStampFromPostPath } from "./getPostTimeStampFromPostPath.js";
 
 export const discover = async function(): Promise<Assets> {
     metrics.startTimer("discovery");
-    const config = await getConfiguration();
     const pathsToAssets = await getFiles();
     const assets = await Promise.all(pathsToAssets.map(async (assetPath: string) => {
         const fileInfo = parse(assetPath);

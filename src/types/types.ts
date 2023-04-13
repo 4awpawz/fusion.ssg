@@ -90,6 +90,7 @@ export interface UserConfig {
 export interface Configuration {
     srcFolder: string,
     postsFolder: string,
+    metaFolder: string,
     buildFolder: string,
     libFolder: string
     componentsFolder: string,

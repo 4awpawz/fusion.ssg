@@ -41,7 +41,13 @@ The project's scope is limited to generating robust and resilient HTML documents
 
 ## Current Status
 
-The project is still in its alpha/prerelease stage. One or more _Beta releases_ will follow and should be considered _unstable_ and _transient_. While in Beta, features and implementations might change dramatically and this should be considered the norm.
+The project is still in its Alpha/prerelease stage. One or more _Beta releases_ will follow and both Alpha and Beta releases should be considered _unstable_ and _transient_. While in Beta, features and implementations might change dramatically and this should be considered the norm.
+
+## Versioning
+
+fusion will use [semantic versioning](https://semver.org/) and will distinguish between _development_ builds and _release_ builds by their major version numbers
+  1. Odd major version number are to be considered development versions.
+  1. Even major version number are to be considered release versions.
 
 ### What Has Already Been Implemented
 
@@ -57,7 +63,7 @@ The project is still in its alpha/prerelease stage. One or more _Beta releases_ 
 
 - [X] Support for base URLs.
 
-- [X] Support development and release builds.
+- [X] Support for development and release builds.
 
 - [X]  Support for content posting (e.g. Blogging)
 
@@ -66,8 +72,13 @@ The project is still in its alpha/prerelease stage. One or more _Beta releases_ 
   - [X] Support for categories.
 
 - [X] Work in progress templates.
+  - [X] Individual files.
+  - [X] Folders.
+  - [X] Ignored.
 
 ### What Still Remains To Be Done
+
+- Logo... fusion.ssg is desperately in need of a great logo.
 
 - End-User project generation - _currently under development_.
 

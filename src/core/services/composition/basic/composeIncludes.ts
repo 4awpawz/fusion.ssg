@@ -5,7 +5,7 @@
 import { join } from "path";
 import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenContent.js";
 import { _find } from "../../../lib/functional.js";
-import { getConfiguration } from "../../configuration/getConfiguration.js";
+import { config } from "../../configuration/configuration.js";
 import type { Asset, Assets, IncludeMatchesResults } from "../../../../types/types";
 import chalk from "chalk";
 import { getMatchingTokens } from "../../../lib/getMatchingTokens.js";
@@ -17,7 +17,7 @@ const getListOfIncludesFromAsset = function(assetContent: string): IncludeMatche
 
 export const composeIncludes = async function(asset: Asset, assets: Assets): Promise<Asset> {
     if (typeof asset.content === "undefined") return asset;
-    const srcFolder = (await getConfiguration()).srcFolder;
+    const srcFolder = config.srcFolder;
     const matcherResults = getListOfIncludesFromAsset(asset.content);
     if (matcherResults.length === 0) return asset;
     for (const matchResult of matcherResults) {

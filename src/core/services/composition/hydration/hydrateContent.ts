@@ -4,7 +4,7 @@
 
 import type { ComponentIdentifier, ComponentsMap, Component, ComponentProfile, Assets, Asset } from "../../../../types/types";
 import { join } from "path";
-import { getConfiguration } from "../../configuration/getConfiguration.js";
+import { config } from "../../configuration/configuration.js";
 import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenContent.js";
 import { getDataSources } from "../getDataSources.js";
 import { importModule } from "../../../lib/importModule.js";
@@ -12,7 +12,6 @@ import chalk from "chalk";
 import { renderToString } from "preact-render-to-string";
 
 export const hydrateContent = async function(content: string, componentProfiles: ComponentProfile[], componentsMap: ComponentsMap, asset: Asset, assets: Assets): Promise<string | void> {
-    const config = await getConfiguration();
     const runtimeCWD = join(process.cwd(), config.libFolder);
     const cwd = process.cwd(); // Is restored below.
     for (const componentProfile of componentProfiles) {

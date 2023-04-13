@@ -2,7 +2,7 @@
     "name": "@4awpawz/fusion.ssg",
     "type": "module",
     "version": "0.0.0-alpha.1",
-    "description": "A tool that greatly simplifies the process of creating static websites.",
+    "description": "Minimal SSG Framework for Static Websites",
     "bin": {
         "fusion": "dist/bin/fusion.js"
     },
@@ -11,9 +11,26 @@
         "test": "jest --watch-all --coverage",
         "build": "tsc --build --force --watch"
     },
-    "keywords": [],
+    "keywords": [
+        "static-site-generator",
+        "static-website-generator",
+        "site-generator",
+        "website-generator",
+        "blog-engine",
+        "blog-aware",
+        "markup",
+        "markdown",
+        "html",
+        "javascript",
+        "typescript",
+        "components"
+    ],
     "author": "jeffreyschwartz",
-    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/4awpawz/fusion.ssg"
+    },
+    "license": "MIT",
     "devDependencies": {
         "@tsconfig/node16-strictest-esm": "^1.0.3",
         "@types/fs-extra": "^9.0.13",

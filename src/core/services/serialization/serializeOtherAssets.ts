@@ -5,7 +5,7 @@
 import path from "path";
 import { _writeJSONFile } from "../../lib/io/_writeJSONFile.js";
 import { _copyFolder } from "../../lib/io/_copyFolder.js";
-import { getConfiguration } from "../configuration/getConfiguration.js";
+import { config } from "../configuration/configuration.js";
 import type { Assets, Configuration } from "../../../types/types";
 
 const serializeAssetsJSON = async function(assets: Assets): Promise<void> {
@@ -44,7 +44,6 @@ const serializeEtcFolder = async function(config: Configuration, buildFolderPath
 
 export const serializeOtherAssets = async function(assets: Assets, buildFolderPath: string): Promise<void> {
     await serializeAssetsJSON(assets);
-    const config = await getConfiguration();
     await serializeCSSFolder(config, buildFolderPath);
     await serializeScriptsFolder(config, buildFolderPath);
     await serializeMediaFolder(config, buildFolderPath);

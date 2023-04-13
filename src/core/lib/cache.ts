@@ -11,11 +11,11 @@ import { _readJSONFile } from "./io/_readJsonFile.js";
 
 const rCache = new Map();
 
-const cacheJSONFile = async function(path: string): Promise<Map<any, any>> {
+const cacheJSONFile = async function(path: string): Promise<Map<unknown, unknown>> {
     return rCache.set(path, _readJSONFile(path));
 };
 
-const cacheFile = async function(path: string): Promise<Map<any, any>> {
+const cacheFile = async function(path: string): Promise<Map<unknown, unknown>> {
     return rCache.set(path, await _readFile(path));
 };
 

@@ -4,7 +4,7 @@
 
 import chalk from "chalk";
 import { join, parse } from "path";
-import { getConfiguration } from "../configuration/getConfiguration.js";
+import { config } from "../configuration/configuration.js";
 import { isPostDateValid } from "./isPostDateValid.js";
 
 const outErrorMessage = function(path: string): void {
@@ -13,7 +13,6 @@ const outErrorMessage = function(path: string): void {
 };
 
 export const getPostOutPath = async function(path: string, postCategoriesPath: string | undefined): Promise<string | undefined> {
-    const config = await getConfiguration();
     const pathParts = parse(path);
     const postDateFound = /(\d{4})-(\d{2})-(\d{2})/.test(pathParts.name);
     if (!postDateFound) {

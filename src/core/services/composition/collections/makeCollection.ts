@@ -7,12 +7,11 @@ import type { Asset, Assets, CollectionComponent, ComponentIdentifier, Component
 import { join } from "path";
 import chalk from "chalk";
 import { makeNewAsset } from "./makeNewAsset.js";
-import { getConfiguration } from "../../configuration/getConfiguration.js";
+import { config } from "../../configuration/configuration.js";
 import { importModule } from "../../../lib/importModule.js";
 import { getDataSources } from "../getDataSources.js";
 
 export const makeCollection = async function(assets: Assets, asset: Asset, componentProfile: ComponentProfile, componentsMap: ComponentsMap): Promise<void> {
-    const config = await getConfiguration();
     const runtimeCWD = join(process.cwd(), config.libFolder);
     const cwd = process.cwd();
     const componentIdentifier: ComponentIdentifier = componentsMap[componentProfile.componentName] as ComponentIdentifier;

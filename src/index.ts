@@ -11,6 +11,7 @@ import { discover } from "./core/services/discovery/discover.js";
 import { collectionGerator } from "./core/services/composition/collections/collectionGenerator.js";
 import type { BuildCategroy } from "./types/types.js";
 import { tokenize } from "./core/services/tokenization/tokenize.js";
+import { _writeMetaTimeStamp } from "./core/lib/io/_writeMetaTimeStamp.js";
 
 export const run = async function(buildStrategy: BuildCategroy) {
     metrics.startTimer("total elapsed time");
@@ -18,6 +19,7 @@ export const run = async function(buildStrategy: BuildCategroy) {
     console.log(`building ${buildStrategy.toLowerCase()}...`);
     const isOKToContine = await compile();
     isOKToContine && (await serialize(await tokenize(await hydrate(await collectionGerator(await compose(await discover()))))));
+    await _writeMetaTimeStamp();
     metrics.stopTimer("total elapsed time");
     metrics.forEachTimer(timer => console.log(timer.elapsed));
 };
