@@ -44,7 +44,7 @@ export const discover = async function(): Promise<Assets> {
         const buffer = await _readFile(assetPath);
         if (typeof buffer === "undefined") return asset;
         try {
-            asset.fm = matter(buffer, { excerpt: true });
+            asset.fm = matter(buffer, { excerpt: true, excerpt_separator: '<!-- end -->' });
         } catch (error) {
             console.log(chalk.red(`there was an error: Can't compile front matter in ${asset.filePath}.`));
             throw error;
