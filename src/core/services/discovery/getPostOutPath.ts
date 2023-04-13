@@ -31,7 +31,6 @@ export const getPostOutPath = async function(path: string, postCategoriesPath: s
     }
     const postsPath = typeof postCategoriesPath !== "undefined" ?
         join(config.userConfig.postsFolder, postCategoriesPath) : config.userConfig.postsFolder;
-    console.log("postsPath", postsPath);
     const yyyyPath = yyyy.toString();
     const mmPath = mm.toString().padStart(2, "0");
     const ddPath = dd.toString().padStart(2, "0");
