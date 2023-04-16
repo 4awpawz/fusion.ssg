@@ -47,12 +47,12 @@ export interface ComponentProfile {
     componentTag: string,
     componentName: string,
     componentDataSources: DataSource[],
-    componentProperties: string[],
+    componentProperties: Record<string, unknown>,
     componentIsCollection: boolean
 }
 
 export interface BuffersMap {
-    [key: string]: any
+    [key: string]: unknown
 }
 
 export type IncludeToken = string
@@ -102,6 +102,10 @@ export interface Configuration {
     userConfig: UserConfig
 }
 
+export interface ComponentProperty {
+    [key: string]: string | boolean;
+}
+
 export interface ComponentIdentifier {
     moduleName: string
 }
@@ -112,7 +116,7 @@ export interface ComponentsMap {
 
 export type Component = ((buffersMap: BuffersMap) => Promise<VNode>) | undefined;
 
-export type CollectionComponent = ((index: number, buffersMap: BuffersMap) => Promise<CollectionPageProfile>) | undefined;
+export type CollectionComponent = ((buffersMap: BuffersMap) => Promise<CollectionPageProfile>) | undefined;
 
 export type Components = Components[];
 

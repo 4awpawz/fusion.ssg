@@ -26,14 +26,14 @@ export const hydrateContent = async function(content: string, componentProfiles:
             console.error(chalk.red(`there was an error: Hydration processing for template '${componentIdentifier.moduleName}' bypassed, unable to import component '${componentIdentifier.moduleName}'`));
             continue;
         }
-        let buffersMap = componentProfile.componentDataSources.length > 0 &&
+        let props = componentProfile.componentDataSources.length > 0 &&
             await getDataSources(componentProfile.componentDataSources, config);
-        buffersMap = { ...buffersMap, asset, assets };
+        props = { ...props, ...componentProfile.componentProperties, asset, assets, };
 
         // *Important: Set the cwd to 'cwd/lib' so that component calls to import using relative paths are resolved relative to the lib folder.
         process.chdir(runtimeCWD);
         // Components are always called asynchronously.
-        const componentContent = await component(buffersMap);
+        const componentContent = await component(props);
         process.chdir(cwd);
         if (typeof componentContent === "undefined") continue;
         const html = renderToString(componentContent);

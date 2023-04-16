@@ -24,9 +24,9 @@ export const makeCollection = async function(assets: Assets, asset: Asset, compo
         console.error(chalk.red(`there was an error: Unable to import '${componentIdentifier.moduleName}' from '${componentIdentifier.moduleName}'.`));
         return;
     }
-    let buffersMap = componentProfile.componentDataSources.length > 0 &&
+    let props = componentProfile.componentDataSources.length > 0 &&
         await getDataSources(componentProfile.componentDataSources, config);
-    buffersMap = { ...buffersMap, asset, assets };
+    props = { ...props, ...componentProfile.componentProperties, asset, assets };
 
     // *Important: Set the cwd to 'cwd/lib' so that component calls to import using relative paths are resolved relative to the lib folder.
     process.chdir(runtimeCWD);
@@ -35,7 +35,8 @@ export const makeCollection = async function(assets: Assets, asset: Asset, compo
     const condition = true;
     while (condition) {
         // Components are always called asynchronously.
-        const collectionPageProfile = await collectionComponent(index, buffersMap);
+        props["index"] = index;
+        const collectionPageProfile = await collectionComponent(props);
         // Collection components return undefined when there's nothing more to process.
         if (typeof collectionPageProfile === "undefined") break;
         const generatedAsset = makeNewAsset(asset, collectionPageProfile, componentProfile.componentTag);

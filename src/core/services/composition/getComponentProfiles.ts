@@ -2,7 +2,7 @@
  * getComponentProfiles - returns ComponentProfile[].
  */
 
-import type { ComponentProfile, DataSource } from "../../../types/types";
+import type { ComponentProfile, ComponentProperty, DataSource } from "../../../types/types";
 import { _filter } from "../../lib/functional.js";
 
 const getDataSourcesFromTagProperties = function(properties: string[]): DataSource[] {
@@ -14,7 +14,17 @@ const getDataSourcesFromTagProperties = function(properties: string[]): DataSour
 };
 
 const getOtherPropertiesFromTagProperties = function(properties: string[]) {
-    return _filter(properties, propertiy => !propertiy.startsWith("dataSources"));
+    let props = {};
+    for (const prop of properties) {
+        const tProp: ComponentProperty = {};
+        if (prop.startsWith("dataSources") || prop.includes("<") || prop.includes("/>")) continue;
+        const propParts = prop.split("=");
+        const key: string = propParts[0] as string;
+        const value = propParts.length === 2 ? propParts[1] as string : true;
+        tProp[key] = value;
+        props = { ...props, ...tProp };
+    }
+    return props;
 };
 
 export const getComponentProfiles = function(assetContent: string): ComponentProfile[] {
@@ -25,16 +35,19 @@ export const getComponentProfiles = function(assetContent: string): ComponentPro
         // Get the component path and its data sources.
         const tagParts = match[0].split(" ");
         let tagProperties = tagParts.slice(1);
-        const isCollectionComponent = tagProperties.includes("isCollection");
-        tagProperties = isCollectionComponent && _filter(tagProperties, tagProperty => tagProperty !== "isCollection") || tagProperties;
+        const componentIsCollection = tagProperties.includes("isCollection");
+        tagProperties = componentIsCollection && _filter(tagProperties, tagProperty =>
+            tagProperty !== "isCollection") || tagProperties;
         const componentDataSources = getDataSourcesFromTagProperties(tagProperties);
+        tagProperties = tagProperties.includes("dataSources") && _filter(tagProperties, tagProperty =>
+            tagProperty !== "dataSources") || tagProperties;
         const componentProperties = getOtherPropertiesFromTagProperties(tagProperties);
         const componentProfile = {
             componentTag: match[0],
             componentName: match[1] + ".tsx" as string,
             componentDataSources,
             componentProperties,
-            componentIsCollection: isCollectionComponent
+            componentIsCollection
         };
         componentProfiles.push(componentProfile);
     }
