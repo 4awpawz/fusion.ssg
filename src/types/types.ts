@@ -14,7 +14,7 @@ export interface Asset {
     filePath: string,
     fileType: string,
     isWip?: boolean,
-    collection?: Asset[],
+    memberOf?: string,
     content?: string,
     fm?: GrayMatterFile<string>
     associatedPage?: string,

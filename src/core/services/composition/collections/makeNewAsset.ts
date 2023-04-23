@@ -6,9 +6,10 @@ import type { Asset, CollectionPageProfile } from "../../../../types/types";
 import { join, parse } from "path";
 import { renderToString } from "preact-render-to-string";
 
-export const makeNewAsset = function(asset: Asset, collectionPageProfile: CollectionPageProfile, componentTag: string): Asset {
+export const makeNewAsset = function(asset: Asset, collectionPageProfile: CollectionPageProfile, componentTag: string, componentName: string): Asset {
     const newAsset: Asset = JSON.parse(JSON.stringify(asset));
     delete newAsset?.fm?.data["isCollection"];
+    newAsset["memberOf"] = componentName.split(".")[0] as string;
     newAsset.content = newAsset.content?.replace("{title}", collectionPageProfile.title) as string;
     const html = renderToString(collectionPageProfile.content);
     newAsset.content = newAsset.content?.replace(componentTag, html);

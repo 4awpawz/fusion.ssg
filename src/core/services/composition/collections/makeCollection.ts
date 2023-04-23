@@ -39,7 +39,7 @@ export const makeCollection = async function(assets: Assets, asset: Asset, compo
         const collectionPageProfile = await collectionComponent(props);
         // Collection components return undefined when there's nothing more to process.
         if (typeof collectionPageProfile === "undefined") break;
-        const generatedAsset = makeNewAsset(asset, collectionPageProfile, componentProfile.componentTag);
+        const generatedAsset = makeNewAsset(asset, collectionPageProfile, componentProfile.componentTag, componentProfile.componentName);
         assets.push(generatedAsset);
         index += 1;
     }

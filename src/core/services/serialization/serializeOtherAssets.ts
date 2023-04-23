@@ -10,8 +10,7 @@ import type { Assets, Configuration } from "../../../types/types";
 
 const serializeAssetsJSON = async function(assets: Assets): Promise<void> {
     const outputPath = path.join(process.cwd(), "assets.json");
-    await _writeJSONFile(outputPath, assets);
-    return;
+    await _writeJSONFile(outputPath, assets, { spaces: 2 }); return;
 };
 
 const serializeCSSFolder = async function(config: Configuration, buildFolderPath: string): Promise<void> {
