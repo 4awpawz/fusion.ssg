@@ -15,7 +15,10 @@ import { _filter } from "../../../lib/functional.js";
 
 export const collectionGerator = async function(assets: Assets): Promise<Assets> {
     metrics.startTimer("collections");
-    if (process.env["OK_TO_CALL_COMPONENTS"] === "0") return assets;
+    if (process.env["OK_TO_CALL_COMPONENTS"] === "0") {
+        metrics.stopTimer("collections");
+        return assets;
+    }
     const componentsMap = makeComponentsMap(componentPaths);
     clearCache();
     for (const asset of assets) {

@@ -12,6 +12,7 @@ import { log } from "../core/lib/io/log.js";
 import { run } from "../index.js";
 import fileDirName from "../core/lib/fileDirName.js";
 import { _forEach, _filter, _reduce } from "../core/lib/functional.js";
+import { newTypeScriptProjectGenerator as newProject } from "@4awpawz/fusion-typescript-project-generator";
 
 const { __dirname } = fileDirName(import.meta);
 
@@ -101,11 +102,34 @@ const releaseHelp = function() {
     log("");
 };
 
+const newProjectHelp = function() {
+    log("NAME");
+    log("       fusion-new-typescript-project - Creates a new TypeScript project in the current folder.");
+    log("");
+    log("SYNOPSIS");
+    log("       fusion new");
+    log("");
+    log("       alias: fusion n");
+    log("");
+    log("DESCRIPTION");
+    log("       This command creates a new TypeScript project in the current folder.");
+    log("       This command will fail if a folder of the same name already exists in the current folder.");
+    log("");
+    log("           fusion new [project name]");
+    log("");
+    log("       In the first form, a new TypeScript project is created in a folder named [project name].");
+    log("");
+};
+
 const commandSpecificHelp = (command: string) => {
     switch (command) {
         case "b":
         case "build":
             buildHelp();
+            break;
+        case "n":
+        case "new":
+            newProjectHelp();
             break;
         case "r":
         case "release":
@@ -140,7 +164,7 @@ const buildCommand = {
     valid: async () => {
         await run("DEVELOPMENT");
     },
-    invalid: () => generalHelp(),
+    invalid: () => buildHelp(),
 };
 
 // Build for release.
@@ -151,10 +175,24 @@ const releaseCommand = {
     valid: async () => {
         await run("RELEASE");
     },
-    invalid: () => generalHelp(),
+    invalid: () => releaseHelp(),
+};
+
+// Build for release.
+const newTypeScriptProject = {
+    validate: function({ commands }: { commands: string[] }) {
+        if (typeof commands[1] as string === "undefined" || commands[1] === "") return false;
+        return true;
+    },
+    valid: async ({ commands }: { commands: string[] }) => {
+        await newProject(commands[1] as string);
+    },
+    invalid: () => newProjectHelp(),
 };
 
 const commandHandlers = new Map();
+commandHandlers.set("new", newTypeScriptProject);
+commandHandlers.set("n", newTypeScriptProject);
 commandHandlers.set("build", buildCommand);
 commandHandlers.set("b", buildCommand);
 commandHandlers.set("release", releaseCommand);
@@ -176,7 +214,10 @@ const commandRunner = async function() {
         }
         return;
     }
-    guard();
+
+    const isNew = ["n", "new"].includes(commands[0] as string);
+    !isNew && guard();
+
     const commandParams = commandHandlers.get(commands[0]);
     if (commandParams) {
         if (commandParams.validate({ commands, options })) {

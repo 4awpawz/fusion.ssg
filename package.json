@@ -46,6 +46,7 @@
         "ts-jest": "^28.0.8"
     },
     "dependencies": {
+        "@4awpawz/fusion-typescript-project-generator": "^0.0.0-alpha-1",
         "chalk": "^5.2.0",
         "fs-extra": "^10.1.0",
         "glob": "^9.2.1",

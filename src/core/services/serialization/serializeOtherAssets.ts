@@ -1,5 +1,5 @@
 /**
- * serializeAssets - Serialize assets to assets.json.
+ * serializeAssets - Serializes other assets.
  */
 
 import path from "path";
@@ -9,7 +9,7 @@ import { config } from "../configuration/configuration.js";
 import type { Assets, Configuration } from "../../../types/types";
 
 const serializeAssetsJSON = async function(assets: Assets): Promise<void> {
-    const outputPath = path.join(process.cwd(), "assets.json");
+    const outputPath = path.join(process.cwd(), ".assets.json");
     await _writeJSONFile(outputPath, assets, { spaces: 2 }); return;
 };
 

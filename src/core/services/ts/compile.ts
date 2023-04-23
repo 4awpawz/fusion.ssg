@@ -34,7 +34,7 @@ export const compile = async function(): Promise<boolean> {
     if (componentPaths.length === 0) {
         console.log(chalk.blue("no components found"));
         process.env["OK_TO_CALL_COMPONENTS"] = "0";
-        metrics.stopTimer("compilation");
+        metrics.stopTimer("component compilation");
         return true;
     }
 
@@ -60,7 +60,7 @@ export const compile = async function(): Promise<boolean> {
     if (exitCode === 1) {
         console.error(chalk.red("there was an error: TypeScript found errors in one or more components that need to be addressed."));
         process.env["OK_TO_CALL_COMPONENTS"] = "0";
-        metrics.stopTimer("compilation");
+        metrics.stopTimer("component compilation");
         return false;
     }
 

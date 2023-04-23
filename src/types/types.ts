@@ -127,3 +127,7 @@ export interface TokenValidators {
 }
 
 export type BuildCategroy = "DEVELOPMENT" | "RELEASE"
+
+export interface Meta {
+    url: string
+}

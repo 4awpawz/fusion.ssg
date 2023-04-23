@@ -12,7 +12,10 @@ import { makeComponentsMap } from "../../../lib/makeComponentsMap.js";
 
 export const hydrate = async function(assets: Assets): Promise<Assets> {
     metrics.startTimer("hydration");
-    if (process.env["OK_TO_CALL_COMPONENTS"] === "0") return assets;
+    if (process.env["OK_TO_CALL_COMPONENTS"] === "0") {
+        metrics.stopTimer("hydration");
+        return assets;
+    }
     const componentsMap = makeComponentsMap(componentPaths);
     clearCache();
     for (const asset of assets) {
