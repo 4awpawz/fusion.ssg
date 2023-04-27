@@ -52,46 +52,31 @@ fusion will use [semantic versioning](https://semver.org/) and will distinguish 
 ### What Has Already Been Implemented
 
 - [X] Support for _simple HTML document creation_ using _Pages, Templates and Includes_.
-
 - [X] Support for _simple token replacement_ involving _front matter property values_ and _matching property names_ in HTML.
-
 - [X] Support for Typescript _`.tsx` components_, _compilation_ and _sand-boxed execution_.
-
 - [X]  Support for _document hydration_ using Typescript components and JSON data sources.
-
 - [X] Support for generating _collections of pages_ using Typescript components and JSON data sources.
-
 - [X] Support for base URLs.
-
 - [X] Support for development and release builds.
-
-- [X]  Support for content posting (e.g. Blogging)
-
+- [X]  Support for content posting (e.g. Blogging).
   - [X] Support for tags.
-
   - [X] Support for categories.
-
 - [X] Work in progress templates.
   - [X] Individual files.
   - [X] Folders.
   - [X] Ignored.
+- [X] End-User project generation.
 
 ### What Still Remains To Be Done
 
 - Logo... fusion.ssg is desperately in need of a great logo.
-
-- End-User project generation - _currently under development_.
-
 - Project documentation website - _currently under development_.
-
 - Encourage early community involvement and adoption.
-
 - Provide sufficient testing to reduce the likelihood of introducing regressions.
 
 ### Longer Term Goals
 
 - Seek RFC.
-
 - Accept pull requests when the codebase is stable enough to receive them, which will probably coincide with the first major Alpha release.
 
 ## Community
