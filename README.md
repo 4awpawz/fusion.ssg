@@ -31,6 +31,7 @@ _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Mark
   - Individual files.
   - Folders.
   - Ignored.
+- End user project creation.
 
 ## Project Development
 
@@ -65,11 +66,11 @@ fusion will use [semantic versioning](https://semver.org/) and will distinguish 
   - [X] Individual files.
   - [X] Folders.
   - [X] Ignored.
-- [X] End-User project generation.
+- [X] End user project creation.
 
 ### What Still Remains To Be Done
 
-- Logo... fusion.ssg is desperately in need of a great logo.
+- Logo, fusion.ssg is desperately in need of a great logo.
 - Project documentation website - _currently under development_.
 - Encourage early community involvement and adoption.
 - Provide sufficient testing to reduce the likelihood of introducing regressions.
