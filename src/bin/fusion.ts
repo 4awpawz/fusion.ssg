@@ -117,7 +117,8 @@ const newProjectHelp = function() {
     log("");
     log("           fusion new [project name]");
     log("");
-    log("       In the first form, a new TypeScript project is created in a folder named [project name].");
+    log("       In the first form, a new TypeScript project is created in a folder named [project name]");
+    log("       along with all its dependencies.");
     log("");
 };
 
