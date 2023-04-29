@@ -1,5 +1,5 @@
 /**
- * site landing page.
+ * Main entry point. Called from both CLI and directly.
  */
 
 import { compile } from "./core/services/ts/compile.js";
