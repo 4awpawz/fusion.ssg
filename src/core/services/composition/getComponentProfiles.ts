@@ -20,8 +20,8 @@ const getOtherPropertiesFromTagProperties = function(properties: string[]) {
         if (prop.startsWith("dataSources") || prop.includes("<") || prop.includes("/>")) continue;
         const propParts = prop.split("=");
         const key: string = propParts[0] as string;
-        const value = propParts.length === 2 ? propParts[1] as string : true;
-        tProp[key] = value;
+        const value = propParts.length === 2 ? (propParts[1] as string).replace("'", "") as string : true;
+        tProp[key] = typeof value === "string" && value.replaceAll("\"", "") || value;
         props = { ...props, ...tProp };
     }
     return props;
