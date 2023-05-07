@@ -16,6 +16,7 @@ import { normalizeOutPath } from "./normalizeOutPath.js";
 import { getPostOutPath } from "./getPostOutPath.js";
 import { getCategoryPath } from "./getCategoryPath.js";
 import { isPost } from "./isPost.js";
+import { isAssetPostLandingPage } from "./isAssetPostLandingPage.js";
 import chalk from "chalk";
 import { config } from "../configuration/configuration.js";
 import { templateIsWIP } from "./templateIsWIP.js";
@@ -57,16 +58,21 @@ export const discover = async function(): Promise<Assets> {
         asset.isWip = templateIsWIP(wips, asset.filePath);
         const page: string | undefined = asset.fm.data["page"];
         asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || `src/pages/default.html`;
-        asset.isPost = await isPost(assetPath);
+
+        // -- Post related --
+        asset.isPost = isPost(assetPath);
         if (asset.isPost) asset.postTimeStamp = getPostTimeStampFromPostPath(asset.filePath);
         const postProfile: PostProfile = asset.isPost && asset.fm.data["post"];
         const postCategoryPath = asset.isPost && fileInfo.name !== "index" && typeof postProfile !== "undefined"
             && typeof postProfile.categories !== "undefined" ? getCategoryPath(postProfile.categories) : undefined;
-        const oPath = asset.isPost && fileInfo.name !== "index" ?
+        let oPath = asset.isPost && fileInfo.name !== "index" ?
             await getPostOutPath(asset.filePath, postCategoryPath) : normalizeOutPath(fileInfo.dir);
+        const assetIsPostLandingPage = !asset.isPost && isAssetPostLandingPage(assetPath) ? true : false;
+        oPath = assetIsPostLandingPage && join(config.userConfig.postsFolder) || oPath;
         if (typeof oPath === "undefined") return asset;
         const postNamePath = asset.isPost ? join(oPath, parse(filePath.split("-").pop() as string).name, "index.html") : "";
         const oName = asset.isPost && postNamePath || fileName.endsWith("index") ? "index.html" : fileName + "/index.html";
+
         asset.htmlDocumentName = asset.isPost ? postNamePath : join(oPath, oName);
         asset.url = parse(asset.htmlDocumentName).dir + "/";
         return asset;

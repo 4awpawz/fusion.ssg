@@ -1,14 +1,15 @@
 /**
- * isPost - Returns true if asset's path points to a post, false otherwise.
+ * isPost - Returns true if the asset isn't an index file and its path points to the posts folder, false otherwise.
  */
 
 import { parse } from "path";
 import { config } from "../configuration/configuration.js";
 
-export const isPost = async function(assetPath: string): Promise<boolean> {
+export const isPost = function(assetPath: string): boolean {
     const assetPathParts = parse(assetPath);
-    // Posts will never be named 'index'.
+    // Posts will never be named 'index' though index files might
+    // reside in the posts folder, such as a blog's landing page.
+    // See isPostLandingPage below.
     if (assetPathParts.name === "index") return false;
-    const postFolderPath = config.postsFolder;
-    return parse(assetPath).dir.includes(postFolderPath);
+    return assetPathParts.dir.includes(config.postsFolder);
 };
