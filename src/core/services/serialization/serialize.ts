@@ -22,10 +22,8 @@ export const serialize = async function(assets: Assets): Promise<Assets> {
     metrics.startTimer("serialization");
     await _remove(config.buildFolder);
     const buildFolderPath = await getBuildFolderPath();
-    const result = await serializePages(assets, buildFolderPath);
-    "RELEASE" === process.env["BUILD_STRATEGY"] &&
-        console.log("total WIP documents bypassed: ", chalk.green(result.wips));
-    console.log("total documents generated: ", chalk.green(result.count));
+    const count = await serializePages(assets, buildFolderPath);
+    console.log("total documents generated: ", chalk.green(count));
     await serializeOtherAssets(assets, buildFolderPath);
     metrics.stopTimer("serialization");
     return assets;

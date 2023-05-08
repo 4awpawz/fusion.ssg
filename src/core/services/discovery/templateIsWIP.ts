@@ -2,7 +2,10 @@
  * templateIsWIP - return true if wip matches folder or file patch and isn't ignored, false otherwise.
  */
 
-export const templateIsWIP = function(wips: string[], templatePath: string) {
+import { config } from "../configuration/configuration.js";
+
+export const templateIsWIP = function(templatePath: string) {
+    const wips = config.userConfig.wips;
     const tPath = templatePath.split("/").slice(2).join("/"); // Remove src/templates from templatePth.
     for (const wip of wips) {
         const isIgnore = wip[0] === "!";

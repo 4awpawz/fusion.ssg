@@ -8,11 +8,8 @@ import { _writeContentToFile } from "../../lib/io/_writeContentToFile.js";
 import { _filter } from "../../lib/functional.js";
 import type { Assets } from "../../../types/types";
 
-export const serializePages = async function(assets: Assets, buildFolderPath: string): Promise<{ count: number, wips: number }> {
-    let templateAssets = _filter(assets, asset => asset.assetType === "template" && !asset.fm?.data["isCollection"]);
-    const unfilteredCount = templateAssets.length;
-    const buildStrategy = process.env["BUILD_STRATEGY"];
-    templateAssets = buildStrategy === "RELEASE" ? _filter(templateAssets, asset => !asset.isWip) : templateAssets;
+export const serializePages = async function(assets: Assets, buildFolderPath: string): Promise<number> {
+    const templateAssets = _filter(assets, asset => asset.assetType === "template" && !asset.fm?.data["isCollection"]);
     let count = 0;
     for (const asset of templateAssets) {
         const outputPath = join(buildFolderPath, asset.htmlDocumentName as string);
@@ -20,7 +17,5 @@ export const serializePages = async function(assets: Assets, buildFolderPath: st
         await _writeContentToFile(outputPath, asset.content);
         count++;
     }
-    const wips = unfilteredCount - count;
-    const result = { count, wips };
-    return result;
+    return count;
 };

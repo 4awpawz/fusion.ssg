@@ -17,15 +17,16 @@ import { getPostOutPath } from "./getPostOutPath.js";
 import { getCategoryPath } from "./getCategoryPath.js";
 import { isPost } from "./isPost.js";
 import { isAssetPostLandingPage } from "./isAssetPostLandingPage.js";
-import chalk from "chalk";
 import { config } from "../configuration/configuration.js";
 import { templateIsWIP } from "./templateIsWIP.js";
 import { getPostTimeStampFromPostPath } from "./getPostTimeStampFromPostPath.js";
+import { _filter } from "../../lib/functional.js";
+import chalk from "chalk";
 
 export const discover = async function(): Promise<Assets> {
     metrics.startTimer("discovery");
     const pathsToAssets = await getFiles();
-    const assets = await Promise.all(pathsToAssets.map(async (assetPath: string) => {
+    let assets = await Promise.all(pathsToAssets.map(async (assetPath: string) => {
         const fileInfo = parse(assetPath);
         const filePath = assetPath;
         const fileType = fileInfo.ext;
@@ -54,8 +55,7 @@ export const discover = async function(): Promise<Assets> {
 
         // -- At this point asset is a template! --
 
-        const wips = config.userConfig.wips;
-        asset.isWip = templateIsWIP(wips, asset.filePath);
+        asset.isWip = templateIsWIP(asset.filePath);
         const page: string | undefined = asset.fm.data["page"];
         asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || `src/pages/default.html`;
 
@@ -77,6 +77,8 @@ export const discover = async function(): Promise<Assets> {
         asset.url = parse(asset.htmlDocumentName).dir + "/";
         return asset;
     }));
+    // When building for release, wips are not included in metadata.
+    assets = process.env["BUILD_STRATEGY"] === "RELEASE" ? _filter(assets, asset => !asset.isWip) : assets;
     metrics.stopTimer("discovery");
     return assets;
 };
