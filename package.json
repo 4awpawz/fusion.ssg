@@ -36,6 +36,7 @@
         "@types/fs-extra": "^9.0.13",
         "@types/glob": "^8.0.0",
         "@types/jest": "^29.0.0",
+        "@types/js-beautify": "^1.13.3",
         "@types/marked": "^4.0.7",
         "@types/node": "^18.7.13",
         "@typescript-eslint/eslint-plugin": "^5.36.2",
@@ -46,11 +47,13 @@
         "ts-jest": "^28.0.8"
     },
     "dependencies": {
+        "-": "^0.0.1",
         "@4awpawz/fusion-typescript-project-generator": "^1.0.0-beta-1",
         "chalk": "^5.2.0",
         "fs-extra": "^10.1.0",
         "glob": "^9.2.1",
         "gray-matter": "^4.0.3",
+        "js-beautify": "^1.14.7",
         "marked": "^4.1.0",
         "nstall": "^0.2.0",
         "preact-render-to-string": "^5.2.6",
