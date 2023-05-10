@@ -1,7 +1,7 @@
 {
     "name": "@4awpawz/fusion.ssg",
     "type": "module",
-    "version": "1.0.0-beta.5",
+    "version": "1.0.0-beta.6",
     "description": "Minimal SSG Framework for Static Websites",
     "bin": {
         "fusion": "dist/bin/fusion.js"
@@ -48,7 +48,7 @@
     },
     "dependencies": {
         "-": "^0.0.1",
-        "@4awpawz/fusion-typescript-project-generator": "^1.0.0-beta-1",
+        "@4awpawz/fusion-typescript-project-generator": "^1.0.0-beta-2",
         "chalk": "^5.2.0",
         "fs-extra": "^10.1.0",
         "glob": "^9.2.1",
