@@ -7,6 +7,7 @@ import { _writeJSONFile } from "../../lib/io/_writeJSONFile.js";
 import { _copyFolder } from "../../lib/io/_copyFolder.js";
 import { config } from "../configuration/configuration.js";
 import type { Assets, Configuration } from "../../../types/types";
+import { _fileExists } from "../../lib/io/_fileExists.js";
 
 const serializeAssetsJSON = async function(assets: Assets): Promise<void> {
     const outputPath = path.join(process.cwd(), ".assets.json");
@@ -15,6 +16,7 @@ const serializeAssetsJSON = async function(assets: Assets): Promise<void> {
 
 const serializeCSSFolder = async function(config: Configuration, buildFolderPath: string): Promise<void> {
     const sourceFolder = path.join(process.cwd(), config.srcFolder, config.cssFolder);
+    if (!_fileExists(sourceFolder)) return;
     const destinationFolder = path.join(buildFolderPath, config.cssFolder);
     await _copyFolder(sourceFolder, destinationFolder);
     return;
@@ -22,6 +24,7 @@ const serializeCSSFolder = async function(config: Configuration, buildFolderPath
 
 const serializeScriptsFolder = async function(config: Configuration, buildFolderPath: string): Promise<void> {
     const sourceFolder = path.join(process.cwd(), config.srcFolder, config.scriptsFolder);
+    if (!_fileExists(sourceFolder)) return;
     const destinationFolder = path.join(buildFolderPath, config.scriptsFolder);
     await _copyFolder(sourceFolder, destinationFolder);
     return;
@@ -29,6 +32,7 @@ const serializeScriptsFolder = async function(config: Configuration, buildFolder
 
 const serializeMediaFolder = async function(config: Configuration, buildFolderPath: string): Promise<void> {
     const sourceFolder = path.join(process.cwd(), config.srcFolder, config.mediaFolder);
+    if (!_fileExists(sourceFolder)) return;
     const destinationFolder = path.join(buildFolderPath, config.mediaFolder);
     await _copyFolder(sourceFolder, destinationFolder);
     return;
@@ -36,6 +40,7 @@ const serializeMediaFolder = async function(config: Configuration, buildFolderPa
 
 const serializeEtcFolder = async function(config: Configuration, buildFolderPath: string): Promise<void> {
     const sourceFolder = path.join(process.cwd(), config.srcFolder, config.etcFolder);
+    if (!_fileExists(sourceFolder)) return;
     const destinationFolder = path.join(buildFolderPath);
     await _copyFolder(sourceFolder, destinationFolder);
     return;
