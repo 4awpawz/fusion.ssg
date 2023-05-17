@@ -44,7 +44,7 @@ export const getComponentProfiles = function(assetContent: string): ComponentPro
         const componentProperties = getOtherPropertiesFromTagProperties(tagProperties);
         const componentProfile = {
             componentTag: match[0],
-            componentName: match[1] + ".tsx" as string,
+            componentName: match[1] as string,
             componentDataSources,
             componentProperties,
             componentIsCollection

@@ -7,6 +7,7 @@ import { config } from "../services/configuration/configuration.js";
 import { _filter } from "./functional.js";
 import { _glob } from "./io/_glob.js";
 
-const extensions = [".tsx"];
-const paths = await _glob(path.join(config.srcFolder, config.componentsFolder, "*.tsx"));
+const globPath = path.join(config.srcFolder, config.componentsFolder) + `/*.{tsx,jsx}`;
+const paths = await _glob(globPath);
+const extensions = [".tsx", ".jsx"];
 export const componentPaths = _filter(paths, _path => extensions.includes(path.parse(_path).ext));
