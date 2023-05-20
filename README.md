@@ -40,15 +40,9 @@ The project is written in ` TypeScript` (no excuses, _it just works beautifully_
 ## Project Scope
 The project's scope is limited to generating robust and resilient HTML documents and nothing else. It will not provide any other tooling other than what is absolutely necessary to accomplish that. Importantly, fusion.ssg requires no knowledge of front-end frameworks like React. This keeps the scope of the project focused, preventing feature creep, and benefits users who will be able to pick and chose their own tools.
 
-## Current Status
+## Current Status And Semantic Versioning
 
-The project is still in its Alpha/prerelease stage. One or more _Beta releases_ will follow and both Alpha and Beta releases should be considered _unstable_ and _transient_. While in Beta, features and implementations might change dramatically and this should be considered the norm.
-
-## Versioning
-
-fusion will use [semantic versioning](https://semver.org/) and will distinguish between _development_ builds and _release_ builds by their major version numbers
-  1. Odd major version number are to be considered development versions.
-  1. Even major version number are to be considered release versions.
+The project is still under v1.0.0-beta development. When all features targeted for v1.0.0 are implemented in beta and are stable, the version number will be bumped to remove the beta sub status. Going forward, odd version numbers are to be considered development release builds and even numbered version numbers are to be considered production release builds.
 
 ### What Has Already Been Implemented
 
