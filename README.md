@@ -9,19 +9,19 @@
 
 # Minimal SSG Framework For Building Static Websites
 
-HTML, Markdown, Front Matter + Custom `.tsx` Components.
+HTML, Markdown, Front Matter + Custom `.tsx and .jsx` Components.
 
 ## The Name
 
-_fusion_ plays on the idea of **_fusing_** together various elements (HTML, Markdown, TypseScript components, JSON data, YAML front matter, etc.).
+_fusion_ plays on the idea of **_fusing_** together various elements (HTML, Markdown, Components, JSON data, YAML front matter, etc.).
 
 ## Features
 
 - Simple HTML document creation using Pages, Templates and Includes.
 - Simple token replacement involving front matter property values and matching property names in HTML.
-- TSX custom component compilation and sand-boxed execution.
-- Document hydration using Typescript components and JSON data sources.
-- Page collections using Typescript components and JSON data sources.
+- .tsx and .jsx component compilation and sand-boxed execution.
+- Document hydration using components and JSON data sources.
+- Page collections using components and JSON data sources.
 - Base URLs.
 - Development and release builds.
 - Content posting (e.g. Blogging).
@@ -54,9 +54,9 @@ fusion will use [semantic versioning](https://semver.org/) and will distinguish 
 
 - [X] Support for _simple HTML document creation_ using _Pages, Templates and Includes_.
 - [X] Support for _simple token replacement_ involving _front matter property values_ and _matching property names_ in HTML.
-- [X] Support for Typescript _`.tsx` components_, _compilation_ and _sand-boxed execution_.
-- [X]  Support for _document hydration_ using Typescript components and JSON data sources.
-- [X] Support for generating _collections of pages_ using Typescript components and JSON data sources.
+- [X] Support for _`.tsx` and .jsx components_, _compilation_ and _sand-boxed execution_.
+- [X]  Support for _document hydration_ using components and JSON data sources.
+- [X] Support for generating _collections of pages_ using components and JSON data sources.
 - [X] Support for base URLs.
 - [X] Support for development and release builds.
 - [X]  Support for content posting (e.g. Blogging).
