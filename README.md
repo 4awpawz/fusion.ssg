@@ -17,21 +17,18 @@ _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Mark
 
 ## Features
 
-- Simple HTML document creation using Pages, Templates and Includes.
-- Simple token replacement involving front matter property values and matching property names in HTML.
-- .tsx and .jsx component compilation and sand-boxed execution.
-- Document hydration using components and JSON data sources.
-- Page collections using components and JSON data sources.
-- Base URLs.
-- Development and release builds.
-- Content posting (e.g. Blogging).
-  - Tags.
-  - Categories.
-- Works in progress.
-  - Individual files.
-  - Folders.
-  - Ignored.
-- End user project creation.
+- No initial project configuration is required.
+- DOMless and serverless, so builds are really very quick.
+- Create HTML documents using markdown, HTML, tokens, components, JSON data sources and meta data.
+- Built-in TSX component compilation.
+- Built-in JSX component compilation and TS browser scripts compilation coming in v1.0.0-beta.8.
+- Portfolio generation via collections.
+- package.json scripts for development and release builds.
+- CLI for one-off development and one-off release builds.
+- Base URL support for sites hosted in sub folders.
+- Works in progress for HTML documents that need to be ignored during release builds.
+- Blogging support, including categories and tags.
+- HTML documents are beautified.
 
 ## Project Development
 

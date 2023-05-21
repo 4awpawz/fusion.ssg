@@ -9,7 +9,6 @@ import { serializeOtherAssets } from "./serializeOtherAssets.js";
 import chalk from "chalk";
 import { config } from "../configuration/configuration.js";
 import { join } from "path";
-import { _remove } from "../../lib/io/_remove.js";
 
 const getBuildFolderPath = async function(): Promise<string> {
     const baseURL = config.userConfig.baseURL;
@@ -20,7 +19,6 @@ const getBuildFolderPath = async function(): Promise<string> {
 
 export const serialize = async function(assets: Assets): Promise<Assets> {
     metrics.startTimer("serialization");
-    await _remove(config.buildFolder);
     const buildFolderPath = await getBuildFolderPath();
     const count = await serializePages(assets, buildFolderPath);
     console.log("total documents generated: ", chalk.green(count));

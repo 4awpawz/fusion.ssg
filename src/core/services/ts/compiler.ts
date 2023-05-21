@@ -1,5 +1,5 @@
 /**
- * Compiles user's components using the Typescript compiler api.
+ * Compiles user's components and browser scripts using the Typescript compiler api.
  * See https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API
  */
 
@@ -7,8 +7,8 @@ import chalk from "chalk";
 import ts from "typescript";
 import { _forEach } from "../../lib/functional.js";
 
-export const compiler = function(pathsToComponents: readonly string[], options: ts.CompilerOptions): number {
-    const program = ts.createProgram(pathsToComponents, options);
+export const compiler = function(paths: readonly string[], options: ts.CompilerOptions): number {
+    const program = ts.createProgram(paths, options);
     const emitResult = program.emit();
 
     const allDiagnostics = ts

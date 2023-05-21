@@ -1,5 +1,5 @@
 /**
- * _outputFile - async/await wrapper for outputFile.
+ * _writeContentToFile - async/await wrapper for outputFile.
  */
 
 import chalk from "chalk";
