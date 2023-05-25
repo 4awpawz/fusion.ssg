@@ -39,8 +39,8 @@ export const discover = async function(): Promise<Assets> {
             filePath,
             fileType,
         };
-        // Assets that represent data and components files do not include their content.
         asset.isPost = false;
+        // Assets that represent data and components files do not include their content.
         if (["data", "component"].includes(assetType)) return asset;
         const buffer = await _readFile(assetPath);
         if (typeof buffer === "undefined") return asset;

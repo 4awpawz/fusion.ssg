@@ -8,12 +8,14 @@
         "outDir": "dist",
         "removeComments": true,
         "sourceMap": true,
+        "strict": true,
         "jsx": "react-jsx",
         "jsxImportSource": "preact",
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noImplicitReturns": true,
         "noImplicitAny": true,
-        "declaration": true
+        "declaration": true,
+        "ignoreDeprecations": "5.0"
     }
 }
