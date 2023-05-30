@@ -27,7 +27,8 @@ const getConfiguration = async function(): Promise<Configuration> {
         userConfig: {
             postsFolder: "posts", // Target folder for posts.
             baseURL: "", // Base URL that can be applied as a token via {baseURL}.
-            wips: [] // Works In Progress
+            wips: [], // Works In Progress
+            tokens: {} // Global tokens
         },
     };
     const configPath = path.join(process.cwd(), configFileName);

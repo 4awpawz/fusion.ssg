@@ -84,7 +84,8 @@ export type Token = `${TokenLeftDelimeter}${TokenContent}${TokenRightDelimeter}`
 export interface UserConfig {
     postsFolder: string,
     baseURL: string,
-    wips: string[]
+    wips: string[],
+    tokens: object,
 }
 
 export interface Configuration {
