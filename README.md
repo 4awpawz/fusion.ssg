@@ -1,12 +1,3 @@
-<!-- <br> -->
-<!-- <br> -->
-<!-- <div align=center> -->
-<!--     <img src="github/readmeheader.png" alt="README Header"> -->
-<!-- </div> -->
-<!-- <br> -->
-<!-- <hr color="grey"> -->
-<!-- <br> -->
-
 # Minimal SSG Framework For Building Static Websites
 
 HTML, Markdown, Front Matter + Custom `.tsx and .jsx` Components.
@@ -20,10 +11,9 @@ _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Mark
 - No initial project configuration is required.
 - DOMless and serverless, so builds are really very quick.
 - Create HTML documents using markdown, HTML, tokens, components, JSON data sources and meta data.
-- Built-in .tsx and .jsx component compilation.
-- Built-in .ts browser scripts compilation.
+- Support for .tsx and .jsx components, including sand-boxed execution, and for .ts browser scripts.
 - Portfolio generation via collections.
-- package.json scripts for development and release builds.
+- package.json scripts provided for development and release builds.
 - CLI for one-off development and one-off release builds.
 - Base URL support for sites hosted in sub folders.
 - Works in progress for HTML documents that need to be ignored during release builds.
@@ -37,9 +27,9 @@ The project is written in ` TypeScript` (no excuses, _it just works beautifully_
 ## Project Scope
 The project's scope is limited to generating robust and resilient HTML documents and nothing else. It will not provide any other tooling other than what is absolutely necessary to accomplish that. Importantly, fusion.ssg requires no knowledge of front-end frameworks like React. This keeps the scope of the project focused, preventing feature creep, and benefits users who will be able to pick and chose their own tools.
 
-## Current Status And Semantic Versioning
+## Versioning
 
-The project is still under v1.0.0-beta development. When all features targeted for v1.0.0 are implemented in beta and are stable, the version number will be bumped to remove the beta sub status. Going forward, odd version numbers are to be considered development release builds and even numbered version numbers are to be considered production release builds.
+Beginning with v1.0.0, which will be our first production release, we will be dropping the use of _beta_ when versioning a development release. Going forward, all development releases will use `-dev.n` instead of -beta.n.
 
 ### What Has Already Been Implemented
 
@@ -62,9 +52,6 @@ The project is still under v1.0.0-beta development. When all features targeted f
 ### What Still Remains To Be Done
 
 - Logo, fusion.ssg is desperately in need of a great logo.
-- Project documentation website - _currently under development_.
-- Encourage early community involvement and adoption.
-- Provide sufficient testing to reduce the likelihood of introducing regressions.
 
 ### Longer Term Goals
 
