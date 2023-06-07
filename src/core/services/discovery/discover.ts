@@ -3,7 +3,7 @@
  * that participates in page compostion. Resolves to an array of assets.
  */
 
-import { join, parse } from "path";
+import path from "path";
 import matter from "gray-matter";
 import { markdownToHTML } from "../../lib/markdownToHTML.js";
 import { _readFile } from "../../lib/io/_readFile.js";
@@ -18,63 +18,106 @@ import { getCategoryPath } from "./getCategoryPath.js";
 import { isPost } from "./isPost.js";
 import { isAssetPostLandingPage } from "./isAssetPostLandingPage.js";
 import { config } from "../configuration/configuration.js";
+import chalk from "chalk";
 import { templateIsWIP } from "./templateIsWIP.js";
 import { getPostTimeStampFromPostPath } from "./getPostTimeStampFromPostPath.js";
 import { _filter } from "../../lib/functional.js";
-import chalk from "chalk";
+import { getPostName } from "./getPostName.js";
+
+const processInclude = async function(asset: Asset): Promise<Asset> {
+    const buffer = await _readFile(asset.filePath);
+    asset.content = typeof buffer === "undefined" ? "" : path.parse(asset.filePath).ext === ".md" ? markdownToHTML(buffer) : buffer;
+    return asset;
+};
+
+const processPage = async function(asset: Asset): Promise<Asset> {
+    const buffer = await _readFile(asset.filePath);
+    asset.content = typeof buffer === "undefined" ? "" : path.parse(asset.filePath).ext === ".md" ? markdownToHTML(buffer) : buffer;
+    return asset;
+};
+
+const processPost = async function(asset: Asset): Promise<Asset> {
+    asset.isPost = true;
+    asset.postTimeStamp = getPostTimeStampFromPostPath(asset.filePath);
+    const postProfile: PostProfile = asset?.fm?.data["post"];
+    const postCategoryPath = typeof postProfile !== "undefined"
+        && typeof postProfile.categories !== "undefined" ? getCategoryPath(postProfile.categories) : undefined;
+    const oPath = await getPostOutPath(asset.filePath, postCategoryPath);
+    const postName = getPostName(asset.filePath);
+    // asset.htmlDocumentName = path.join(oPath as string, path.parse(asset.filePath.split("-").pop() as string).name, "index.html");
+    asset.htmlDocumentName = path.join(oPath as string, postName, "index.html");
+    asset.url = path.parse(asset.htmlDocumentName).dir + "/";
+    return asset;
+};
+
+const processPostLandingPage = function(asset: Asset): Asset {
+    const oPath = config.userConfig.postsFolder;
+    const oName = "index.html";
+    asset.htmlDocumentName = path.join(oPath, oName);
+    asset.url = path.parse(asset.htmlDocumentName).dir + "/";
+    return asset;
+};
+
+const process404 = function(asset: Asset): Asset {
+    const oPath = normalizeOutPath(path.parse(asset.filePath).dir);
+    const oName = "404.html";
+    asset.htmlDocumentName = path.join(oPath, oName);
+    asset.url = path.parse(asset.htmlDocumentName).dir + "/";
+    return asset;
+};
+
+const processTemplate = async function(asset: Asset): Promise<Asset> {
+    const buffer = await _readFile(asset.filePath);
+    try {
+        asset.fm = matter(buffer as string, { excerpt: true, excerpt_separator: '<!-- end -->' });
+    } catch (error) {
+        console.log(chalk.red(`there was an error: Can't compile front matter in ${asset.filePath}.`));
+        throw error;
+    }
+    asset.content = path.parse(asset.filePath).ext === ".md" && markdownToHTML(asset.fm.content) || asset.fm.content;
+    asset.isWip = templateIsWIP(asset.filePath);
+    asset.associatedPage = typeof asset.fm.data["page"] === "undefined" ? "src/pages/default.html" : `src/pages/${asset.fm.data["page"]}.html`;
+    if (isPost(asset.filePath)) return processPost(asset);
+    if (isAssetPostLandingPage(asset.filePath)) return processPostLandingPage(asset);
+    if (path.parse(asset.filePath).name === "404") return process404(asset);
+    const oPath = normalizeOutPath(path.parse(asset.filePath).dir);
+    const oName = path.parse(asset.filePath).name === "index" ? "index.html" : path.join(path.parse(asset.filePath).name, "/index.html");
+    asset.htmlDocumentName = path.join(oPath, oName);
+    asset.url = path.parse(asset.htmlDocumentName).dir + "/";
+    return asset;
+};
 
 export const discover = async function(): Promise<Assets> {
     metrics.startTimer("discovery");
     const pathsToAssets = await getFiles();
     let assets = await Promise.all(pathsToAssets.map(async (assetPath: string) => {
-        const fileInfo = parse(assetPath);
+        const fileInfo = path.parse(assetPath);
         const filePath = assetPath;
         const fileType = fileInfo.ext;
         const timestamp = await fileModifiedTime(assetPath);
         const assetType = getAssetType(assetPath);
-        const fileName = fileInfo.name;
+
+        // All assets have these properties.
         const asset: Asset = {
             timestamp,
             assetType,
             filePath,
             fileType,
         };
-        asset.isPost = false;
-        // Assets that represent data and components files do not include their content.
+
+        // If the asset doesn't contribute markup (html or markdown)
+        // to the document then we're done with it.
         if (["data", "component"].includes(assetType)) return asset;
-        const buffer = await _readFile(assetPath);
-        if (typeof buffer === "undefined") return asset;
-        try {
-            asset.fm = matter(buffer, { excerpt: true, excerpt_separator: '<!-- end -->' });
-        } catch (error) {
-            console.log(chalk.red(`there was an error: Can't compile front matter in ${asset.filePath}.`));
-            throw error;
-        }
-        asset.content = fileType === ".md" ? markdownToHTML(asset.fm.content) : asset.fm.content;
-        if (asset.assetType !== "template") return asset;
 
-        // -- At this point asset is a template! --
+        // At this point the asset is either an include, a page, or a template.
 
-        asset.isWip = templateIsWIP(asset.filePath);
-        const page: string | undefined = asset.fm.data["page"];
-        asset.associatedPage = (typeof page === "string" && page.length !== 0) && `src/pages/${page}.html` || `src/pages/default.html`;
+        if (assetType === "include") return await processInclude(asset);
+        if (assetType === "page") return await processPage(asset);
+        if (assetType === "template") return await processTemplate(asset);
 
-        // -- Post related --
-        asset.isPost = isPost(assetPath);
-        if (asset.isPost) asset.postTimeStamp = getPostTimeStampFromPostPath(asset.filePath);
-        const postProfile: PostProfile = asset.isPost && asset.fm.data["post"];
-        const postCategoryPath = asset.isPost && fileInfo.name !== "index" && typeof postProfile !== "undefined"
-            && typeof postProfile.categories !== "undefined" ? getCategoryPath(postProfile.categories) : undefined;
-        let oPath = asset.isPost && fileInfo.name !== "index" ?
-            await getPostOutPath(asset.filePath, postCategoryPath) : normalizeOutPath(fileInfo.dir);
-        const assetIsPostLandingPage = !asset.isPost && isAssetPostLandingPage(assetPath) ? true : false;
-        oPath = assetIsPostLandingPage && join(config.userConfig.postsFolder) || oPath;
-        if (typeof oPath === "undefined") return asset;
-        const postNamePath = asset.isPost ? join(oPath, parse(filePath.split("-").pop() as string).name, "index.html") : "";
-        const oName = asset.isPost && postNamePath || fileName.endsWith("index") ? "index.html" : fileName + "/index.html";
-
-        asset.htmlDocumentName = asset.isPost ? postNamePath : join(oPath, oName);
-        asset.url = parse(asset.htmlDocumentName).dir + "/";
+        // But...
+        // TODO: 23/06/16 12:07:58 - jeffreyschwartz : Remove the line below before merging.
+        console.log(chalk.redBright("You fucked up!!!!!!!!!!!!!!!!!!!!!"));
         return asset;
     }));
     // When building for release, wips are not included in metadata.

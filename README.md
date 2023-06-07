@@ -2,6 +2,13 @@
 
 HTML, Markdown, Front Matter + Custom `.tsx and .jsx` Components.
 
+## Installation
+
+<p>Run the following in your terminal to install fusion.ssg:</p>
+<pre><code class="language-SHELL">
+npm i -g @4awpawz/fusion.ssg
+</code></pre>
+
 ## The Name
 
 _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Markdown, Components, JSON data, YAML front matter, etc.).
@@ -38,7 +45,7 @@ Beginning with v1.0.0, which will be our first production release, we will be dr
 ### Long Term Goals
 
 - Seek RFC.
-- Accept pull requests when the codebase is stable enough to receive them, which will probably coincide with the first major Alpha release.
+- Accept pull requests when procedures and policies are in place to govern the process.
 
 ## Community
 

@@ -1,8 +1,8 @@
 /**
  * File cache management.
-* Uses Map. Keys are names of files, including their paths.
-* JSON content is cached as JS Objects.
-*/
+ * Uses Map. Keys are names of files, including their paths.
+ * JSON content is cached as JS Objects.
+ */
 
 import { parse } from "path";
 import { _fileExists } from "./io/_fileExists.js";

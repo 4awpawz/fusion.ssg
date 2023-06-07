@@ -1,5 +1,5 @@
 /**
- * normalizeOutPath - Removes 'src/' and parent folder containing asset
+ * normalizeOutPath - Removes 'src/' and immediate child folder containing asset.
  */
 
 export const normalizeOutPath = function(path: string): string {

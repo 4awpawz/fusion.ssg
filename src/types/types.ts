@@ -14,13 +14,13 @@ export interface Asset {
     filePath: string,
     fileType: string,
     isWip?: boolean,
+    isPost?: boolean,
     memberOf?: string,
     content?: string,
     fm?: GrayMatterFile<string>
     associatedPage?: string,
     htmlDocumentName?: string,
     url?: string,
-    isPost?: boolean,
     postTimeStamp?: number
 }
 
@@ -127,7 +127,7 @@ export interface TokenValidators {
     [key: string]: TokenValidator
 }
 
-export type BuildCategroy = "DEVELOPMENT" | "RELEASE"
+export type BuildStrategy = "DEVELOPMENT" | "RELEASE"
 
 export interface Meta {
     url: string

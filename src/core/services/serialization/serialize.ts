@@ -10,7 +10,7 @@ import chalk from "chalk";
 import { config } from "../configuration/configuration.js";
 import { join } from "path";
 
-const getBuildFolderPath = async function(): Promise<string> {
+const getBuildFolderPath = function(): string {
     const baseURL = config.userConfig.baseURL;
     let buildFolderPath = join(process.cwd(), config.buildFolder);
     buildFolderPath = process.env["BUILD_STRATEGY"] === "RELEASE" ? join(buildFolderPath, baseURL) : buildFolderPath;
@@ -19,7 +19,7 @@ const getBuildFolderPath = async function(): Promise<string> {
 
 export const serialize = async function(assets: Assets): Promise<Assets> {
     metrics.startTimer("serialization");
-    const buildFolderPath = await getBuildFolderPath();
+    const buildFolderPath = getBuildFolderPath();
     const count = await serializePages(assets, buildFolderPath);
     console.log("total documents generated: ", chalk.green(count));
     await serializeOtherAssets(assets, buildFolderPath);

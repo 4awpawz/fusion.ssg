@@ -1,5 +1,6 @@
 /**
- * isPostLandingPage - Returns true if the asset is an index file and its path points to the posts folder, false otherwise.
+ * isPostLandingPage - Returns true if the asset is an index file
+ * and its path points to the posts folder, false otherwise.
  */
 
 import { parse } from "path";

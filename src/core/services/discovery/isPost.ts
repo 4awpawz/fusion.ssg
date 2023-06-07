@@ -7,9 +7,6 @@ import { config } from "../configuration/configuration.js";
 
 export const isPost = function(assetPath: string): boolean {
     const assetPathParts = parse(assetPath);
-    // Posts will never be named 'index' though index files might
-    // reside in the posts folder, such as a blog's landing page.
-    // See isPostLandingPage below.
-    if (assetPathParts.name === "index") return false;
-    return assetPathParts.dir.includes(config.postsFolder);
+    // Posts will never be named 'index'.
+    return assetPathParts.dir.includes(config.postsFolder) && assetPathParts.name !== "index";
 };

@@ -1,6 +1,6 @@
 /**
  * serializePage - Serializes every template's content except for those that are
-* collection generators and returns the total number of pages serialized.
+ * collection generators and returns the total number of pages serialized.
  */
 
 import { join } from "path";

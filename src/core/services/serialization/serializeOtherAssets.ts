@@ -24,13 +24,14 @@ const serializeCSSFolder = async function(config: Configuration, buildFolderPath
     return;
 };
 
-const serializeScriptsFolder = async function(config: Configuration): Promise<void> {
+const serializeScriptsFolder = async function(config: Configuration, buildFolderPath: string): Promise<void> {
     // Note: we can't just copy the src/scripts folder in whole because it might contain
-    // .ts files (see compilation) which would "pollute" the build/scripts folder.
+    // .ts files (see compilation) which would pollute the build/scripts folder.
     const sourceFolder = path.join(process.cwd(), config.srcFolder, config.scriptsFolder, "/**/*.js");
     const filePahts = await _glob(sourceFolder);
     for (const filePath of filePahts) {
-        const destPath = filePath.replace(config.srcFolder, config.buildFolder);
+        const filePathParts = filePath.split("scripts");
+        const destPath = path.join(buildFolderPath, config.scriptsFolder, filePathParts[1] as string);
         await _copyFile(filePath, destPath);
     }
     return;
@@ -55,7 +56,7 @@ const serializeEtcFolder = async function(config: Configuration, buildFolderPath
 export const serializeOtherAssets = async function(assets: Assets, buildFolderPath: string): Promise<void> {
     await serializeAssetsJSON(assets);
     await serializeCSSFolder(config, buildFolderPath);
-    await serializeScriptsFolder(config);
+    await serializeScriptsFolder(config, buildFolderPath);
     await serializeMediaFolder(config, buildFolderPath);
     await serializeEtcFolder(config, buildFolderPath);
     return;
