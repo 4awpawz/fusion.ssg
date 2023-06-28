@@ -1,5 +1,5 @@
 /**
- * getAssets - Creates assets for files found in user's src
+ * discover - Creates assets for files found in user's src
  * that participates in page compostion. Resolves to an array of assets.
  */
 
@@ -69,6 +69,9 @@ const process404 = function(asset: Asset): Asset {
 const processTemplate = async function(asset: Asset): Promise<Asset> {
     const buffer = await _readFile(asset.filePath);
     try {
+        // Using the default "---" excerpt separator can cause issues when
+        // markdown is converted to HTML. For an explanation of this, please
+        // see https://github.github.com/gfm/#example-73.
         asset.fm = matter(buffer as string, { excerpt: true, excerpt_separator: '<!-- end -->' });
     } catch (error) {
         console.log(chalk.red(`there was an error: Can't compile front matter in ${asset.filePath}.`));
@@ -115,9 +118,6 @@ export const discover = async function(): Promise<Assets> {
         if (assetType === "page") return await processPage(asset);
         if (assetType === "template") return await processTemplate(asset);
 
-        // But...
-        // TODO: 23/06/16 12:07:58 - jeffreyschwartz : Remove the line below before merging.
-        console.log(chalk.redBright("You fucked up!!!!!!!!!!!!!!!!!!!!!"));
         return asset;
     }));
     // When building for release, wips are not included in metadata.
