@@ -7,6 +7,7 @@
 
 import fs from "fs-extra";
 import path from "path";
+import chalk from "chalk";
 import { _readFile } from "../core/lib/io/_readFile.js";
 import { log } from "../core/lib/io/log.js";
 import { run } from "../index.js";
@@ -47,17 +48,22 @@ const commands = _filter(process.argv.slice(2), arg => arg[0] !== "-");
  */
 
 const generalHelp = () => {
+    log(chalk.red("NAME"));
+    log(`    ${chalk.red("fusion")} - fusion.ssg static site generator`);
     log("");
-    log("Usage: fusion [option] | fusion [command] [args]");
+    log(chalk.red("SYNOPSIS"));
+    log(`    ${chalk.red("fusion [ -v | --version ]")}`);
+    log(`    ${chalk.red("fusion [ -h | --help ]")}`);
+    log(`    ${chalk.red("fusion [ b | build ]")}`);
+    log(`    ${chalk.red("fusion [ r | release ]")}`);
     log("");
-    log("where [option] is one of:");
-    log("    -v | --version (version)");
-    log("    -h | --help (this help)");
+    log(chalk.red("DESCRIPTION"));
+    log(`    ${chalk.red("[ -v | --version ]")} Displays the version.`);
+    log(`    ${chalk.red("[ -h | --help ]")} Displays general help.`);
+    log(`    ${chalk.red("[ b | build ]")} Builds your site for development.`);
+    log(`    ${chalk.red("[ r | release ]")} Builds your site for release.`);
     log("");
-    log("where [command] is one of:");
-    log("    b, build, r, release");
-    log("");
-    log("For command specific help, enter fusion -h | --help [command]");
+    log(`For command specific help, enter ${chalk.red("fusion [ -h | --help ] [command]")}`);
     log("");
 };
 
@@ -66,38 +72,26 @@ const generalHelp = () => {
  */
 
 const buildHelp = function() {
-    log("NAME");
-    log("       fusion-build - Builds your site for development.");
+    log(chalk.red("NAME"));
+    log(`       ${chalk.red("fusion build")} - Builds your site for development.`);
     log("");
-    log("SYNOPSIS");
-    log("       fusion build");
+    log(chalk.red("SYNOPSIS"));
+    log(`    ${chalk.red("fusion [ b | build ]")}`);
     log("");
-    log("       alias: fusion b");
-    log("");
-    log("DESCRIPTION");
-    log("       This command builds your site for development targeting the build folder.");
-    log("");
-    log("           fusion build");
-    log("");
-    log("       In the first form, it builds your entire site.");
+    log(chalk.red("DESCRIPTION"));
+    log(`    ${chalk.red("[ b | build ]")} Builds your site for development. ${chalk.red("baseURL")}s are not applied and ${chalk.red("WIP")}s are not ignored.`);
     log("");
 };
 
 const releaseHelp = function() {
-    log("NAME");
-    log("       fusion-release - Builds your site for release.");
+    log(chalk.red("NAME"));
+    log(`       ${chalk.red("fusion release")} - Builds your site for release.`);
     log("");
-    log("SYNOPSIS");
-    log("       fusion release");
+    log(chalk.red("SYNOPSIS"));
+    log(`    ${chalk.red("fusion [ r | release ]")}`);
     log("");
-    log("       alias: fusion r");
-    log("");
-    log("DESCRIPTION");
-    log("       This command builds your site for release targeting the release folder.");
-    log("");
-    log("           fusion release");
-    log("");
-    log("       In the first form, it builds your entire site.");
+    log(chalk.red("DESCRIPTION"));
+    log(`    ${chalk.red("[ r | release ]")} Builds your site for release. ${chalk.red("baseURL")}s are applied and ${chalk.red("WIP")}s are ignored.`);
     log("");
 };
 
@@ -122,7 +116,7 @@ const commandSpecificHelp = (command: string) => {
 const guard = function() {
     const isAProject = fs.existsSync(path.join(process.cwd(), "fusion.json"));
     if (!isAProject) {
-        log(`This command requires the current working directory to be a fusion project. See 'fusion -h ${commands[0]}' for more information.`);
+        log(`This command requires the current working directory to be a fusion project.See 'fusion -h ${commands[0]}' for more information.`);
         log("");
         process.exit();
     }
