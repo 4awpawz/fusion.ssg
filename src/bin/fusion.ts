@@ -114,10 +114,15 @@ const commandSpecificHelp = (command: string) => {
  * "Guard against commands that act on a project but which are issued in a folder that doesn't contain one.
  */
 const guard = function() {
+    console.log("commands[0]", commands[0]);
     const isAProject = fs.existsSync(path.join(process.cwd(), "fusion.json"));
-    if (!isAProject) {
+    if (!isAProject && ["b", "build", "r", "release"].includes(commands[0] as string)) {
         log(`This command requires the current working directory to be a fusion project.See 'fusion -h ${commands[0]}' for more information.`);
         log("");
+        process.exit();
+    }
+    if (!isAProject) {
+        generalHelp();
         process.exit();
     }
 };
@@ -171,8 +176,7 @@ const commandRunner = async function() {
         return;
     }
 
-    const isNew = ["n", "new"].includes(commands[0] as string);
-    !isNew && guard();
+    guard();
 
     const commandParams = commandHandlers.get(commands[0]);
     if (commandParams) {
