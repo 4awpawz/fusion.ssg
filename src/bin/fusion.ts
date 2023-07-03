@@ -48,22 +48,21 @@ const commands = _filter(process.argv.slice(2), arg => arg[0] !== "-");
  */
 
 const generalHelp = () => {
-    log(chalk.red("NAME"));
-    log(`    ${chalk.red("fusion")} - fusion.ssg static site generator`);
+    log(`${chalk.red("fusion")} - fusion.ssg static site generator`);
     log("");
     log(chalk.red("SYNOPSIS"));
-    log(`    ${chalk.red("fusion [ -v | --version ]")}`);
-    log(`    ${chalk.red("fusion [ -h | --help ]")}`);
-    log(`    ${chalk.red("fusion [ b | build ]")}`);
-    log(`    ${chalk.red("fusion [ r | release ]")}`);
+    log(`    ${chalk.red("fusion -h | --help")}`);
+    log(`    ${chalk.red("fusion -h | --help <command>")}`);
+    log(`    ${chalk.red("fusion -v | --version")}`);
+    log(`    ${chalk.red("fusion b | build")}`);
+    log(`    ${chalk.red("fusion r | release")}`);
     log("");
     log(chalk.red("DESCRIPTION"));
-    log(`    ${chalk.red("[ -v | --version ]")} Displays the version.`);
-    log(`    ${chalk.red("[ -h | --help ]")} Displays general help.`);
-    log(`    ${chalk.red("[ b | build ]")} Builds your site for development.`);
-    log(`    ${chalk.red("[ r | release ]")} Builds your site for release.`);
-    log("");
-    log(`For command specific help, enter ${chalk.red("fusion [ -h | --help ] [command]")}`);
+    log(`    ${chalk.red("-h | --help")}\t\t   Displays this help screen.`);
+    log(`    ${chalk.red("-h | --help <command>")}  Displays command specific help.`);
+    log(`    ${chalk.red("-v | --version")}\t   Displays the version.`);
+    log(`    ${chalk.red("b | build")}\t\t   Builds your site for development.`);
+    log(`    ${chalk.red("r | release")}\t\t   Builds your site for release.`);
     log("");
 };
 
@@ -72,26 +71,24 @@ const generalHelp = () => {
  */
 
 const buildHelp = function() {
-    log(chalk.red("NAME"));
-    log(`       ${chalk.red("fusion build")} - Builds your site for development.`);
+    log(`${chalk.red("fusion build")} - Builds your site for development.`);
     log("");
     log(chalk.red("SYNOPSIS"));
-    log(`    ${chalk.red("fusion [ b | build ]")}`);
+    log(`    ${chalk.red("fusion b | build")}`);
     log("");
     log(chalk.red("DESCRIPTION"));
-    log(`    ${chalk.red("[ b | build ]")} Builds your site for development. ${chalk.red("baseURL")}s are not applied and ${chalk.red("WIP")}s are not ignored.`);
+    log(`    Builds your site for development. {baseURL}s are not applied and WIPs are not ignored.`);
     log("");
 };
 
 const releaseHelp = function() {
-    log(chalk.red("NAME"));
-    log(`       ${chalk.red("fusion release")} - Builds your site for release.`);
+    log(`${chalk.red("fusion release")} - Builds your site for release.`);
     log("");
     log(chalk.red("SYNOPSIS"));
-    log(`    ${chalk.red("fusion [ r | release ]")}`);
+    log(`    ${chalk.red("fusion r | release")}`);
     log("");
     log(chalk.red("DESCRIPTION"));
-    log(`    ${chalk.red("[ r | release ]")} Builds your site for release. ${chalk.red("baseURL")}s are applied and ${chalk.red("WIP")}s are ignored.`);
+    log(`    Builds your site for release. {baseURL}s are applied and WIPs are ignored.`);
     log("");
 };
 
@@ -114,7 +111,6 @@ const commandSpecificHelp = (command: string) => {
  * "Guard against commands that act on a project but which are issued in a folder that doesn't contain one.
  */
 const guard = function() {
-    console.log("commands[0]", commands[0]);
     const isAProject = fs.existsSync(path.join(process.cwd(), "fusion.json"));
     if (!isAProject && ["b", "build", "r", "release"].includes(commands[0] as string)) {
         log(`This command requires the current working directory to be a fusion project.See 'fusion -h ${commands[0]}' for more information.`);
