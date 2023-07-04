@@ -26,7 +26,7 @@ export const compiler = function(paths: readonly string[], options: ts.CompilerO
     });
 
     const exitCode = emitResult.emitSkipped ? 1 : 0;
-    exitCode === 0 ? console.log(chalk.blue(`Typescript Compilation Process exited with code '${exitCode}'.`)) :
-        console.log(chalk.red(`Typescript Compilation Process exited with code '${exitCode}'.`));
+    const message = `Typescript Compilation Process exited with code '${exitCode}'`;
+    exitCode === 0 ? console.log(chalk.blue(message)) : console.log(chalk.red(message));
     return exitCode;
 };

@@ -64,7 +64,7 @@ export const compileBrowserScripts = async function(): Promise<boolean> {
     }
 
     if (!scriptIsStale) {
-        console.log(chalk.blue("nothing to compile, all browser scripts are clean"));
+        console.log(chalk.blue("browser scripts are clean, nothing to compile"));
         metrics.stopTimer("browser scripts compilation");
         return true;
     }
@@ -99,7 +99,7 @@ export const compileComponents = async function(): Promise<boolean> {
     }
 
     if (!componentIsStale) {
-        console.log(chalk.blue("nothing to compile, all components are clean"));
+        console.log(chalk.blue("components are clean, nothing to compile"));
         process.env["OK_TO_CALL_COMPONENTS"] = "1";
         metrics.stopTimer("component compilation");
         return true;
