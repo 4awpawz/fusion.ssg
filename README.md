@@ -16,15 +16,15 @@ _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Mark
 ## Features
 
 - No initial project configuration is required.
-- DOMless and serverless, so builds are really very quick.
-- Create HTML documents using markdown, HTML, tokens, components, JSON data sources and meta data.
+- DOMless and serverless results in very quick build times.
+- HTML documents from markdown, HTML, tokens, components, JSON data sources and meta data.
 - Support for .tsx and .jsx components, including sand-boxed execution, and for .ts browser scripts.
 - Portfolio generation via collections.
 - package.json scripts provided for development and release builds.
 - CLI for one-off development and one-off release builds.
 - Base URL support for sites hosted in sub folders.
 - Works in progress for HTML documents that need to be ignored during release builds.
-- Blogging support, including categories and tags.
+- Blogging support, including multiple categories and tags.
 - Beautified HTML documents.
 
 ## Project Development
@@ -32,15 +32,15 @@ _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Mark
 The project is written in ` TypeScript` (no excuses, _it just works beautifully_) and runs on `Node`.
 
 ## Project Scope
-The project's scope is limited to generating robust and resilient HTML documents and nothing else. It will not provide any other tooling other than what is absolutely necessary to accomplish that. Importantly, fusion.ssg requires no knowledge of front-end frameworks like React. This keeps the scope of the project focused, preventing feature creep, and benefits users who will be able to pick and chose their own tools.
+The project's scope is limited to generating robust and resilient HTML documents and websites and requires no knowledge of other front-end frameworks. This keeps the scope of the project focused and preventing feature creep.
 
 ## Versioning
 
-Beginning with v1.0.0, which will be our first production release, we will be dropping the use of _beta_ when versioning a development release. Going forward, all development releases will use `-dev.n` instead of -beta.n.
+We use [Semantic Versioning](https://semver.org/).
 
 ### What Still Remains To Be Done
 
-- Logo, fusion.ssg is desperately in need of a great logo.
+- Logo, we'd welcome your contributing one.
 
 ### Long Term Goals
 
