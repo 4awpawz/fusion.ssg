@@ -4,10 +4,7 @@ HTML, Markdown, Front Matter + Custom `.tsx and .jsx` Components.
 
 ## Installation
 
-<p>Run the following in your terminal to install fusion.ssg:</p>
-<pre><code class="language-SHELL">
-npm i -g @4awpawz/fusion.ssg
-</code></pre>
+Full installation instructions can be found at [fusionssg.com](https://fusionssg.com/docs/installation/).
 
 ## The Name
 
