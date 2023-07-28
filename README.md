@@ -37,7 +37,7 @@ We use [Semantic Versioning](https://semver.org/).
 
 ### What Still Remains To Be Done
 
-- Logo, we'd welcome your contributing one.
+- fusion.ssg deserves an awesome logo. If you are a graphic artist 🎨, we would love ❤️  your contribution to this project and we we'd be thrilled to give you well-deserved, prominent attribution! Please reply via [issues](https://github.com/4awpawz/fusion.ssg/issues/51).
 
 ### Long Term Goals
 
