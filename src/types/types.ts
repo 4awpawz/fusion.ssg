@@ -132,3 +132,8 @@ export type BuildStrategy = "DEVELOPMENT" | "RELEASE"
 export interface Meta {
     url: string
 }
+
+export interface UnresolvedToken {
+    token: string,
+    file: string
+}
