@@ -27,8 +27,9 @@ const serializeCSSFolder = async function(config: Configuration, buildFolderPath
 const serializeScriptsFolder = async function(config: Configuration, buildFolderPath: string): Promise<void> {
     // Note: we can't just copy the src/scripts folder in whole because it might contain
     // .ts files (see compilation) which would pollute the build/scripts folder.
-    const sourceFolder = path.join(process.cwd(), config.srcFolder, config.scriptsFolder, "/**/*.js");
-    const filePahts = await _glob(sourceFolder);
+    const sourceFolder = path.join(process.cwd(), config.srcFolder, config.scriptsFolder);
+    if (!_fileExists(sourceFolder)) return;
+    const filePahts = await _glob(path.join(sourceFolder, "/**/*.js"));
     for (const filePath of filePahts) {
         const filePathParts = filePath.split("scripts");
         const destPath = path.join(buildFolderPath, config.scriptsFolder, filePathParts[1] as string);

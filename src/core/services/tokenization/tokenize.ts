@@ -16,7 +16,6 @@ export const tokenize = async function(assets: Assets): Promise<Assets> {
         const templateTokens = typeof asset.fm.data["tokens"] === "undefined" ? {} : asset.fm.data["tokens"];
         const tokens = { ...globalTokens, ...templateTokens };
         asset.content = await composeTokens(asset.content as string, tokens);
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         unresolvedTokens.note(asset.content, asset.htmlDocumentName as string);
     }
     unresolvedTokens.report();
