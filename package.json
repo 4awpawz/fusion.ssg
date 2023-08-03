@@ -1,7 +1,7 @@
 {
     "name": "@4awpawz/fusion.ssg",
     "type": "module",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Minimal SSG Framework for Static Websites",
     "bin": {
         "fusion": "dist/bin/fusion.js"
