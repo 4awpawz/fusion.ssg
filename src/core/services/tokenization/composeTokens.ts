@@ -4,16 +4,9 @@
 
 import type { Tokens } from "../../../types/types";
 import { findAndReplaceTokenContent } from "../../lib/findAndReplaceTokenContent.js";
-import { config } from "../configuration/configuration.js";
 
-const getUerConfigBaseURL = async function(): Promise<string | undefined> {
-    return config.userConfig.baseURL;
-};
-
-export const composeTokens = async function(assetContent: string, tokens: Tokens): Promise<string> {
-    const baseURL = process.env["BUILD_STRATEGY"] === "DEVELOPMENT" ? "" : await getUerConfigBaseURL();
-    const _tokens = typeof baseURL !== "undefined" ? { ...tokens, baseURL } : tokens;
-    for (const [key, value] of Object.entries(_tokens)) {
+export const composeTokens = function(assetContent: string, tokens: Tokens): string {
+    for (const [key, value] of Object.entries(tokens)) {
         assetContent = findAndReplaceTokenContent(assetContent, `{${key}}`, value as string);
     }
     return assetContent;

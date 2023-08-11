@@ -21,12 +21,22 @@ import { config } from "../configuration/configuration.js";
 import chalk from "chalk";
 import { templateIsWIP } from "./templateIsWIP.js";
 import { getPostTimeStampFromPostPath } from "./getPostTimeStampFromPostPath.js";
-import { _filter } from "../../lib/functional.js";
+import { _filter, _forEach } from "../../lib/functional.js";
 import { getPostName } from "./getPostName.js";
 
 const processInclude = async function(asset: Asset): Promise<Asset> {
     const buffer = await _readFile(asset.filePath);
-    asset.content = typeof buffer === "undefined" ? "" : path.parse(asset.filePath).ext === ".md" ? markdownToHTML(buffer) : buffer;
+    try {
+        asset.fm = matter(buffer as string);
+    } catch (error) {
+        console.log(chalk.red(`there was an error: Can't compile front matter in ${asset.filePath}.`));
+        throw error;
+    }
+    asset.content = typeof buffer === "undefined" ? "" : path.parse(asset.filePath).ext === ".md" ? markdownToHTML(asset.fm.content) : asset.fm.content;
+    asset.content = process.env["BUILD_STRATEGY"] === "RELEASE" && Object.hasOwn(asset.fm.data, "developmentOnly")
+        && asset.fm.data["developmentOnly"] === true ? "" : asset.content;
+    asset.content = process.env["BUILD_STRATEGY"] === "DEVELOPMENT" && Object.hasOwn(asset.fm.data, "releaseOnly")
+        && asset.fm.data["releaseOnly"] === true ? "" : asset.content;
     return asset;
 };
 
@@ -39,6 +49,7 @@ const processPage = async function(asset: Asset): Promise<Asset> {
 const processPost = async function(asset: Asset): Promise<Asset> {
     asset.isPost = true;
     asset.postTimeStamp = getPostTimeStampFromPostPath(asset.filePath);
+    asset.postDate = new Date(asset.postTimeStamp as number).toLocaleDateString();
     const postProfile: PostProfile = asset?.fm?.data["post"];
     const postCategoryPath = typeof postProfile !== "undefined"
         && typeof postProfile.categories !== "undefined" ? getCategoryPath(postProfile.categories) : undefined;
@@ -90,6 +101,16 @@ const processTemplate = async function(asset: Asset): Promise<Asset> {
     return asset;
 };
 
+const reportWIPS = function(assets: Assets): void {
+    if (process.env["BUILD_STRATEGY"] !== "RELEASE") return;
+    const wips = _filter(assets, asset => typeof asset["isWip"] !== "undefined" && asset["isWip"] === true);
+    if (!wips.length) return;
+    console.log(chalk.black.bgYellow("Warning! The following templates are WIPS and their corresponding HTML documents have not been generated:"));
+    _forEach(wips, function(wip) {
+        console.log(chalk.black.bgYellow(`  template: ${wip.filePath}`));
+    });
+};
+
 export const discover = async function(): Promise<Assets> {
     metrics.startTimer("discovery");
     const pathsToAssets = await getFiles();
@@ -120,6 +141,7 @@ export const discover = async function(): Promise<Assets> {
 
         return asset;
     }));
+    reportWIPS(assets);
     // When building for release, wips are not included in metadata.
     assets = process.env["BUILD_STRATEGY"] === "RELEASE" ? _filter(assets, asset => !asset.isWip) : assets;
     metrics.stopTimer("discovery");

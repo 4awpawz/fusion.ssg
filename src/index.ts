@@ -22,7 +22,7 @@ export const run = async function(buildStrategy: BuildStrategy) {
     process.env["BUILD_STRATEGY"] = buildStrategy;
     console.log("build strategy:", buildStrategy);
     const isOKToContinue = await compileComponents() && await compileBrowserScripts();
-    isOKToContinue && (await serialize(await tokenize(await hydrate(await collectionGerator(await compose(await discover()))))));
+    isOKToContinue && (await serialize(tokenize(await hydrate(await collectionGerator(await compose(await discover()))))));
     await _writeMetaTimeStamp();
     metrics.stopTimer("total elapsed time");
     metrics.forEachTimer(timer => console.log(`${timer.name}: ${chalk.green(timer.elapsed)}`));

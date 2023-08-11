@@ -21,7 +21,8 @@ export interface Asset {
     associatedPage?: string,
     htmlDocumentName?: string,
     url?: string,
-    postTimeStamp?: number
+    postTimeStamp?: number,
+    postDate?: string
 }
 
 export interface PostProfile {
