@@ -128,7 +128,11 @@ export interface TokenValidators {
     [key: string]: TokenValidator
 }
 
-export type BuildStrategy = "DEVELOPMENT" | "RELEASE"
+export type BuildStrategy = "DEVELOPMENT" | "RELEASE";
+
+export interface BuildStrategyOptions {
+    cacheBust: boolean
+}
 
 export interface Meta {
     url: string

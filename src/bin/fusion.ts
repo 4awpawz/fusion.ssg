@@ -82,13 +82,15 @@ const buildHelp = function() {
 };
 
 const releaseHelp = function() {
-    log(`${chalk.red("fusion release")} - Builds your site for release.`);
+    log(`${chalk.red("fusion release")} - Builds your site for release with optional cache busting.`);
     log("");
     log(chalk.red("SYNOPSIS"));
     log(`    ${chalk.red("fusion r | release")}`);
+    log(`    ${chalk.red("fusion r | release --cache-bust")}`);
     log("");
     log(chalk.red("DESCRIPTION"));
-    log(`    Builds your site for release. {baseURL}s are applied and WIPs are ignored.`);
+    log(`    1st form: Builds your site for release. {baseURL}s are applied and WIPs are ignored.`);
+    log(`    2nd form: Builds your site for release with cache busting applied to the content in the build folder. {baseURL}s are applied and WIPs are ignored.`);
     log("");
 };
 
@@ -142,7 +144,8 @@ const releaseCommand = {
         return true;
     },
     valid: async () => {
-        await run("RELEASE");
+        const opts = { cacheBust: options.includes("--cache-bust") ? true : false };
+        await run("RELEASE", opts);
     },
     invalid: () => releaseHelp(),
 };
