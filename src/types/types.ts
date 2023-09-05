@@ -82,11 +82,14 @@ export type TokenRightDelimeter = "}"
 
 export type Token = `${TokenLeftDelimeter}${TokenContent}${TokenRightDelimeter}`
 
+export interface ConditionalIncludes { developmentOnly?: string[], releaseOnly?: string[] }
+
 export interface UserConfig {
     postsFolder: string,
     baseURL: string,
     wips: string[],
     tokens: object,
+    conditionalIncludes: ConditionalIncludes
 }
 
 export interface Configuration {

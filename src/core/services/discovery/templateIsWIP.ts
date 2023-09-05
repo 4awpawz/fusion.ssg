@@ -6,7 +6,7 @@ import { config } from "../configuration/configuration.js";
 
 export const templateIsWIP = function(templatePath: string) {
     const wips = config.userConfig.wips;
-    const tPath = templatePath.split("/").slice(2).join("/"); // Remove src/templates from templatePth.
+    const tPath = templatePath.split("/").slice(2).join("/"); // Remove src/templates from templatePath.
     for (const wip of wips) {
         const isIgnore = wip[0] === "!";
         const _wip = isIgnore ? wip.substring(1) : wip;

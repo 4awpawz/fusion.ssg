@@ -23,20 +23,12 @@ import { templateIsWIP } from "./templateIsWIP.js";
 import { getPostTimeStampFromPostPath } from "./getPostTimeStampFromPostPath.js";
 import { _filter, _forEach } from "../../lib/functional.js";
 import { getPostName } from "./getPostName.js";
+import { includeIsConditional } from "./includeIsConditional.js";
 
 const processInclude = async function(asset: Asset): Promise<Asset> {
-    const buffer = await _readFile(asset.filePath);
-    try {
-        asset.fm = matter(buffer as string);
-    } catch (error) {
-        console.log(chalk.red(`there was an error: Can't compile front matter in ${asset.filePath}.`));
-        throw error;
-    }
-    asset.content = typeof buffer === "undefined" ? "" : path.parse(asset.filePath).ext === ".md" ? markdownToHTML(asset.fm.content) : asset.fm.content;
-    asset.content = process.env["BUILD_STRATEGY"] === "RELEASE" && Object.hasOwn(asset.fm.data, "developmentOnly")
-        && asset.fm.data["developmentOnly"] === true ? "" : asset.content;
-    asset.content = process.env["BUILD_STRATEGY"] === "DEVELOPMENT" && Object.hasOwn(asset.fm.data, "releaseOnly")
-        && asset.fm.data["releaseOnly"] === true ? "" : asset.content;
+    let buffer = await _readFile(asset.filePath);
+    buffer = typeof buffer === "undefined" ? "" : path.parse(asset.filePath).ext === ".md" ? markdownToHTML(buffer) : buffer;
+    asset.content = includeIsConditional(asset.filePath) ? "" : buffer;
     return asset;
 };
 
