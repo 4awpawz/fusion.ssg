@@ -1,4 +1,4 @@
-# Minimal SSG Framework For Building Static Websites
+# Minimal Framework For Building Static Websites
 
 HTML, Markdown, Front Matter + Custom `.tsx and .jsx` Components.
 
