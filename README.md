@@ -34,7 +34,7 @@ _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Mark
 The project is written in ` TypeScript` (no excuses, _it just works beautifully_) and runs on `Node`.
 
 ## Project Scope
-The project's scope is limited to generating robust and resilient HTML documents and websites and requires no knowledge of other front-end frameworks. This keeps the scope of the project focused and preventing feature creep.
+The project's scope is limited to generating robust and resilient HTML documents and websites and requires no knowledge of other front-end frameworks. This keeps the scope of the project focused and prevents feature creep.
 
 ## Versioning
 Current version: v1.2.0. We use [Semantic Versioning](https://semver.org/).
