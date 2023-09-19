@@ -58,6 +58,6 @@ For casual conversation with others about using _fusion.ssg_:
 
 [Discuss _fusion.ssg on Twitter and other social media.](https://twitter.com).
 
-## Show Your Appreciation.
+## Show Your Appreciation
 
 Please 👀 watch and leave us a 🌟 star. :)
