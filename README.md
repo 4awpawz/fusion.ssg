@@ -34,16 +34,18 @@ _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Mark
 The project is written in ` TypeScript` (no excuses, _it just works beautifully_) and runs on `Node`.
 
 ## Project Scope
+
 The project's scope is limited to generating robust and resilient HTML documents and websites and requires no knowledge of other front-end frameworks. This keeps the scope of the project focused and prevents feature creep.
 
 ## Versioning
+
 Current version: v1.2.0. We use [Semantic Versioning](https://semver.org/).
 
-### What Still Remains To Be Done
+## What Still Remains To Be Done
 
 - fusion.ssg deserves an awesome logo. If you are a graphic artist 🎨, we would love ❤️  your contribution to this project and we we'd be thrilled to give you well-deserved, prominent attribution! Please reply via [issues](https://github.com/4awpawz/fusion.ssg/issues/51).
 
-### Long Term Goals
+## Long Term Goals
 
 - Seek RFC.
 - Accept pull requests when procedures and policies are in place to govern the process.
