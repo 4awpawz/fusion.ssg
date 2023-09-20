@@ -15,7 +15,7 @@ _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Mark
 - No initial project configuration is required.
 - DOMless and serverless results in very quick build times.
 - HTML document composition from markdown, HTML, tokens, .jsx and .tsx components, JSON data sources and meta data.
-- .tsx and .jsx sand-boxed exaction.
+- .tsx and .jsx sand-boxed execution.
 - .ts browser scripts.
 - Portfolio (multiple pages) generation via collections.
 - Generated projects provide package.json scripts for development and release builds.
