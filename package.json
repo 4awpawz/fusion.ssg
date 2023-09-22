@@ -44,7 +44,7 @@
         "typescript": "^5.0.4"
     },
     "dependencies": {
-        "@4awpawz/buster": "^1.0.1",
+        "@4awpawz/buster": "^1.1.0",
         "chalk": "^5.2.0",
         "fs-extra": "^10.1.0",
         "glob": "^9.3.5",
