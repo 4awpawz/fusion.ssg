@@ -79,9 +79,9 @@ const buildHelp = function() {
     log(`    ${chalk.red("fusion b")} | ${chalk.red("build")} [${chalk.red("--verbose")}]`);
     log("");
     log(chalk.red("DESCRIPTION"));
-    log(`    {baseURL}s are not applied and WIPs are included in the build.`);
+    log("    {baseURL}s are not applied and WIPs are included in the build.");
     log("");
-    log(`    The following options are available:`);
+    log("    The following options are available:");
     log("");
     log(`    ${chalk.red("--verbose")} Prints all the accumulated metrics to the console. The default is to print only a subset of the accumulated metrics.`);
     log("");
@@ -97,7 +97,7 @@ const releaseHelp = function() {
     log(chalk.red("DESCRIPTION"));
     log("    {baseURL}s are applied and WIPs are not included in the build.");
     log("");
-    log(`    The following options are available: `);
+    log("    The following options are available: ");
     log("");
     log(`    ${chalk.red("--verbose")} Prints all the accumulated metrics to the console. The default is to print only a subset of the accumulated metrics.`);
     log(`    ${chalk.red("--cache-bust")} Apply cache busting to your release.`);
