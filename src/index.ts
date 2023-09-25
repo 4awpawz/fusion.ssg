@@ -33,4 +33,5 @@ export const run = async function(buildStrategyOptions: BuildStrategyOptions) {
     buildStrategyOptions.verbose ?
         metrics.forEachTimer(reporter) :
         metrics.filterTimer("total elapsed time", reporter);
+    buildStrategyOptions.cacheBust && !buildStrategyOptions.verbose && metrics.filterTimer("cache busting", reporter);
 };
