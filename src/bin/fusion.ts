@@ -72,26 +72,35 @@ const generalHelp = () => {
  */
 
 const buildHelp = function() {
-    log(`${chalk.red("fusion build")} - Builds your site for development.`);
+    log(chalk.red("NAME"));
+    log(`    ${chalk.red("fusion build")} - Builds your site for development.`);
     log("");
     log(chalk.red("SYNOPSIS"));
-    log(`    ${chalk.red("fusion b | build")}`);
+    log(`    ${chalk.red("fusion b")} | ${chalk.red("build")} [${chalk.red("--verbose")}]`);
     log("");
     log(chalk.red("DESCRIPTION"));
-    log(`    Builds your site for development. {baseURL}s are not applied and WIPs are not ignored.`);
+    log(`    {baseURL}s are not applied and WIPs are included in the build.`);
+    log("");
+    log(`    The following options are available:`);
+    log("");
+    log(`    ${chalk.red("--verbose")} Prints all the accumulated metrics to the console. The default is to print only a subset of the accumulated metrics.`);
     log("");
 };
 
 const releaseHelp = function() {
-    log(`${chalk.red("fusion release")} - Builds your site for release with optional cache busting.`);
+    log(chalk.red("NAME"));
+    log(`    ${chalk.red("fusion release")} - Builds your site for release.`);
     log("");
     log(chalk.red("SYNOPSIS"));
-    log(`    ${chalk.red("fusion r | release")}`);
-    log(`    ${chalk.red("fusion r | release --cache-bust")}`);
+    log(`    ${chalk.red("fusion r")} | ${chalk.red("release")} [${chalk.red("--verbose")}] [${chalk.red("--cache-bust")}] `);
     log("");
     log(chalk.red("DESCRIPTION"));
-    log(`    1st form: Builds your site for release. {baseURL}s are applied and WIPs are ignored.`);
-    log(`    2nd form: Builds your site for release with cache busting applied to the content in the build folder. {baseURL}s are applied and WIPs are ignored.`);
+    log("    {baseURL}s are applied and WIPs are not included in the build.");
+    log("");
+    log(`    The following options are available: `);
+    log("");
+    log(`    ${chalk.red("--verbose")} Prints all the accumulated metrics to the console. The default is to print only a subset of the accumulated metrics.`);
+    log(`    ${chalk.red("--cache-bust")} Apply cache busting to your release.`);
     log("");
 };
 
