@@ -13,6 +13,7 @@ import { log } from "../core/lib/io/log.js";
 import { run } from "../index.js";
 import fileDirName from "../core/lib/fileDirName.js";
 import { _forEach, _filter, _reduce } from "../core/lib/functional.js";
+import type { BuildStrategyOptions } from "../types/types.js";
 
 const { __dirname } = fileDirName(import.meta);
 
@@ -133,7 +134,13 @@ const buildCommand = {
         return true;
     },
     valid: async () => {
-        await run("DEVELOPMENT");
+        const opts = {
+            buildStrategy: "DEVELOPMENT",
+            cacheBust: false,
+            verbose: options.includes("--verbose") ? true : false
+        } as BuildStrategyOptions;
+        options.includes("--cache-bust") && console.log(chalk.red("ignoring unsupported development build option: \"--cache-bust\""));
+        await run(opts);
     },
     invalid: () => buildHelp(),
 };
@@ -144,8 +151,12 @@ const releaseCommand = {
         return true;
     },
     valid: async () => {
-        const opts = { cacheBust: options.includes("--cache-bust") ? true : false };
-        await run("RELEASE", opts);
+        const opts = {
+            buildStrategy: "RELEASE",
+            cacheBust: options.includes("--cache-bust") ? true : false,
+            verbose: options.includes("--verbose") ? true : false
+        } as BuildStrategyOptions;
+        await run(opts);
     },
     invalid: () => releaseHelp(),
 };

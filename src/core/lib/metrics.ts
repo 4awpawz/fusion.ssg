@@ -4,13 +4,7 @@
  */
 
 import chalk from "chalk";
-
-interface Timer {
-    name: string,
-    precision: number,
-    started: [number, number],
-    elapsed?: string
-}
+import type { Timer } from "../../types/types";
 
 const timers = new Map();
 
@@ -37,11 +31,14 @@ const stopTimer = (name: string): string | void => {
 
 const forEachTimer = (callbackFn: (timer: Timer) => void) => timers.size > 0 && timers.forEach(callbackFn);
 
+const filterTimer = (name: string, callbackFn: (timer: Timer) => void) => timers.size > 0 && timers.has(name) && callbackFn(timers.get(name));
+
 const clearTimers = () => timers.clear();
 
 export {
     startTimer,
     stopTimer,
     forEachTimer,
+    filterTimer,
     clearTimers,
 };

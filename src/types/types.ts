@@ -134,7 +134,9 @@ export interface TokenValidators {
 export type BuildStrategy = "DEVELOPMENT" | "RELEASE";
 
 export interface BuildStrategyOptions {
-    cacheBust: boolean
+    buildStrategy: BuildStrategy,
+    cacheBust: boolean,
+    verbose: boolean
 }
 
 export interface Meta {
@@ -144,4 +146,11 @@ export interface Meta {
 export interface UnresolvedToken {
     token: string,
     file: string
+}
+
+export interface Timer {
+    name: string,
+    precision: number,
+    started: [number, number],
+    elapsed?: string
 }

@@ -10,24 +10,27 @@ import { serialize } from "./core/services/serialization/serialize.js";
 import * as metrics from "./core/lib/metrics.js";
 import { discover } from "./core/services/discovery/discover.js";
 import { collectionGerator } from "./core/services/composition/collections/collectionGenerator.js";
-import type { BuildStrategy, BuildStrategyOptions } from "./types/types.js";
+import type { BuildStrategyOptions, Timer } from "./types/types.js";
 import { tokenize } from "./core/services/tokenization/tokenize.js";
 import { _writeMetaTimeStamp } from "./core/lib/io/_writeMetaTimeStamp.js";
 import { config } from "./core/services/configuration/configuration.js";
 import { cleanBuildFolder } from "./core/lib/cleanBuildFolder.js";
 import { cacheBust } from "./core/services/cacheBusting/cacheBust.js";
 
-export const run = async function(buildStrategy: BuildStrategy, buildStrategyOptions?: BuildStrategyOptions | undefined) {
+export const run = async function(buildStrategyOptions: BuildStrategyOptions) {
     metrics.startTimer("total elapsed time");
     await cleanBuildFolder(config);
-    process.env["BUILD_STRATEGY"] = buildStrategy;
-    console.log("build strategy:", buildStrategy);
+    process.env["BUILD_STRATEGY"] = buildStrategyOptions.buildStrategy;
+    console.log("build strategy:", buildStrategyOptions.buildStrategy);
     const isOKToContinue = await compileComponents() && await compileBrowserScripts();
     if (isOKToContinue) {
         (await serialize(tokenize(await hydrate(await collectionGerator(await compose(await discover()))))));
-        typeof buildStrategyOptions !== "undefined" && buildStrategyOptions.cacheBust && await cacheBust();
+        buildStrategyOptions.cacheBust && await cacheBust();
         await _writeMetaTimeStamp();
     }
     metrics.stopTimer("total elapsed time");
-    metrics.forEachTimer(timer => console.log(`${timer.name}: ${chalk.green(timer.elapsed)}`));
+    const reporter = (timer: Timer) => console.log(`${timer.name}: ${chalk.green(timer.elapsed)}`);
+    buildStrategyOptions.verbose ?
+        metrics.forEachTimer(reporter) :
+        metrics.filterTimer("total elapsed time", reporter);
 };
