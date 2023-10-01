@@ -1,6 +1,6 @@
 /**
  * Metrics uses process.hrtime(time) for nano second precision.
- * public api: startTimer, stopTimer, forEachTimer, clearTimers
+ * public api: startTimer, stopTimer, forEachTimer, clearTimers, filterTimer
  */
 
 import chalk from "chalk";
