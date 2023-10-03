@@ -13,20 +13,21 @@ _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Mark
 ## Features
 
 - No initial project configuration is required.
-- DOMless and serverless results in very quick build times.
+- Effortless project creation using fusion.ssg's project generator.
+- DOMless and serverless execution produces very quick build times.
 - HTML document composition from markdown, HTML, tokens, .jsx and .tsx components, JSON data sources and meta data.
-- .tsx and .jsx sand-boxed execution.
-- .ts browser scripts.
+- .tsx and .jsx compilation and sand-boxed execution.
+- .ts browser script compilations.
 - Portfolio (multiple pages) generation via collections.
 - Generated projects provide package.json scripts for development and release builds.
 - CLI for one-off development and one-off release builds.
 - Base URL support for sites hosted in sub folders.
-- Works in progress for HTML documents that should be ignored during release builds.
+- HTML documents that are works in progress can be ignored during release builds.
 - Blogging support, including multiple categories and tags.
-- Optional cache busting during release builds for your project's assets (v1.2.0).
+- Optional cache busting of website assets during release builds (v1.2.0).
 - Conditional composition of includes based on build strategy (v1.2.0).
-- The reporting of works in progress during release builds (v1.2.0).
-- Additional post metadata exposed as simple tokens (v1.2.0).
+- Reporting of works in progress during release builds (v1.2.0).
+- Blog metadata exposed as simple tokens (v1.2.0).
 - Beautified HTML documents.
 
 ## Project Development
