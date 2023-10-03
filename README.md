@@ -24,11 +24,11 @@ _fusion_ plays on the idea of **_fusing_** together various elements (HTML, Mark
 - Base URL support for sites hosted in sub folders.
 - HTML documents that are works in progress can be ignored during release builds.
 - Blogging support, including multiple categories and tags.
+- Beautified HTML documents.
 - Optional cache busting of website assets during release builds (v1.2.0).
 - Conditional composition of includes based on build strategy (v1.2.0).
 - Reporting of works in progress during release builds (v1.2.0).
 - Blog metadata exposed as simple tokens (v1.2.0).
-- Beautified HTML documents.
 
 ## Project Development
 
