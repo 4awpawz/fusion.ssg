@@ -61,11 +61,14 @@ const processPostLandingPage = function(asset: Asset): Asset {
     return asset;
 };
 
+let has404 = false;
+
 const process404 = function(asset: Asset): Asset {
     const oPath = normalizeOutPath(path.parse(asset.filePath).dir);
     const oName = "404.html";
     asset.htmlDocumentName = path.join(oPath, oName);
     asset.url = path.parse(asset.htmlDocumentName).dir + "/";
+    has404 = true;
     return asset;
 };
 
@@ -136,6 +139,8 @@ export const discover = async function(): Promise<Assets> {
     reportWIPS(assets);
     // When building for release, wips are not included in metadata.
     assets = process.env["BUILD_STRATEGY"] === "RELEASE" ? _filter(assets, asset => !asset.isWip) : assets;
+    // Warn if there's no 404.html document.
+    if (!has404) console.log(chalk.yellowBright("Warning: this site is missing a 404.html file."));
     metrics.stopTimer("discovery");
     return assets;
 };
