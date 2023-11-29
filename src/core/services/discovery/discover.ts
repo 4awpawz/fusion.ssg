@@ -34,6 +34,7 @@ const processInclude = async function(asset: Asset): Promise<Asset> {
 
 const processPage = async function(asset: Asset): Promise<Asset> {
     const buffer = await _readFile(asset.filePath);
+    // TODO: pages are not allowed to be written in markdown so the check for md extension and the conversion to html should be removed.
     asset.content = typeof buffer === "undefined" ? "" : path.parse(asset.filePath).ext === ".md" ? markdownToHTML(buffer) : buffer;
     return asset;
 };

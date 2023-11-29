@@ -24,11 +24,11 @@ const searchContent = function(content: string) {
     // Array to store the matches
     const matches: string[] = [];
     // Regular expression to match text between opening and closing braces
-    const regex = /{([^}]*)}/g;
+    const regex = /{+([^}]*)}+/g;
     // Iterate through the matches and extract the content inside braces
     let match;
     while ((match = regex.exec(contentWithoutCodeAndScriptTags)) !== null) {
-        if (match[1] !== "") matches.push(match[1] as string);
+        if (match[0] !== "") matches.push(match[0] as string);
     }
     return matches;
 };
@@ -43,7 +43,7 @@ export const report = function(): void {
     if (!unresolvedTokens.length) return;
     console.log(chalk.black.bgYellow("Warning! The following HTML documents contain unresolved tokens:"));
     _forEach(unresolvedTokens, function(unresolvedToken) {
-        console.log(chalk.black.bgYellow(`  file: ${unresolvedToken.file}, token: {${unresolvedToken.token}}`));
+        console.log(chalk.black.bgYellow(`  file: ${unresolvedToken.file}, token: ${unresolvedToken.token}`));
     });
 };
 
