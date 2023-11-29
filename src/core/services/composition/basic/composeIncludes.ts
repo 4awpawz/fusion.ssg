@@ -7,7 +7,7 @@ import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenCont
 import { _find } from "../../../lib/functional.js";
 import { config } from "../../configuration/configuration.js";
 import type { Asset, Assets, IncludeMatchesResults } from "../../../../types/types";
-import chalk from "chalk";
+// import chalk from "chalk";
 import { getMatchingTokens } from "../../../lib/getMatchingTokens.js";
 
 const getListOfIncludesFromAsset = function(assetContent: string): IncludeMatchesResults {
@@ -25,7 +25,7 @@ export const composeIncludes = async function(asset: Asset, assets: Assets): Pro
         const foundInclude: Asset | undefined = _find(assets, _asset =>
             _asset.assetType === "include" && (_asset.filePath === `${pathToInclude}.html` || _asset.filePath === `${pathToInclude}.md`));
         if (typeof foundInclude === "undefined") {
-            console.log(chalk.red(`there was an error: Unable to find include file ${pathToInclude} declared in ${asset.filePath}`));
+            // console.log(chalk.red(`there was an error: Unable to find include file ${pathToInclude} declared in ${asset.filePath}`));
             continue;
         }
         const token = matchResult.matched;
