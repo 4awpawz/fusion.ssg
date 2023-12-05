@@ -4,6 +4,13 @@
 
 import type { Token } from "../../types/types";
 
+const regexpBuilder = function(token: string): RegExp {
+    // This regex ignores script and code tags to guard agains applying tokens to their content.
+    const r = `${token}(?![<]*>|[^<>]*</(?:script|code)>)`;
+    return new RegExp(r, "g");
+};
+
 export const findAndReplaceTokenContent = function(content: string, token: Token | string, value: string): string {
-    return content.replace(new RegExp(token, "g"), value);
+    const regex = regexpBuilder(token);
+    return content.replaceAll(regex, value);
 };

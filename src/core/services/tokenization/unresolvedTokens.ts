@@ -28,7 +28,9 @@ const searchContent = function(content: string) {
     // Iterate through the matches and extract the content inside braces
     let match;
     while ((match = regex.exec(contentWithoutCodeAndScriptTags)) !== null) {
-        if (match[0] !== "") matches.push(match[0] as string);
+        // Validate token to guard against things like empty token with no name or with just one or mre spaces.
+        const length = match[1]?.trim().length;
+        if (length && length > 0) matches.push(match[0]);
     }
     return matches;
 };
