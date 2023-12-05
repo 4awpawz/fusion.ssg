@@ -25,7 +25,7 @@ export const composeIncludes = async function(asset: Asset, assets: Assets): Pro
         const foundInclude: Asset | undefined = _find(assets, _asset =>
             _asset.assetType === "include" && (_asset.filePath === `${pathToInclude}.html` || _asset.filePath === `${pathToInclude}.md`));
         if (typeof foundInclude === "undefined") {
-            // console.log(chalk.red(`there was an error: Unable to find include file ${pathToInclude} declared in ${asset.filePath}`));
+            // Defer reporting of unresolved includes to tokenization.
             continue;
         }
         const token = matchResult.matched;
