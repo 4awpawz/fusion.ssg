@@ -10,5 +10,6 @@ export const getAssetType = function(pathToAsset: string): AssetType {
     if (pathToAsset.startsWith("src/pages")) return "page";
     if (pathToAsset.startsWith("src/data")) return "data";
     if (pathToAsset.startsWith("src/components")) return "component";
+    if (pathToAsset.startsWith("src/css")) return "css";
     return "*";
 };

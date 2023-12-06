@@ -1,39 +1,43 @@
 /**
- * tokenize - Tokenizes each generated document with token values from their respective
- * templates and from global tokens as well as postDate if assets are a post and from
- * baseURL from fusion.json and reports unresolved tokens.
+ * tokenize - 1) Tokenizes each generated document (asset.content) with token values
+ * and also tokenizes {baseURL} in CSS (asset.content).
  */
 
-import type { Assets } from "../../../types/types";
+import type { Assets, Tokens } from "../../../types/types";
 import { config } from "../configuration/configuration.js";
 import { composeTokens } from "./composeTokens.js";
 import * as unresolvedTokens from "./unresolvedTokens.js";
 import * as metrics from "../../lib/metrics.js";
+import { _filter } from "../../lib/functional.js";
 
 export const tokenize = function(assets: Assets): Assets {
     metrics.startTimer("tokenize");
     const globalTokens = config.userConfig.tokens;
-    for (const asset of assets) {
-        if (asset.assetType !== "template" || asset?.fm?.data["isCollection"]
-            || typeof asset.fm?.content === "undefined") continue;
-        const templateTokens = typeof asset.fm.data["tokens"] === "undefined" ? {} : asset.fm.data["tokens"];
-        let tokens = { ...globalTokens, ...templateTokens };
+    const baseURL = process.env["BUILD_STRATEGY"] === "DEVELOPMENT" ? "" : config.userConfig.baseURL;
+    const templateAssets = _filter(assets, asset => asset.assetType === "template" && !asset.isCollection && typeof asset.fm?.content !== "undefined");
+    for (const asset of templateAssets) {
+        // Add template tokens.
+        const templateTokens = typeof asset.fm?.data["tokens"] === "undefined" ? {} : asset.fm.data["tokens"];
+        // Add global tokens.
+        let tokens: Tokens = { ...globalTokens, ...templateTokens };
         // Add post date as a locale date string to tokens if is a post.
         tokens = asset.isPost ? { ...tokens, postDate: asset.postDate } : tokens;
-        // Add categories formatted as a path to tokens if is a post.
-        const categories = asset.isPost && typeof asset.fm.data["post"]["categories" as string] !== "undefined" ?
+        // Add post categories formatted as a path to tokens if is a post.
+        const categories = asset.isPost && typeof asset.fm?.data["post"]["categories" as string] !== "undefined" ?
             asset.fm.data["post"]["categories"].replace(" ", "").replace(",", "/") : "";
         tokens = { ...tokens, categories };
-        // Add tags to tokens if is a post.
-        const tags = asset.isPost && typeof asset.fm.data["post"]["tags" as string] !== "undefined" ? asset.fm.data["post"]["tags"] : "";
+        // Add post tags to tokens if is a post.
+        const tags = asset.isPost && typeof asset.fm?.data["post"]["tags" as string] !== "undefined" ? asset.fm.data["post"]["tags"] : "";
         tokens = { ...tokens, tags };
-        // Add baseURL to tokens.
-        const baseURL = process.env["BUILD_STRATEGY"] === "DEVELOPMENT" ? "" : config.userConfig.baseURL;
-        tokens = typeof baseURL !== "undefined" ? { ...tokens, baseURL } : tokens;
+        tokens = { ...tokens, baseURL };
         asset.content = composeTokens(asset.content as string, tokens);
         unresolvedTokens.note(asset.content, asset.htmlDocumentName as string);
     }
     unresolvedTokens.report();
+    const cssAssets = _filter(assets, asset => asset.assetType === "css");
+    for (const asset of cssAssets) {
+        asset.content = (asset.content as string).replaceAll("{baseURL}", baseURL);
+    }
     metrics.stopTimer("tokenize");
     return assets;
 };

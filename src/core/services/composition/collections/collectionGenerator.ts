@@ -22,8 +22,7 @@ export const collectionGerator = async function(assets: Assets): Promise<Assets>
     const componentsMap = makeComponentsMap(componentPaths);
     clearCache();
     for (const asset of assets) {
-        if (asset.assetType !== "template" || typeof asset?.fm?.data["isCollection"] === "undefined"
-            || !asset?.fm?.data["isCollection"] || typeof asset.fm?.content === "undefined") continue;
+        if (asset.assetType !== "template" || !asset.isCollection || typeof asset.fm?.content === "undefined") continue;
         const componentProfiles = _filter(getComponentProfiles(asset.fm?.content as string), item => item.componentIsCollection);
         if (componentProfiles.length !== 1) {
             console.error(chalk.red(`there was an error: Collection processing for template ${asset.filePath} bypassed, a template that declares itself a collection must declare one collection component`));

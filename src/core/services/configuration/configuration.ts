@@ -1,8 +1,5 @@
 /**
- * config - Returns immutable Configuration object.
- * Note: The choice was made not to export a static config object as it would require
- * the user to restart node whenever they make a change to their config file.
- * Note: A static config object is not exported becau the user can make changes to theirs.
+ * config - Returns Configuration object.
  */
 
 import path from "path";
@@ -21,6 +18,7 @@ const getConfiguration = async function(): Promise<Configuration> {
         componentsFolder: "components", // Folder that contains component definitions.
         dataFolder: "data", // Folder that contains data referenced by components.
         cssFolder: "css", // Folder that contains css.
+        cssLibsFolder: "libs", // Folder that contains 3rd party css libraries.
         scriptsFolder: "scripts", // Folder that contains JavaScript scripts.
         mediaFolder: "media", // Folder that contains media files.
         etcFolder: "etc", // Folder that contains etc type files.

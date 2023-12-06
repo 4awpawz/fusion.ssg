@@ -16,10 +16,12 @@ const serializeAssetsJSON = async function(assets: Assets): Promise<void> {
     await _writeJSONFile(outputPath, assets, { spaces: 2 }); return;
 };
 
+// The src/css/libs folder is reserved for 3rd party libraries.
+// Project specific css files are true assets and are not coppied here.
 const serializeCSSFolder = async function(config: Configuration, buildFolderPath: string): Promise<void> {
-    const sourceFolder = path.join(process.cwd(), config.srcFolder, config.cssFolder);
+    const sourceFolder = path.join(process.cwd(), config.srcFolder, config.cssFolder, config.cssLibsFolder);
     if (!_fileExists(sourceFolder)) return;
-    const destinationFolder = path.join(buildFolderPath, config.cssFolder);
+    const destinationFolder = path.join(buildFolderPath, config.cssFolder, config.cssLibsFolder);
     await _copyFolder(sourceFolder, destinationFolder);
     return;
 };
