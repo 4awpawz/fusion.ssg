@@ -8,7 +8,7 @@ import { renderToString } from "preact-render-to-string";
 
 export const makeNewAsset = function(asset: Asset, collectionPageProfile: CollectionPageProfile, componentTag: string, componentName: string): Asset {
     const newAsset: Asset = JSON.parse(JSON.stringify(asset));
-    delete newAsset?.fm?.data["isCollection"];
+    delete newAsset.isCollection;
     newAsset["memberOf"] = componentName.split(".")[0] as string;
     newAsset.content = newAsset.content?.replace("{title}", collectionPageProfile.title) as string;
     const html = renderToString(collectionPageProfile.content);

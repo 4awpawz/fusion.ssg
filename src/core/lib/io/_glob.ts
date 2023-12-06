@@ -3,10 +3,12 @@
  */
 
 import chalk from "chalk";
-import glob from "glob";
+import glob, { GlobOptions } from "glob";
 
-export const _glob = async function(pattern: string, options = {}): Promise<string[]> {
-    const _options = { ...options, ...{ ignore: "node_moduless**/*" } };
+export const _glob = async function(pattern: string, options: GlobOptions = {}): Promise<string[]> {
+    const ignore = ["node_modules/**"];
+    options.ignore && ignore.push(options.ignore as string);
+    const _options = { ignore };
     let paths = [] as string[];
     try {
         paths = await glob(pattern, _options);

@@ -6,13 +6,14 @@ export interface PromiseResultGlob {
     value: string[] | Error,
 }
 
-export type AssetType = "page" | "template" | "include" | "component" | "data" | "*"
+export type AssetType = "page" | "template" | "include" | "component" | "data" | "css" | "*"
 
 export interface Asset {
     timestamp: number,
     assetType: AssetType
     filePath: string,
     fileType: string,
+    isCollection?: boolean;
     isWip?: boolean,
     isPost?: boolean,
     memberOf?: string,
@@ -20,6 +21,7 @@ export interface Asset {
     fm?: GrayMatterFile<string>
     associatedPage?: string,
     htmlDocumentName?: string,
+    cssDocumentName?: string,
     url?: string,
     postTimeStamp?: number,
     postDate?: string
@@ -38,9 +40,7 @@ export interface CollectionPageProfile {
 
 export type Assets = Asset[]
 
-export interface Tokens {
-    tokens: object
-}
+export type Tokens = object;
 
 export type DataSource = string
 
@@ -101,6 +101,7 @@ export interface Configuration {
     componentsFolder: string,
     dataFolder: string,
     cssFolder: string,
+    cssLibsFolder: string,
     scriptsFolder: string,
     mediaFolder: string,
     etcFolder: string,

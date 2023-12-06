@@ -4,7 +4,7 @@
 
 import type { Assets } from "../../../types/types";
 import * as metrics from "../../lib/metrics.js";
-import { serializePages } from "./serializePages.js";
+import { serializeHTMLDocuments, serializeCSSDocuments } from "./serializePages.js";
 import { serializeOtherAssets } from "./serializeOtherAssets.js";
 import chalk from "chalk";
 import { config } from "../configuration/configuration.js";
@@ -20,8 +20,10 @@ const getBuildFolderPath = function(): string {
 export const serialize = async function(assets: Assets): Promise<Assets> {
     metrics.startTimer("serialization");
     const buildFolderPath = getBuildFolderPath();
-    const count = await serializePages(assets, buildFolderPath);
-    console.log("total documents generated: ", chalk.green(count));
+    const pageCount = await serializeHTMLDocuments(assets, buildFolderPath);
+    console.log("total html documents generated: ", chalk.green(pageCount));
+    const cssCount = await serializeCSSDocuments(assets, buildFolderPath);
+    console.log("total css documents processed: ", chalk.green(cssCount));
     await serializeOtherAssets(assets, buildFolderPath);
     metrics.stopTimer("serialization");
     return assets;

@@ -3,7 +3,7 @@
  * that participates in page compostion. Resolves to an array of assets.
  */
 
-import path from "path";
+import path, { join, parse } from "path";
 import matter from "gray-matter";
 import { markdownToHTML } from "../../lib/markdownToHTML.js";
 import { _readFile } from "../../lib/io/_readFile.js";
@@ -24,6 +24,14 @@ import { getPostTimeStampFromPostPath } from "./getPostTimeStampFromPostPath.js"
 import { _filter, _forEach } from "../../lib/functional.js";
 import { getPostName } from "./getPostName.js";
 import { includeIsConditional } from "./includeIsConditional.js";
+
+const processCSS = async function(asset: Asset): Promise<Asset> {
+    let buffer = await _readFile(asset.filePath);
+    buffer = typeof buffer === "undefined" ? "" : buffer;
+    asset.content = buffer;
+    asset.cssDocumentName = asset.filePath.replace(config.srcFolder + "/", "");
+    return asset;
+};
 
 const processInclude = async function(asset: Asset): Promise<Asset> {
     let buffer = await _readFile(asset.filePath);
@@ -85,6 +93,7 @@ const processTemplate = async function(asset: Asset): Promise<Asset> {
     }
     asset.content = path.parse(asset.filePath).ext === ".md" && markdownToHTML(asset.fm.content) || asset.fm.content;
     asset.isWip = templateIsWIP(asset.filePath);
+    asset.isCollection = asset.fm.data["isCollection"] && asset.fm.data["isCollection"] || false;
     asset.associatedPage = typeof asset.fm.data["page"] === "undefined" ? "src/pages/default.html" : `src/pages/${asset.fm.data["page"]}.html`;
     if (isPost(asset.filePath)) return processPost(asset);
     if (isAssetPostLandingPage(asset.filePath)) return processPostLandingPage(asset);
@@ -133,6 +142,8 @@ export const discover = async function(): Promise<Assets> {
         if (assetType === "include") return await processInclude(asset);
         if (assetType === "page") return await processPage(asset);
         if (assetType === "template") return await processTemplate(asset);
+        // The src/css/libs folder is ignored as it is reserved for 3rd party libraries.
+        if (assetType === "css" && !parse(asset.filePath).dir.startsWith(join(config.srcFolder, config.cssFolder, config.cssLibsFolder))) return await processCSS(asset);
 
         return asset;
     }));
