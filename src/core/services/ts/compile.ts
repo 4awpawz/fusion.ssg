@@ -70,6 +70,8 @@ export const compileBrowserScripts = async function(): Promise<boolean> {
     }
 
     const exitCode = compiler(browserScriptsPaths, browserScriptsCompilerOptions);
+    const message = `browser sripts compilation process exited with code '${exitCode}'`;
+    exitCode === 0 ? console.log(chalk.blue(message)) : console.log(chalk.red(message));
     if (exitCode === 1) {
         console.error(chalk.red("there was an error: TypeScript found errors in one or more browser scripts that need to be addressed."));
         metrics.stopTimer("browser scripts compilation");
@@ -106,6 +108,8 @@ export const compileComponents = async function(): Promise<boolean> {
     }
 
     const exitCode = compiler(componentPaths, componentCompilerOptions);
+    const message = `components compilation process exited with code '${exitCode}'`;
+    exitCode === 0 ? console.log(chalk.blue(message)) : console.log(chalk.red(message));
     if (exitCode === 1) {
         console.error(chalk.red("there was an error: TypeScript found errors in one or more components that need to be addressed."));
         process.env["OK_TO_CALL_COMPONENTS"] = "0";
