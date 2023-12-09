@@ -4,7 +4,7 @@
 
 import type { Assets } from "../../../types/types";
 import * as metrics from "../../lib/metrics.js";
-import { serializeHTMLDocuments, serializeCSSDocuments } from "./serializePages.js";
+import { serializeHTMLDocuments, serializeCSSDocuments } from "./serializeHTMLAndCSSDocuments.js";
 import { serializeOtherAssets } from "./serializeOtherAssets.js";
 import chalk from "chalk";
 import { config } from "../configuration/configuration.js";
