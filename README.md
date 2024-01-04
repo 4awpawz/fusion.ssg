@@ -1,4 +1,4 @@
-# Minimal Framework For Building Static Websites
+# The web framework for static content-driven websites
 
 HTML, Markdown, Front Matter + Custom `.tsx and .jsx` Components.
 
