@@ -1,34 +1,35 @@
 # The web framework for static content-driven websites
 
-HTML, Markdown, Front Matter + Custom `.tsx and .jsx` Components.
+fusion.ssg seamlessly fuses together web-based technologies to propel your static website development to a whole new level.
 
-## Installation
+## Create resilient static websites
 
-Full installation instructions can be found at [fusionssg.com](https://fusionssg.com/docs/installation/).
-
-## The Name
-
-_fusion_ plays on the idea of **_fusing_** together various elements (HTML, Markdown, Components, JSON data, YAML front matter, etc.).
+- Philosophy - The most useful tools are those that fully embrace the functionality that directly reflects their purpose and ignores all others.
+- Minimalistic - fusion.ssg is built from the ground up to be just that, making it quick to learn for anyone who already has experience with HTML, JavaScript and CSS.
+- Productivity - No complicated tooling and configuration to stand in the way of your creativity, and the project generator gets you up and creating quickly.
+- Fast - Capable of generating hundreds of pages in under a second.
 
 ## Features
 
-- No initial project configuration is required.
-- Effortless project creation using fusion.ssg's project generator.
-- DOMless and serverless execution produces very quick build times.
-- HTML document composition from markdown, HTML, tokens, .jsx and .tsx components, JSON data sources and meta data.
-- .tsx and .jsx compilation and sand-boxed execution.
-- .ts browser script compilations.
-- Portfolio (multiple pages) generation via collections.
-- Generated projects provide package.json scripts for development and release builds.
-- CLI for one-off development and one-off release builds.
+- Zero initial project configuration.
+- DOMless and serverless execution.
+- .ts, .tsx and .jsx compilation.
+- .tsx and .jsx sand-boxed execution.
+- Multiple HTML documents generation via collections components.
+- package.json scripts for development and release builds.
+- CLI one-off development and release builds.
 - Base URL support for sites hosted in sub folders.
-- HTML documents that are works in progress can be ignored during release builds.
-- Blogging support, including multiple categories and tags.
-- Beautified HTML documents.
-- Optional cache busting of website assets during release builds (v1.2.0).
-- Conditional composition of includes based on build strategy (v1.2.0).
-- Reporting of works in progress during release builds (v1.2.0).
-- Blog metadata exposed as simple tokens (v1.2.0).
+- Works in progress ignored during release builds.
+- Works in progress reporting during release builds <span>(v1.2.0)</span>.
+- Blog posts with multiple categories and tags
+- Blog posts metadata exposed as simple tokens <span>(v1.2.0)</span>.
+- Beautified HTML and CSS documents.
+- Optional cache busting for release builds <span>(v1.2.0)</span>.
+- Conditional includes based on build strategy <span>(v1.2.0)</span>.
+
+## Installation
+
+Full installation instructions can be found at [fusionssg.com](https://fusionssg.com/docs/v1/installation/).
 
 ## Project Development
 
@@ -40,7 +41,7 @@ The project's scope is limited to generating robust and resilient HTML documents
 
 ## Versioning
 
-Current version: v1.2.0. We use [Semantic Versioning](https://semver.org/).
+Current version: v1.3.0. We use [Semantic Versioning](https://semver.org/).
 
 ## What Still Remains To Be Done
 
