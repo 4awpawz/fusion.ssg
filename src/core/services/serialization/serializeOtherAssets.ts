@@ -17,8 +17,8 @@ const serializeAssetsJSON = async function(assets: Assets): Promise<void> {
 };
 
 // The src/css/libs folder is reserved for 3rd party libraries.
-// Project specific css files are true assets and are not coppied here.
-const serializeCSSFolder = async function(config: Configuration, buildFolderPath: string): Promise<void> {
+// Project specific css files are treaded as true assets and are not coppied here.
+const serializeCSSLibsFolder = async function(config: Configuration, buildFolderPath: string): Promise<void> {
     const sourceFolder = path.join(process.cwd(), config.srcFolder, config.cssFolder, config.cssLibsFolder);
     if (!_fileExists(sourceFolder)) return;
     const destinationFolder = path.join(buildFolderPath, config.cssFolder, config.cssLibsFolder);
@@ -58,7 +58,7 @@ const serializeEtcFolder = async function(config: Configuration, buildFolderPath
 
 export const serializeOtherAssets = async function(assets: Assets, buildFolderPath: string): Promise<void> {
     await serializeAssetsJSON(assets);
-    await serializeCSSFolder(config, buildFolderPath);
+    await serializeCSSLibsFolder(config, buildFolderPath);
     await serializeScriptsFolder(config, buildFolderPath);
     await serializeMediaFolder(config, buildFolderPath);
     await serializeEtcFolder(config, buildFolderPath);
