@@ -15,7 +15,7 @@ fusion.ssg seamlessly fuses together web-based technologies to propel your stati
 - DOMless and serverless execution.
 - .ts, .tsx and .jsx compilation.
 - .tsx and .jsx sand-boxed execution.
-- Multiple HTML documents generation via collections components.
+- Bulk HTML document generation via collection components.
 - package.json scripts for development and release builds.
 - CLI one-off development and release builds.
 - Base URL support for sites hosted in sub folders.
