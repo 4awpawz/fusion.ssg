@@ -22,15 +22,12 @@ export const serializeHTMLDocuments = async function(assets: Assets, buildFolder
     return count;
 };
 
-export const serializeCSSDocuments = async function(assets: Assets, buildFolderPath: string): Promise<number> {
+export const serializeCSSDocuments = async function(assets: Assets, buildFolderPath: string): Promise<void> {
     const cssAssets = _filter(assets, asset => asset.assetType === "css");
-    let count = 0;
     for (const asset of cssAssets) {
         if (typeof asset.content === "undefined") continue;
         const outputPath = join(buildFolderPath, asset.cssDocumentName as string);
         const beautifiedCSS = js_beautify.css(asset.content, { "preserve_newlines": false });
         await _writeContentToFile(outputPath, beautifiedCSS);
-        count++;
     }
-    return count;
 };

@@ -22,8 +22,7 @@ export const serialize = async function(assets: Assets): Promise<Assets> {
     const buildFolderPath = getBuildFolderPath();
     const pageCount = await serializeHTMLDocuments(assets, buildFolderPath);
     console.log("total html documents generated: ", chalk.green(pageCount));
-    const cssCount = await serializeCSSDocuments(assets, buildFolderPath);
-    console.log("total css documents processed: ", chalk.green(cssCount));
+    await serializeCSSDocuments(assets, buildFolderPath);
     await serializeOtherAssets(assets, buildFolderPath);
     metrics.stopTimer("serialization");
     return assets;
