@@ -24,8 +24,7 @@ export const makeCollection = async function(assets: Assets, asset: Asset, compo
         console.error(chalk.red(`there was an error: Unable to import '${componentIdentifier.moduleName}' from '${componentIdentifier.moduleName}'.`));
         return;
     }
-    let props = componentProfile.componentDataSources.length > 0 &&
-        await getDataSources(componentProfile.componentDataSources, config);
+    let props = componentProfile.componentDataSources.length > 0 && await getDataSources(componentProfile.componentDataSources, config);
     props = { ...props, ...componentProfile.componentProperties, asset, assets };
 
     // *Important: Set the cwd to 'cwd/lib' so that component calls to import using relative paths are resolved relative to the lib folder.

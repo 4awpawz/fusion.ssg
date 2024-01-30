@@ -3,11 +3,11 @@
  */
 
 import chalk from "chalk";
-import fs from "fs-extra";
+import fs from "fs/promises";
 
-export const _readFile = async function(path: string, options = "utf8"): Promise<string | undefined> {
+export const _readFile = async function(path: string): Promise<string> {
     try {
-        return await fs.readFile(path, options);
+        return await fs.readFile(path, { encoding: "utf8" });
     } catch (error) {
         console.error(chalk.red(`there was an error: When reading file ${path}`));
         throw error;
