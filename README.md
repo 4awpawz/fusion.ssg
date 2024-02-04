@@ -1,6 +1,10 @@
 # The web framework for static content-driven websites
 
-fusion.ssg seamlessly fuses together web-based technologies to propel your static website development to a whole new level.
+fusion.ssg seamlessly fuses together familiar web-based technologies to propel your static website development to a whole new level.
+
+## Current Stable Version
+
+v1.3.0.
 
 ## Create resilient static websites
 
@@ -24,7 +28,7 @@ fusion.ssg seamlessly fuses together web-based technologies to propel your stati
 - Blog posts with multiple categories and tags
 - Blog posts metadata exposed as simple tokens <span>(v1.2.0)</span>.
 - Beautified HTML and CSS documents.
-- Optional cache busting for release builds <span>(v1.2.0)</span>.
+- Optional cache busting for release builds using --cache-bust <span>(v1.2.0)</span>.
 - Conditional includes based on build strategy <span>(v1.2.0)</span>.
 
 ## Installation
@@ -41,7 +45,7 @@ The project's scope is limited to generating robust and resilient HTML documents
 
 ## Versioning
 
-Current version: v1.3.0. We use [Semantic Versioning](https://semver.org/).
+This project uses [Semantic Versioning](https://semver.org/).
 
 ## What Still Remains To Be Done
 
