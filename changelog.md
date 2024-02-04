@@ -2,6 +2,8 @@
 
 ## v1.3.0
 
+- Update README.md to reflect v1.3.0. #106 
+
 - Update to Node v20.11.0 LTS and address all related issues. #112 
 
 - cache.ts::readCache routine can inadvertently return undefined if path isn't in the cache and the file doesn't exist. #111 
