@@ -5,7 +5,7 @@
 import type { Token } from "../../types/types";
 
 const regexpBuilder = function(token: string): RegExp {
-    // This regex ignores script and code tags to guard agains applying tokens to their content.
+    // This regex ignores script and code tags to guard against applying tokens to their content.
     const r = `${token}(?![<]*>|[^<>]*</(?:script|code)>)`;
     return new RegExp(r, "g");
 };
