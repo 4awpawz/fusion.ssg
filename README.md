@@ -1,6 +1,6 @@
-# The web framework for static content-driven websites
+# The web framework for creating static content-driven websites
 
-fusion.ssg seamlessly fuses together familiar web-based technologies to propel your static website development to a whole new level.
+fusion.ssg seamlessly fuses together familiar web-based technologies (*__i.e. HTML, Markdown, Front Matter, and Custom .tsx and .jsx Components.__*) to propel your static website development to a whole new level.
 
 ## Current Stable Version
 
@@ -15,25 +15,22 @@ v1.3.0.
 
 ## Features
 
+- Easily create new projects (\*\*\* batteries included \*\*\*).
 - Zero initial project configuration.
-- DOMless and serverless execution.
-- .ts, .tsx and .jsx compilation.
-- .tsx and .jsx sand-boxed execution.
-- Bulk HTML document generation via collection components.
-- package.json scripts for development and release builds.
-- CLI one-off development and release builds.
-- Base URL support for sites hosted in sub folders.
-- Works in progress ignored during release builds.
-- Works in progress reporting during release builds <span>(v1.2.0)</span>.
-- Blog posts with multiple categories and tags
-- Blog posts metadata exposed as simple tokens <span>(v1.2.0)</span>.
+- DOMless and serverless for really fast site generation.
+- Component compilation and sand-boxed execution.
+- Bulk HTML document generation.
+- Fully scripted development and release builds.
 - Beautified HTML and CSS documents.
-- Optional cache busting for release builds using --cache-bust <span>(v1.2.0)</span>.
-- Conditional includes based on build strategy <span>(v1.2.0)</span>.
+- Cache busting for release builds (optional).
+- Blog posts, tags and categories support.
+- Works In Progress (WIPS) support.
+- Base URL support for sites hosted in sub folders.
+- Informative metrics reporting after every build cycle.
 
 ## Installation
 
-Full installation instructions can be found at [fusionssg.com](https://fusionssg.com/docs/v1/installation/).
+Full installation instructions can be found at [fusionssg.com](https://fusionssg.com/docs/v1/gettingstarted/installation/).
 
 ## Project Development
 
@@ -60,11 +57,11 @@ This project uses [Semantic Versioning](https://semver.org/).
 
 For help, discussion about best practices, or any other conversation that would benefit from being searchable:
 
-[Discuss _fusion.ssg _on Github](https://github.com/4awpawz/fusion.ssg/discussions)
+[Discuss _fusion.ssg_ on Github](https://github.com/4awpawz/fusion.ssg/discussions)
 
 For casual conversation with others about using _fusion.ssg_:
 
-[Discuss _fusion.ssg on Twitter and other social media.](https://twitter.com).
+[Discuss _fusion.ssg_ on X and other social media.](https://x.com).
 
 ## Show Your Appreciation
 

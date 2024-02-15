@@ -1,0 +1,102 @@
+4awpawz/fusion.ssg
+
+✓ #117: Update features list to reflect v1.3.0 in README.md. [ documentation ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #116: Typescript file diagnostic. [ bug, wontfix, requires further analysis ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #115: Add labels to changelog items and reformat changelog items to display as item number, item title, labels. [ documentation, revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #112: Update to Node v20.11.0 LTS and address all related issues. [ revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #111: cache.ts::readCache routine can inadvertently return undefined if path isn't in the cache and the file doesn't exist.  [ bug ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #110: Remove logging metrics for css files. [ revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #109: Add changelog to project. [ documentation, feature ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #107: Rename function serializeCSSFolder to  serializeCSSLIbsFolder. [ revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #106: Update README.md to reflect v1.3.0. [ documentation, revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #105: Update Buster dependency to v1.1.1. [ revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #103: Console output related to Typescript compilation should identify being for either components or for browser scripts. [ bug, revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #102: Ignore script and code tags during tokenization. [ feature, revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #101: Include tokens in code blocks are being reported as unresolved. [ bug ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #100: CSS files should be first class assets to support {baseURL} tokenizatiion. [ feature, revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #98: Unresolved token reporting drops the last closing brace for include tokens. [ bug, revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #97: Log warning to the console if user project does not have a 404.html document. [ feature, revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #96: Though template front matter is documented as a requirement, this is not enforced in the codebase. [ wontfix, revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #95: Update to Node v18.18.0 LTS and address all related issues. [ revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #94: Include cache bust metric when release is called without the --verbose option and is called with the --cache-bust option. [ revision ] [ No Assignees ] v1.3.0 (2024-03-31)
+✓ #93: Refactor the cli help to accommodate multiple command options. [ feature ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #92: Provide CLI --verbose logging option. [ feature, revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #91: Update Buster dependency to v1.1.0. [ revision ] [ Jeff Schwartz ] v1.3.0 (2024-03-31)
+✓ #90: Include excerpt among the tokens that are exposed from a post as simple tokens. [ wontfix, requires further analysis ] [ Jeff Schwartz ] v1.2.0
+✓ #89: Provide the ability to make the composition of includes conditional based on build strategy using configuration. [ revision ] [ Jeff Schwartz ] v1.2.0
+✓ #88: Add direct support for cache busting via 4awpawz/buster. [ feature ] [ Jeff Schwartz ] v1.2.0
+✓ #86: Provide the ability to make the composition of includes conditional based on build strategy using front matter. [ feature, revision ] [ Jeff Schwartz ] v1.2.0
+✓ #85: Report all WIPS to the console when building for release. [ feature, revision ] [ Jeff Schwartz ] v1.2.0
+✓ #84: When tokenizing a post, expose its post date, categories and tags as simple token values. [ feature, revision ] [ Jeff Schwartz ] v1.2.0
+✓ #83: The tokenize service no longer should be async as the configuration object is no longer accessed asynchronously. [ revision ] [ Jeff Schwartz ] v1.2.0
+✓ #82: Add metrics reporting to the console for the tokenize service. [ feature, revision ] [ Jeff Schwartz ] v1.2.0
+✓ #81: Note and report all unresolved tokens per HTML document. [ feature ] [ Jeff Schwartz ] v1.1.0
+✓ #80: Verify the src/scripts folder exists before serializing its content to the build/scripts folder. [ bug ] [ No Assignees ] v1.1.0
+✓ #79: Apply established conventions to the CLI. [ revision ] [ Jeff Schwartz ] v1.0.0
+✓ #78: CLI guard function is all too inclusive and doesn't show general help. [ bug ] [ Jeff Schwartz ] v1.0.0
+✓ #77: Refactor the CLI for color and content. [ revision ] [ Jeff Schwartz ] v1.0.0
+✓ #76: Remove all references to the project generator from the project. [ revision ] [ Jeff Schwartz ] v1.0.0
+✓ #75: Refactor composition. [ revision ] [ Jeff Schwartz ] v1.0.0
+✓ #74: Post names are generated incorrectly when they contain hyphens beyond their post date. [ bug ] [ Jeff Schwartz ] v1.0.0
+✓ #73: Support 404.html document generation. [ feature ] [ Jeff Schwartz ] v1.0.0
+✓ #72: Refactor discovery. [ revision ] [ Jeff Schwartz ] v1.0.0
+✓ #70: Bug:  The calculation for determining the target path for serializing the scripts folder should be based on the current build strategy but isn't. [ bug ] [ Jeff Schwartz ] v1.0.0
+✓ #69: Project generator should be a stand alone global module. [ revision ] [ Jeff Schwartz ] v1.0.0
+✓ #68: Add cache busting as a post build cycle process. [ wontfix, feature request ] [ Jeff Schwartz ] v1.1.0
+✓ #67: Add support for global tokens. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.8
+✓ #66: Install project generator v1.0.0-beta.8. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.8
+✓ #65: Install project generator v1.0.0-beta.6. [ revision ] [ Jeff Schwartz ] v1.0.0-beta.8
+✓ #64: Add Typescript support for browser scripts. [ feature, revision ] [ Jeff Schwartz ] v1.0.0-beta.8
+✓ #63: Support .jsx components. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.8
+✓ #62: Guard against serializing non existent folders that crash the build. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #61: Before serializing pages, beautify their content. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #60: WIPs should not be included in metadata during release builds. [ revision ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #59: Generated time stamp for post date is off by 1 day. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #58: The src/templates/posts/index.html) document isn't being written to config.userConfig.postsFolderName. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #57: Component string properties shouldn't contain extra surround quotes.  [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #56: Support Wips Without Paths. [ revision ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #55: Create end user projects using @4awpawz/fusion-typescript-project-generator. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #54: # Add collection ame to generated collection ages. [ feature, revision ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #53: Generated component properties contain tag delimiters. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #52: All properties passed to components should be packaged in the props object. [ revision ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #50: gray-matter excerpts aren't being recognized in markdown files. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #49: Add post date value (in milliseconds) to post assets. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #48: Post are incorrectly written to the root of the build folder when the userConfig.postsFolder property is set to an empty string. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #47: Discovery throws exception when a post doesn't include categories. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #46: Support  default associated pages. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #45: Compile all components (atomic compilation) only when any one component is stale. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #41: Support WIP folders. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #39: Add url property to template assets. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #38: baseURL is being applied when building for development. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #37: Tokens in generated collection pages are never resolved. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #35: Build Strategies [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #31: Browser Refresh Needed When Build Folder Is Created. [ bug, wontfix ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #30: Call render-to-string for content returned from user components. [ revision ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #29: Log exceptions and stats. [ requires further analysis ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #28: Release build with support for baseURLs. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #27: Add support for work in progress templates. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #24: Rename user project configuration file name to fusion.json. [ revision ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #23: Typescript compiler should show errors for 'noUnusedLocals' and 'noUnusedParameters'. [ revision ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #22: Support base URLs. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #21: Use Custom Components Instead of Tokens. [ feature, experimental ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #20: Copy additional folders to the build folder. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #19: Include a total for number of pages generated in console output. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #18: Include assets In Data Sources when calling components. [ revision ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #17: Blog Support [ feature ] [ No Assignees ] v1.0.0-beta.7
+✓ #16: Add color to console output. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #15: Cache data sources. [ feature, experimental ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #14: Data driven tokenization. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #13: Data driven components. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #12: Normalize error message format. [ revision ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #11: Hydration continues even when it fails to be imported. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #10: Hydration continues even when a component can not be resolved from its component token path. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #9: Hydration continues to run even if the typescript compiler reports errors. [ bug ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #8: Collections. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #7: Add a timestamp that records the file's modified time to each asset. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #6: Add metrics for precise timing of processes. [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #5: Hydration [ feature ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #4: Rename markers to tokens. [ revision ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #3: Refactor project to export and import its types defined in types/types.ts. [ revision ] [ Jeff Schwartz ] v1.0.0-beta.7
+✓ #2: Rename Templates and Pages [ revision ] [ Jeff Schwartz ] v1.0.0-beta.7
+
+| This report was created with Snitch 👉 @ https://github.com/4awpawz/snitch
