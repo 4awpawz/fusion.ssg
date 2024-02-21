@@ -4,7 +4,7 @@ HTML, Markdown, Front Matter + Custom `.tsx and .jsx` Components.
 
 ## Installation
 
-Full installation instructions can be found at [fusionssg.com](https://fusionssg.com/docs/installation/).
+Full installation instructions can be found at [fusionssg.com](https://fusionssg.com/docs/v1/installation/).
 
 ## The Name
 
