@@ -1,6 +1,6 @@
-# The web framework for static content-driven websites
+# The web framework for creating static content-driven websites
 
-fusion.ssg seamlessly fuses together familiar web-based technologies to propel your static website development to a whole new level.
+fusion.ssg seamlessly fuses together familiar web-based technologies (*__i.e. HTML, Markdown, Front Matter, and Custom .tsx and .jsx Components.__*) to propel your static website development to a whole new level.
 
 ## Current Stable Version
 
