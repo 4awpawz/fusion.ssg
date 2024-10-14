@@ -63,4 +63,6 @@ For casual conversation with others about using _fusion.ssg_:
 
 ## Show Your Appreciation
 
+<a href="https://www.buymeacoffee.com/4awpawz"><img src="./github/buymeacoffee.png" alt="image"></a>
+
 Please 👀 watch and leave us a 🌟 star. :)
