@@ -1,14 +1,14 @@
 import type { GrayMatterFile } from "gray-matter";
 import type { VNode } from "preact";
 
-export interface PromiseResultGlob {
+export type PromiseResultGlob = {
     success: boolean,
     value: string[] | Error,
 }
 
 export type AssetType = "page" | "template" | "include" | "component" | "data" | "css" | "*"
 
-export interface Asset {
+export type Asset = {
     timestamp: number,
     assetType: AssetType
     filePath: string,
@@ -27,12 +27,12 @@ export interface Asset {
     postDate?: string
 }
 
-export interface PostProfile {
+export type PostProfile = {
     categories?: string,
     tags?: string
 }
 
-export interface CollectionPageProfile {
+export type CollectionPageProfile = {
     content: VNode,
     title: string,
     htmlDocumentName: string
@@ -44,7 +44,7 @@ export type Tokens = object;
 
 export type DataSource = string
 
-export interface ComponentProfile {
+export type ComponentProfile = {
     componentTag: string,
     componentName: string,
     componentDataSources: DataSource[],
@@ -52,7 +52,7 @@ export interface ComponentProfile {
     componentIsCollection: boolean
 }
 
-export interface BuffersMap {
+export type BuffersMap = {
     [key: string]: unknown
 }
 
@@ -62,7 +62,7 @@ export type IncludeFileName = string
 
 export type IncludeContent = string
 
-export interface Include {
+export type Include = {
     includeMakrer: IncludeToken,
     includeFileName: IncludeFileName,
     includeContent: IncludeContent,
@@ -82,9 +82,9 @@ export type TokenRightDelimeter = "}"
 
 export type Token = `${TokenLeftDelimeter}${TokenContent}${TokenRightDelimeter}`
 
-export interface ConditionalIncludes { developmentOnly?: string[], releaseOnly?: string[] }
+export type ConditionalIncludes = { developmentOnly?: string[], releaseOnly?: string[] }
 
-export interface UserConfig {
+export type UserConfig = {
     postsFolder: string,
     baseURL: string,
     wips: string[],
@@ -92,7 +92,7 @@ export interface UserConfig {
     conditionalIncludes: ConditionalIncludes
 }
 
-export interface Configuration {
+export type Configuration = {
     srcFolder: string,
     postsFolder: string,
     metaFolder: string,
@@ -108,15 +108,15 @@ export interface Configuration {
     userConfig: UserConfig
 }
 
-export interface ComponentProperty {
+export type ComponentProperty = {
     [key: string]: string | boolean;
 }
 
-export interface ComponentIdentifier {
+export type ComponentIdentifier = {
     moduleName: string
 }
 
-export interface ComponentsMap {
+export type ComponentsMap = {
     [key: string]: ComponentIdentifier
 }
 
@@ -128,28 +128,28 @@ export type Components = Components[];
 
 export type TokenValidator = (matches: RegExpMatchArray) => boolean;
 
-export interface TokenValidators {
+export type TokenValidators = {
     [key: string]: TokenValidator
 }
 
 export type BuildStrategy = "DEVELOPMENT" | "RELEASE";
 
-export interface BuildStrategyOptions {
+export type BuildStrategyOptions = {
     buildStrategy: BuildStrategy,
     cacheBust: boolean,
     verbose: boolean
 }
 
-export interface Meta {
+export type Meta = {
     url: string
 }
 
-export interface UnresolvedToken {
+export type UnresolvedToken = {
     token: string,
     file: string
 }
 
-export interface Timer {
+export type Timer = {
     name: string,
     precision: number,
     started: [number, number],
