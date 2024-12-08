@@ -3,7 +3,7 @@
  * and also tokenizes {baseURL} in CSS (asset.content).
  */
 
-import type { Assets, Tokens } from "../../../types/types";
+import type { Assets, Tokens } from "../../../types/types.js";
 import { config } from "../configuration/configuration.js";
 import { composeTokens } from "./composeTokens.js";
 import * as unresolvedTokens from "./unresolvedTokens.js";

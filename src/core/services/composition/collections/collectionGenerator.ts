@@ -3,7 +3,7 @@
  * front matter property 'isCollection' when set to true) and uses the content they return to create new documents.
  */
 
-import type { Assets, ComponentProfile, } from "../../../../types/types";
+import type { Assets, ComponentProfile, } from "../../../../types/types.js";
 import chalk from "chalk";
 import * as metrics from "../../../lib/metrics.js";
 import { makeCollection } from "./makeCollection.js";

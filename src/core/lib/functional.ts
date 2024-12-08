@@ -18,7 +18,8 @@ export function _find<T>(array: T[], cb: (item: T, index: number, array: T[]) =>
 }
 
 // _reduce(T[], ()TT, any)
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 export function _reduce<T, TT>(array: T[], cb: (previousValue: any, value: T, currentIndex?: number, array?: T[]) => TT,
-    initialValue?: any) {
+    initialValue?: unknown) {
     return array.reduce(cb, initialValue) as TT;
 }

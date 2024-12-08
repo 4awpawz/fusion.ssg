@@ -4,7 +4,7 @@
 
 import chalk from "chalk";
 import { join, parse } from "path";
-import type { CollectionComponent, Component, Configuration } from "../../types/types";
+import type { CollectionComponent, Component, Configuration } from "../../types/types.js";
 
 export const importModule = async function(moduleName: string, config: Configuration): Promise<Component | CollectionComponent> {
     // Dynamic import returns promise.

@@ -3,7 +3,7 @@
  */
 
 import { composeHTMLDocument } from "./composeHTMLDocument.js";
-import type { Assets } from "../../../../types/types";
+import type { Assets } from "../../../../types/types.js";
 import * as metrics from "../../../lib/metrics.js";
 
 export const compose = async function(assets: Assets): Promise<Assets> {

@@ -6,7 +6,7 @@ import path from "path";
 import { _writeJSONFile } from "../../lib/io/_writeJSONFile.js";
 import { _copyFolder } from "../../lib/io/_copyFolder.js";
 import { config } from "../configuration/configuration.js";
-import type { Assets, Configuration } from "../../../types/types";
+import type { Assets, Configuration } from "../../../types/types.js";
 import { _fileExists } from "../../lib/io/_fileExists.js";
 import { _glob } from "../../lib/io/_glob.js";
 import { _copyFile } from "../../lib/io/_copyFile.js";

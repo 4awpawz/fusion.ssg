@@ -3,7 +3,7 @@
  */
 
 import { parse } from "path";
-import type { ComponentIdentifier, ComponentsMap } from "../../types/types";
+import type { ComponentIdentifier, ComponentsMap } from "../../types/types.js";
 
 export const makeComponentsMap = function(componentPaths: readonly string[]): ComponentsMap {
     const componentsMap: ComponentsMap = {};

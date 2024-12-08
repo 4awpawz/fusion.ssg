@@ -6,7 +6,7 @@ import { join } from "path";
 import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenContent.js";
 import { _find } from "../../../lib/functional.js";
 import { config } from "../../configuration/configuration.js";
-import type { Asset, Assets, IncludeMatchesResults } from "../../../../types/types";
+import type { Asset, Assets, IncludeMatchesResults } from "../../../../types/types.js";
 // import chalk from "chalk";
 import { getMatchingTokens } from "../../../lib/getMatchingTokens.js";
 

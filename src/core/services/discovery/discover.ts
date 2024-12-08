@@ -10,7 +10,7 @@ import { _readFile } from "../../lib/io/_readFile.js";
 import { fileModifiedTime } from "../../lib/io/fileModifiedTime.js";
 import { getFiles } from "./getFiles.js";
 import { getAssetType } from "./getAssetType.js";
-import type { Asset, Assets, PostProfile } from "../../../types/types";
+import type { Asset, Assets, PostProfile } from "../../../types/types.js";
 import * as metrics from "../../lib/metrics.js";
 import { normalizeOutPath } from "./normalizeOutPath.js";
 import { getPostOutPath } from "./getPostOutPath.js";
@@ -118,7 +118,7 @@ const reportWIPS = function(assets: Assets): void {
 export const discover = async function(): Promise<Assets> {
     metrics.startTimer("discovery");
     const pathsToAssets = await getFiles();
-    let assets = await Promise.all(pathsToAssets.map(async (assetPath: string) => {
+    let assets = await Promise.all(pathsToAssets.map(async(assetPath: string) => {
         const fileInfo = path.parse(assetPath);
         const filePath = assetPath;
         const fileType = fileInfo.ext;

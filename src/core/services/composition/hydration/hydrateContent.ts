@@ -2,7 +2,7 @@
  * hydrateContent - Calls custom components and replaces their tags with the content they return.
  */
 
-import type { ComponentIdentifier, ComponentsMap, Component, ComponentProfile, Assets, Asset } from "../../../../types/types";
+import type { ComponentIdentifier, ComponentsMap, Component, ComponentProfile, Assets, Asset } from "../../../../types/types.js";
 import { join } from "path";
 import { config } from "../../configuration/configuration.js";
 import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenContent.js";

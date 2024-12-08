@@ -142,7 +142,7 @@ const buildCommand = {
     validate: function() {
         return true;
     },
-    valid: async () => {
+    valid: async() => {
         const opts = {
             buildStrategy: "DEVELOPMENT",
             cacheBust: false,
@@ -159,7 +159,7 @@ const releaseCommand = {
     validate: function() {
         return true;
     },
-    valid: async () => {
+    valid: async() => {
         const opts = {
             buildStrategy: "RELEASE",
             cacheBust: options.includes("--cache-bust") ? true : false,

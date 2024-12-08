@@ -2,7 +2,7 @@
  * clearnBuildFolder - empties the build folder.
  */
 
-import type { Configuration } from "../../types/types";
+import type { Configuration } from "../../types/types.js";
 import path from "path";
 import { _glob } from "./io/_glob.js";
 import { _remove } from "./io/_remove.js";
