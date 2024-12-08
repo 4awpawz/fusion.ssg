@@ -1,9 +1,14 @@
 {
-    "extends": "@tsconfig/node16-strictest-esm/tsconfig.json",
-    "include": ["src/**/*"],
+    "extends": "@tsconfig/strictest",
+    "include": [
+        "src/**/*"
+    ],
     "compilerOptions": {
-        "lib": [ "es2022" ],
-        "module": "es2022",
+        "moduleResolution": "nodenext",
+        // "lib": [
+        //     "ESNext"
+        // ],
+        "module": "NodeNext",
         "allowJs": true,
         "outDir": "dist",
         "removeComments": true,
@@ -17,6 +22,6 @@
         "noImplicitAny": true,
         "declaration": true,
         "ignoreDeprecations": "5.0",
-        "esModuleInterop": true
+        "esModuleInterop": true,
     }
 }
