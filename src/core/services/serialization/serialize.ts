@@ -2,7 +2,7 @@
  * serialize - Serializes pages, assets, css, scripts, media, etc to the build folder.
  */
 
-import type { Assets } from "../../../types/types";
+import type { Assets } from "../../../types/types.js";
 import * as metrics from "../../lib/metrics.js";
 import { serializeHTMLDocuments, serializeCSSDocuments } from "./serializeHTMLAndCSSDocuments.js";
 import { serializeOtherAssets } from "./serializeOtherAssets.js";

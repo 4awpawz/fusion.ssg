@@ -3,7 +3,7 @@
  * implements and exports them so that they can be used as if they were native Node implementations.
  */
 
-import type { Meta } from '../../types/types';
+import type { Meta } from '../../types/types.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 

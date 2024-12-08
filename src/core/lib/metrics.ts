@@ -4,7 +4,7 @@
  */
 
 import chalk from "chalk";
-import type { Timer } from "../../types/types";
+import type { Timer } from "../../types/types.js";
 
 const timers = new Map();
 

@@ -2,7 +2,7 @@
  * Compose - Hydrate pages using components.
  */
 
-import type { Assets } from "../../../../types/types";
+import type { Assets } from "../../../../types/types.js";
 import { hydrateContent } from "./hydrateContent.js";
 import * as metrics from "../../../lib/metrics.js";
 import { componentPaths } from "../../../lib/getComponentPaths.js";

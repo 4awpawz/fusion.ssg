@@ -2,7 +2,7 @@
  * getComponentProfiles - returns ComponentProfile[].
  */
 
-import type { ComponentProfile, ComponentProperty, DataSource } from "../../../types/types";
+import type { ComponentProfile, ComponentProperty, DataSource } from "../../../types/types.js";
 import { _filter } from "../../lib/functional.js";
 
 const getDataSourcesFromTagProperties = function(properties: string[]): DataSource[] {

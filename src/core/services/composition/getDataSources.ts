@@ -4,7 +4,7 @@
  */
 
 import path from "path";
-import type { BuffersMap, Configuration, DataSource } from "../../../types/types";
+import type { BuffersMap, Configuration, DataSource } from "../../../types/types.js";
 import { readCache } from "../../lib/cache.js";
 
 export const getDataSources = async function(dataSources: DataSource[], config: Configuration): Promise<BuffersMap> {

@@ -2,7 +2,7 @@
  * getMatchingTokens - returns an array of tokens.
  */
 
-import type { TokenValidator, TokenValidators } from "../../types/types";
+import type { TokenValidator, TokenValidators } from "../../types/types.js";
 import { _filter } from "./functional.js";
 
 const tokenValidators: TokenValidators = {

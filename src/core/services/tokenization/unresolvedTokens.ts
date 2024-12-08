@@ -2,7 +2,7 @@
  * unresolvedTokens - Notes and reports all unresolved tokens per HTML document.
  */
 
-import type { UnresolvedToken } from "../../../types/types";
+import type { UnresolvedToken } from "../../../types/types.js";
 import chalk from "chalk";
 import { _forEach } from "../../lib/functional.js";
 

@@ -6,7 +6,7 @@
 import { join } from "path";
 import { _writeContentToFile } from "../../lib/io/_writeContentToFile.js";
 import { _filter } from "../../lib/functional.js";
-import type { Assets } from "../../../types/types";
+import type { Assets } from "../../../types/types.js";
 import js_beautify from "js-beautify";
 
 export const serializeHTMLDocuments = async function(assets: Assets, buildFolderPath: string): Promise<number> {

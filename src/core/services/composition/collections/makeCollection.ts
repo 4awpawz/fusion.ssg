@@ -3,7 +3,7 @@
  * for each copy to contribute content to the page and stores the copied asset to assets.
  */
 
-import type { Asset, Assets, CollectionComponent, ComponentIdentifier, ComponentProfile, ComponentsMap } from "../../../../types/types";
+import type { Asset, Assets, CollectionComponent, ComponentIdentifier, ComponentProfile, ComponentsMap } from "../../../../types/types.js";
 import { join } from "path";
 import chalk from "chalk";
 import { makeNewAsset } from "./makeNewAsset.js";

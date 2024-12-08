@@ -2,7 +2,7 @@
  * makeNewAsset - Makes a copy of the collection template for use in a collection.
  */
 
-import type { Asset, CollectionPageProfile } from "../../../../types/types";
+import type { Asset, CollectionPageProfile } from "../../../../types/types.js";
 import { join, parse } from "path";
 import { renderToString } from "preact-render-to-string";
 

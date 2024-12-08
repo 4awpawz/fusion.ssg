@@ -2,7 +2,7 @@
  * findAndReplaceTokenContent - find a token and  replace its content.
  */
 
-import type { Token } from "../../types/types";
+import type { Token } from "../../types/types.js";
 
 const regexpBuilder = function(token: string): RegExp {
     // This regex ignores script and code tags to guard against applying tokens to their content.

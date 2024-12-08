@@ -5,7 +5,7 @@
 import { _find } from "../../../lib/functional.js";
 import { findAndReplaceTokenContent } from "../../../lib/findAndReplaceTokenContent.js";
 import { composeIncludes } from "./composeIncludes.js";
-import type { Asset } from "../../../../types/types";
+import type { Asset } from "../../../../types/types.js";
 import chalk from "chalk";
 
 export const composeHTMLDocument = async function(asset: Asset, assets: Asset[]): Promise<Asset> {
