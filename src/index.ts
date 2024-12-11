@@ -21,7 +21,8 @@ export const run = async function(buildStrategyOptions: BuildStrategyOptions) {
     metrics.startTimer("total elapsed time");
     await cleanBuildFolder(config);
     process.env["BUILD_STRATEGY"] = buildStrategyOptions.buildStrategy;
-    console.log("build strategy:", buildStrategyOptions.buildStrategy);
+    //TODO: Remove "-Next" from the line below when releasing
+    console.log("build strategy:", buildStrategyOptions.buildStrategy + "-Next");
     const isOKToContinue = await compileComponents() && await compileBrowserScripts();
     if (isOKToContinue) {
         (await serialize(tokenize(await hydrate(await collectionGerator(await compose(await discover()))))));
