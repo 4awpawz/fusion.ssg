@@ -15,7 +15,7 @@ import { metaTimeStampFileName } from "../configuration/metaTimeStampFileName.js
 import { _fileExists } from "../../lib/io/_fileExists.js";
 
 const browserScriptsCompilerOptions: ts.CompilerOptions = {
-    module: ts.ModuleKind.None,
+    module: ts.ModuleKind.NodeNext,
     target: ts.ScriptTarget.ES2022,
     moduleResolution: ts.ModuleResolutionKind.NodeNext,
     rootDir: "src/scripts",
