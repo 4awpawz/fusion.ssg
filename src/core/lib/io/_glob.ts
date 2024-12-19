@@ -3,7 +3,7 @@
  */
 
 import chalk from "chalk";
-import glob, { GlobOptions } from "glob";
+import { glob, GlobOptions } from "glob";
 
 export const _glob = async function(pattern: string, options: GlobOptions = {}): Promise<string[]> {
     const ignore = ["node_modules/**"];

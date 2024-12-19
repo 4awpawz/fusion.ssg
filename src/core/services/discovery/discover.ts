@@ -35,7 +35,7 @@ const processCSS = async function(asset: Asset): Promise<Asset> {
 
 const processInclude = async function(asset: Asset): Promise<Asset> {
     let buffer = await _readFile(asset.filePath);
-    buffer = typeof buffer === "undefined" ? "" : path.parse(asset.filePath).ext === ".md" ? markdownToHTML(buffer) : buffer;
+    buffer = typeof buffer === "undefined" ? "" : path.parse(asset.filePath).ext === ".md" ? await markdownToHTML(buffer) : buffer;
     asset.content = includeIsConditional(asset.filePath) ? "" : buffer;
     return asset;
 };
@@ -91,7 +91,7 @@ const processTemplate = async function(asset: Asset): Promise<Asset> {
         console.log(chalk.red(`there was an error: Can't compile front matter in ${asset.filePath}.`));
         throw error;
     }
-    asset.content = path.parse(asset.filePath).ext === ".md" && markdownToHTML(asset.fm.content) || asset.fm.content;
+    asset.content = path.parse(asset.filePath).ext === ".md" && await markdownToHTML(asset.fm.content) || asset.fm.content;
     asset.isWip = templateIsWIP(asset.filePath);
     asset.isCollection = asset.fm.data["isCollection"] && asset.fm.data["isCollection"] || false;
     asset.associatedPage = typeof asset.fm.data["page"] === "undefined" ? "src/pages/default.html" : `src/pages/${asset.fm.data["page"]}.html`;
