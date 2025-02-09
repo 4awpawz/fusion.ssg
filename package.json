@@ -50,6 +50,7 @@
         "gray-matter": "^4.0.3",
         "js-beautify": "^1.15.1",
         "marked": "^15.0.4",
+        "marked-gfm-heading-id": "^4.1.1",
         "preact-render-to-string": "^6.5.12"
     }
 }
